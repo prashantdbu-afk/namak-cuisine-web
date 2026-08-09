@@ -113,7 +113,7 @@ test("captures menu search and mobile states", async ({ page }) => {
   });
 
   await search.fill("zzzz");
-  await expect(page.getByText("No dishes match “zzzz”.")).toBeVisible();
+  await expect(page.getByText("No menu items match “zzzz”.")).toBeVisible();
   await page.screenshot({
     path: path.join(outputDirectory, "menu-state--no-results.png"),
     fullPage: true,

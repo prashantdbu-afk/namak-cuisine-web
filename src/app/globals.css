@@ -788,6 +788,30 @@ em {
   backdrop-filter: blur(12px);
 }
 
+.menu-switcher {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--canvas);
+}
+
+.menu-switcher a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 720;
+}
+
+.menu-switcher a[aria-current="page"] {
+  background: var(--primary);
+  color: var(--surface);
+}
+
 .menu-search label {
   display: block;
   margin-bottom: 0.4rem;
@@ -890,7 +914,52 @@ em {
 
 .menu-sections article p {
   margin: 0.35rem 0 0;
-  color: var(--text-muted);
+  color: #5f6964;
+}
+
+.priced-menu-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.25rem 1.25rem;
+  align-items: baseline;
+}
+
+.menu-item-copy {
+  min-width: 0;
+}
+
+.menu-price {
+  color: var(--primary-dark);
+  font-size: 0.98rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.menu-variants {
+  grid-column: 1 / -1;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  margin: 0.55rem 0 0 !important;
+}
+
+.menu-variants li {
+  display: flex;
+  min-width: 0;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0 !important;
+  border: 0 !important;
+  color: #5f6964;
+}
+
+.menu-disclaimer {
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: #5f6964;
+  font-size: 0.82rem;
 }
 
 .menu-item-with-image {
@@ -1211,6 +1280,10 @@ em {
 
   .menu-sections h2 {
     font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .priced-menu-item {
+    gap: 0.25rem 0.75rem;
   }
 
   .menu-item-with-image {

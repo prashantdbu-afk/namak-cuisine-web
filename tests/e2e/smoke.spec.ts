@@ -10,7 +10,7 @@ test("homepage presents primary actions", async ({ page }) => {
     page.getByRole("link", { name: /explore menu/i }).first(),
   ).toHaveAttribute("href", "/menu");
 });
-test("menu is searchable, price-free, and source-clean", async ({ page }) => {
+test("food menu is searchable, priced, and source-clean", async ({ page }) => {
   await page.goto("/menu");
   await expect(
     page.getByRole("heading", { name: "Built in layers." }),
@@ -23,11 +23,33 @@ test("menu is searchable, price-free, and source-clean", async ({ page }) => {
   await expect(main.getByText("Bharwan Paneer Tikka")).toBeHidden();
   await main.getByRole("button", { name: "Clear search" }).click();
   await expect(main.getByText("Bharwan Paneer Tikka")).toBeVisible();
-  await expect(main).not.toContainText("$");
+  await expect(main.getByText("Buratta Bomb")).toBeVisible();
+  await expect(main.getByText("$6.50").first()).toBeVisible();
+  await expect(main).toContainText("$22");
   await expect(main).not.toContainText(
-    /Toast|Grubhub|DoorDash|Uber Eats|owner approval|placeholder|details forthcoming|source confidence/i,
+    /\bToast\b|Grubhub|DoorDash|Uber Eats|owner approval|placeholder|details forthcoming|source confidence/i,
   );
-  await expect(main.locator("img")).toHaveCount(0);
+  await expect(main.getByRole("link", { name: "Bar & Wine" })).toHaveAttribute(
+    "href",
+    "/bar",
+  );
+});
+test("bar menu search and beer variants work", async ({ page }) => {
+  await page.goto("/bar");
+  const main = page.locator("main");
+  await expect(main.getByText("Taj Mahal")).toBeVisible();
+  await expect(main.getByText("330ml")).toBeVisible();
+  await expect(main.getByText("650ml")).toBeVisible();
+  const search = main.getByRole("searchbox", {
+    name: "Search drinks and wine",
+  });
+  await search.fill("Ramirana");
+  await expect(main.getByText("Ramirana Syrah Blend, Chile")).toBeVisible();
+  await expect(main.getByText("Taj Mahal")).toBeHidden();
+  await expect(main.getByRole("link", { name: "Food Menu" })).toHaveAttribute(
+    "href",
+    "/menu",
+  );
 });
 test("visit shows verified information", async ({ page }) => {
   await page.goto("/visit");

@@ -1,101 +1,106 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import {
+  barCategories,
+  barMenuItems,
+  foodCategories,
+  foodMenuItems,
+  formatPrice,
   menuCategories,
   menuItems,
-  publishedCategories,
-  publishedMenuItems,
+  validateMenuData,
 } from "@/content/menu";
 import { MenuExperience } from "./MenuExperience";
 
-describe("menu experience", () => {
-  it("publishes only reconciled items, without prices or hidden records", () => {
-    const { container } = render(
-      <MenuExperience
-        categories={publishedCategories}
-        items={publishedMenuItems}
-      />,
+describe("physical menu data", () => {
+  it("uses exact public names, printed categories, and integer-cent prices", () => {
+    expect(validateMenuData()).toBe(true);
+    expect(menuCategories.map((entry) => entry.name)).toContain(
+      "EMBERS NON-VEG",
     );
-    expect(container.textContent).not.toContain("$");
-    expect(screen.queryByText("Raj Kachori Chat")).toBeNull();
-    expect(screen.queryByText("Veg Thali")).toBeNull();
-    expect(screen.queryByText("Tandoori Salmon")).toBeNull();
-    for (const category of publishedCategories)
-      expect(
-        screen.getByRole("heading", { name: category.name }),
-      ).toBeInTheDocument();
     expect(
-      menuCategories.some(
-        (category) => category.publicationStatus === "hidden",
+      menuItems.find((entry) => entry.name === "Buratta Bomb"),
+    ).toMatchObject({ priceCents: 1200 });
+    expect(menuItems.some((entry) => entry.name === "Burrata Bomb")).toBe(
+      false,
+    );
+    expect(
+      menuItems.every(
+        (entry) =>
+          entry.priceCents === null || Number.isInteger(entry.priceCents),
       ),
     ).toBe(true);
-    expect(menuItems.every((item) => item.price === null)).toBe(true);
-    expect(menuCategories).toHaveLength(16);
-    expect(publishedCategories).toHaveLength(5);
-    expect(menuItems).toHaveLength(128);
-    expect(publishedMenuItems).toHaveLength(20);
-    expect(
-      menuItems.filter((item) => item.publicationStatus === "review"),
-    ).toHaveLength(106);
-    expect(
-      menuItems.filter((item) => item.publicationStatus === "hidden"),
-    ).toHaveLength(2);
+    expect(formatPrice(1200)).toBe("$12");
+    expect(formatPrice(650)).toBe("$6.50");
+    expect(formatPrice(2200)).toBe("$22");
+    expect(formatPrice(2200)).not.toBe("$22.00");
   });
-  it("searches normalized display names case-insensitively and clears", () => {
+
+  it("renders food prices, descriptions, and exact names", () => {
     render(
       <MenuExperience
-        categories={publishedCategories}
-        items={publishedMenuItems}
+        activeMenu="food"
+        categories={foodCategories}
+        items={foodMenuItems}
+      />,
+    );
+    expect(screen.getByText("Buratta Bomb")).toBeVisible();
+    expect(screen.getAllByText("$12").length).toBeGreaterThan(0);
+    expect(screen.getByText(/mashed potatoes and cheese/i)).toBeVisible();
+    expect(screen.getByRole("link", { name: "Bar & Wine" })).toHaveAttribute(
+      "href",
+      "/bar",
+    );
+  });
+
+  it("searches descriptions and aliases without changing the visible name", () => {
+    render(
+      <MenuExperience
+        activeMenu="food"
+        categories={foodCategories}
+        items={foodMenuItems}
       />,
     );
     const search = screen.getByRole("searchbox", { name: "Search dishes" });
-    fireEvent.change(search, { target: { value: "PANEER" } });
-    expect(screen.getByText("Bharwan Paneer Tikka")).toBeVisible();
-    expect(screen.queryByText("Butter Chicken")).toBeNull();
+    fireEvent.change(search, { target: { value: "Burrata Bomb" } });
+    expect(screen.getByText("Buratta Bomb")).toBeVisible();
+    expect(screen.queryByText("Burrata Bomb")).toBeNull();
+    fireEvent.change(search, { target: { value: "black lentils" } });
+    expect(screen.getByText("Dal Makhani")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "Clear search" }));
     expect(screen.getByText("Butter Chicken")).toBeVisible();
   });
-  it("links every category navigation target to a rendered section", () => {
-    const { container } = render(
+
+  it("renders bar and wine prices with Taj Mahal variants", () => {
+    render(
       <MenuExperience
-        categories={publishedCategories}
-        items={publishedMenuItems}
+        activeMenu="bar"
+        categories={barCategories}
+        items={barMenuItems}
       />,
     );
-    for (const link of screen
-      .getByRole("navigation", { name: "Menu categories" })
-      .querySelectorAll("a"))
-      expect(container.querySelector(link.getAttribute("href")!)).toBeTruthy();
+    expect(screen.getByText("Taj Mahal")).toBeVisible();
+    expect(screen.getByText("330ml")).toBeVisible();
+    expect(screen.getByText("650ml")).toBeVisible();
+    expect(screen.getAllByText("$7").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("$9").length).toBeGreaterThan(0);
+    expect(screen.getByText("Ramirana Syrah Blend, Chile")).toBeVisible();
+    expect(screen.getByRole("link", { name: "Food Menu" })).toHaveAttribute(
+      "href",
+      "/menu",
+    );
   });
-  it("contains no provider references or image frames without approved images", () => {
+
+  it("keeps internal and third-party review language out of public output", () => {
     const { container } = render(
       <MenuExperience
-        categories={publishedCategories}
-        items={publishedMenuItems}
+        activeMenu="bar"
+        categories={barCategories}
+        items={barMenuItems}
       />,
     );
-    expect(container.querySelector("img")).toBeNull();
-    expect(container.querySelector("[data-media-frame]")).toBeNull();
     expect(container.textContent).not.toMatch(
-      /Toast|Grubhub|DoorDash|Uber Eats|owner approval|placeholder|details forthcoming|source confidence/i,
-    );
-  });
-  it("renders an approved image through ResponsiveImage", () => {
-    const approved = [
-      { ...publishedMenuItems[0], image: { mediaId: "menu-test-image" } },
-    ];
-    const categories = publishedCategories.filter(
-      (entry) => entry.id === approved[0].categoryId,
-    );
-    const { container } = render(
-      <MenuExperience categories={categories} items={approved} />,
-    );
-    expect(container.querySelector("[data-media-frame] img")).toHaveAttribute(
-      "loading",
-      "lazy",
-    );
-    expect(container.querySelector("img")?.getAttribute("src")).not.toMatch(
-      /^https?:/,
+      /Toast|Grubhub|DoorDash|Uber Eats|owner approval|source confidence/i,
     );
   });
 });

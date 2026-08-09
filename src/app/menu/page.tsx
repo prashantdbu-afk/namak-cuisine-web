@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { MenuExperience } from "@/components/menu/MenuExperience";
-import { publishedCategories, publishedMenuItems } from "@/content/menu";
+import {
+  createMenuStructuredData,
+  foodCategories,
+  foodMenuItems,
+} from "@/content/menu";
 
 export const metadata: Metadata = {
   title: "Indian Restaurant Menu in Dallas",
@@ -15,19 +19,29 @@ export const metadata: Metadata = {
 };
 
 export default function Menu() {
+  const structuredData = createMenuStructuredData(
+    "Namak Food Menu",
+    foodCategories,
+    foodMenuItems,
+  );
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="interior-hero menu-hero">
         <p className="eyebrow">The menu</p>
         <h1>Built in layers.</h1>
         <p>
-          Explore a focused selection from Namak’s menu, gathered for the table
-          and shaped by the depth and range of Indian cooking.
+          Explore the complete food menu, with descriptions and current prices
+          verified from Namak’s physical menu.
         </p>
       </section>
       <MenuExperience
-        categories={publishedCategories}
-        items={publishedMenuItems}
+        activeMenu="food"
+        categories={foodCategories}
+        items={foodMenuItems}
       />
     </>
   );

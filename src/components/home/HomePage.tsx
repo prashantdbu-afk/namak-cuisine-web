@@ -3,19 +3,19 @@ import { integrations } from "@/config/integrations";
 import { site } from "@/config/site";
 import { announcement, approvedReviews, gallery } from "@/content/home";
 import { hoursDisplay } from "@/content/hours";
-import { publishedMenuItems } from "@/content/menu";
+import { foodMenuItems } from "@/content/menu";
 import { MapPreview } from "@/components/site/MapPreview";
 import { OpenStatus } from "@/components/site/OpenStatus";
 
 const featuredDishNames = [
   "Bharwan Paneer Tikka",
   "Butter Chicken",
-  "Burrata Bomb",
+  "Buratta Bomb",
   "Dal Makhani",
 ];
 
 const featuredDishes = featuredDishNames.map((name) => {
-  const dish = publishedMenuItems.find((item) => item.displayName === name);
+  const dish = foodMenuItems.find((item) => item.name === name);
   if (!dish) throw new Error(`Published menu item not found: ${name}`);
   return dish;
 });
@@ -83,7 +83,7 @@ export function HomePage() {
               <span className="dish-number" aria-hidden>
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3>{dish.displayName}</h3>
+              <h3>{dish.name}</h3>
             </article>
           ))}
         </div>
