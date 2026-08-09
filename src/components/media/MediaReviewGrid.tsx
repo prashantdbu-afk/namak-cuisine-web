@@ -1,23 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { MediaFrame } from "@/components/media/MediaFrame";
-import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import Image from "next/image";
 import type { FoodProcessingRecord } from "@/media/food-processing-config";
 import { getImageRecord } from "@/media/manifest";
+import { publicMenuMediaPlacements } from "@/content/menu-media";
+import processingReport from "../../../docs/food-media-processing-report.json";
 
 const filters = [
   "All",
-  "Approved",
+  "Missing from public menu",
+  "Approved and visible",
   "Review",
   "Hold",
-  "Reshoot",
+  "Duplicate warning",
   "Ivory Plate",
   "Indian Vessel",
   "Bread Basket",
-  "Homepage",
-  "Menu",
-  "Gallery",
 ] as const;
 
 export function MediaReviewGrid({
@@ -26,9 +25,25 @@ export function MediaReviewGrid({
   records: FoodProcessingRecord[];
 }) {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const publicImageIds = new Set(
+    publicMenuMediaPlacements.map((placement) => placement.imageId),
+  );
+  const duplicateIds = new Set(
+    processingReport.nearDuplicates.flatMap(([left, right]) => [left, right]),
+  );
   const visible = records.filter((record) => {
     if (filter === "All") return true;
-    if (["Approved", "Review", "Hold", "Reshoot"].includes(filter))
+    if (filter === "Missing from public menu")
+      return (
+        record.status === "approved" &&
+        record.itemId !== null &&
+        record.uses.includes("menu-feature") &&
+        !publicImageIds.has(record.imageId)
+      );
+    if (filter === "Approved and visible")
+      return record.status === "approved" && publicImageIds.has(record.imageId);
+    if (filter === "Duplicate warning") return duplicateIds.has(record.imageId);
+    if (["Review", "Hold"].includes(filter))
       return record.status === filter.toLowerCase();
     if (["Ivory Plate", "Indian Vessel", "Bread Basket"].includes(filter))
       return record.styleFamily === filter.toLowerCase().replace(" ", "-");
@@ -52,24 +67,32 @@ export function MediaReviewGrid({
       <div className="media-review-grid">
         {visible.map((record) => {
           const media = getImageRecord(record.imageId);
+          const reportRecord = processingReport.records.find(
+            (entry) => entry.imageId === record.imageId,
+          );
+          const base = `/media/review/menu/${record.imageId}`;
           return (
             <article className="media-review-card" key={record.imageId}>
-              <MediaFrame
-                aspectRatio={media.aspectRatio}
-                className="review-full"
-              >
-                <ResponsiveImage media={media} />
-              </MediaFrame>
-              <div className="review-crops">
-                <MediaFrame aspectRatio={4 / 3}>
-                  <ResponsiveImage media={media} />
-                </MediaFrame>
-                <MediaFrame aspectRatio={3 / 2}>
-                  <ResponsiveImage media={media} />
-                </MediaFrame>
-                <MediaFrame aspectRatio={4 / 5}>
-                  <ResponsiveImage media={media} />
-                </MediaFrame>
+              <div className="review-comparison">
+                {[
+                  ["Original source", `${base}-original.webp`],
+                  ["Previous processing", `${base}-current.webp`],
+                  ["Enhanced master", media.source],
+                  ["Desktop menu crop", `${base}-menu.webp`],
+                  ["Mobile menu crop", `${base}-mobile.webp`],
+                ].map(([label, source]) => (
+                  <figure key={label}>
+                    <div className="review-comparison-image">
+                      <Image
+                        src={source}
+                        alt=""
+                        fill
+                        sizes="(max-width: 760px) 100vw, 28vw"
+                      />
+                    </div>
+                    <figcaption>{label}</figcaption>
+                  </figure>
+                ))}
               </div>
               <div className="review-card-copy">
                 <p className="eyebrow dark">
@@ -94,6 +117,10 @@ export function MediaReviewGrid({
                     <dd>{record.styleFamily}</dd>
                   </div>
                   <div>
+                    <dt>Public</dt>
+                    <dd>{publicImageIds.has(record.imageId) ? "Yes" : "No"}</dd>
+                  </div>
+                  <div>
                     <dt>Dimensions</dt>
                     <dd>
                       {media.width} × {media.height} ·{" "}
@@ -109,8 +136,35 @@ export function MediaReviewGrid({
                     <dd>Approved</dd>
                   </div>
                   <div>
+                    <dt>Enhancement</dt>
+                    <dd>
+                      B {record.brightness.toFixed(3)} · S{" "}
+                      {record.saturation.toFixed(3)} · C{" "}
+                      {record.contrast.toFixed(3)} · γ {record.gamma.toFixed(2)}{" "}
+                      · sharpen {record.sharpenSigma.toFixed(2)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Duplicate</dt>
+                    <dd>
+                      {duplicateIds.has(record.imageId)
+                        ? "Review warning"
+                        : "None"}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Quality</dt>
+                    <dd>
+                      {reportRecord
+                        ? `${reportRecord.before.meanLuminance} → ${reportRecord.after.meanLuminance} luminance`
+                        : "Pending preparation"}
+                    </dd>
+                  </div>
+                  <div>
                     <dt>Notes</dt>
-                    <dd>{record.notes}</dd>
+                    <dd>
+                      {record.enhancementNotes} {record.notes}
+                    </dd>
                   </div>
                 </dl>
               </div>

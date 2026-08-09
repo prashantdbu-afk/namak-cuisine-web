@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { MediaFrame } from "@/components/media/MediaFrame";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import { barHeroImageId } from "@/content/bar-media";
+import { getImageRecord } from "@/media/manifest";
 import { integrations } from "@/config/integrations";
 import { site } from "@/config/site";
 import { announcement, approvedReviews, gallery } from "@/content/home";
@@ -6,9 +10,7 @@ import { hoursDisplay } from "@/content/hours";
 import { foodMenuItems } from "@/content/menu";
 import { MapPreview } from "@/components/site/MapPreview";
 import { OpenStatus } from "@/components/site/OpenStatus";
-import { MediaFrame } from "@/components/media/MediaFrame";
-import { ResponsiveImage } from "@/components/media/ResponsiveImage";
-import { getImageRecord } from "@/media/manifest";
+import { isStockMediaPreviewAvailable } from "@/config/publication";
 
 const featuredDishNames = [
   "Bharwan Paneer Tikka",
@@ -31,6 +33,7 @@ const featuredDishMedia: Record<string, string> = {
 };
 
 export function HomePage() {
+  const stockPreview = isStockMediaPreviewAvailable();
   return (
     <>
       {announcement.enabled && (
@@ -146,9 +149,21 @@ export function HomePage() {
               Explore the bar
             </Link>
           </div>
-          <div className="media-placeholder media-cocktail" aria-hidden="true">
-            <span>Cocktails after dark</span>
-          </div>
+          {stockPreview ? (
+            <MediaFrame aspectRatio={5 / 3} className="home-bar-image">
+              <ResponsiveImage
+                media={getImageRecord(barHeroImageId)}
+                priority={false}
+              />
+            </MediaFrame>
+          ) : (
+            <div
+              className="media-placeholder media-cocktail"
+              aria-hidden="true"
+            >
+              <span>Cocktails after dark</span>
+            </div>
+          )}
         </section>
       )}
 

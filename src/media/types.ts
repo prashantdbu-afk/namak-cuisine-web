@@ -1,6 +1,18 @@
 export type MediaProvider = "local" | "cloudinary";
 export type RightsStatus = "pending" | "approved" | "rejected";
 export type FocalPoint = { x: number; y: number };
+export type StockProvider = "pexels" | "unsplash";
+export type StockMediaMetadata = {
+  provider: StockProvider;
+  assetId: string;
+  sourcePageUrl: string;
+  photographer: string;
+  photographerProfileUrl: string | null;
+  licenseName: string;
+  licenseUrl: string;
+  licenseCheckedAt: string;
+  representation: "editorial-generic";
+};
 
 type MediaBase = {
   id: string;

@@ -13,6 +13,7 @@ const routes = [
   ["visit", "/visit"],
   ["contact", "/contact"],
   ["media-review", "/media-review"],
+  ["stock-review-bar", "/stock-review/bar"],
 ] as const;
 const viewports = [
   ["desktop-1440x1000", { width: 1440, height: 1000 }],
@@ -27,7 +28,9 @@ async function revealPage(page: Page) {
   );
   for (let y = 0; y < height; y += 700) {
     await page.evaluate((nextY) => window.scrollTo(0, nextY), y);
+    await page.waitForTimeout(60);
   }
+  await page.waitForTimeout(400);
   await page.evaluate(() => window.scrollTo(0, 0));
 }
 
@@ -134,4 +137,45 @@ test("captures menu search and mobile states", async ({ page }) => {
     fullPage: true,
     animations: "disabled",
   });
+});
+
+test("captures photographed menu categories for owner review", async ({
+  page,
+}) => {
+  const desktopCategories = [
+    "food-amuse-bouche",
+    "food-embers-veg",
+    "food-embers-non-veg",
+    "food-veg-entrees",
+    "food-non-veg-entrees",
+    "food-indian-breads",
+    "food-biryani-and-pulao",
+  ];
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/menu");
+  for (const id of desktopCategories) {
+    const section = page.locator(`#${id}`);
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+    await section.screenshot({
+      path: path.join(outputDirectory, `menu-category--desktop--${id}.png`),
+      animations: "disabled",
+    });
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const id of [
+    "food-amuse-bouche",
+    "food-embers-veg",
+    "food-non-veg-entrees",
+    "food-indian-breads",
+  ]) {
+    const section = page.locator(`#${id}`);
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+    await section.screenshot({
+      path: path.join(outputDirectory, `menu-category--mobile--${id}.png`),
+      animations: "disabled",
+    });
+  }
 });

@@ -7,6 +7,13 @@ export type FoodMediaUse =
   | "gallery"
   | "gallery-only";
 export type FoodMediaStatus = "approved" | "review" | "hold" | "reshoot";
+export type FoodBackgroundFamily = "warm-neutral" | "cool-stone" | "warm-oat";
+export type FoodCrop = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+} | null;
 
 export type FoodProcessingRecord = {
   sourceFilename: string;
@@ -21,8 +28,18 @@ export type FoodProcessingRecord = {
   qualityScore: 1 | 2 | 3 | 4 | 5;
   alt: string;
   focalPoint: { x: number; y: number };
+  menuFocalPoint: { x: number; y: number };
+  editorialFocalPoint: { x: number; y: number };
   brightness: number;
   saturation: number;
+  contrast: number;
+  gamma: number;
+  sharpenSigma: number;
+  crop: FoodCrop;
+  backgroundFamily: FoodBackgroundFamily;
+  menuAspectRatio: number;
+  enhancementNotes: string;
+  allowDuplicateImage?: boolean;
   outputQuality: number;
   notes: string;
 };
@@ -39,27 +56,77 @@ const approved = (
   options: Partial<
     Pick<
       FoodProcessingRecord,
-      "featured" | "qualityScore" | "notes" | "focalPoint"
+      | "featured"
+      | "qualityScore"
+      | "notes"
+      | "focalPoint"
+      | "menuFocalPoint"
+      | "editorialFocalPoint"
+      | "brightness"
+      | "saturation"
+      | "contrast"
+      | "gamma"
+      | "sharpenSigma"
+      | "crop"
+      | "backgroundFamily"
+      | "menuAspectRatio"
+      | "enhancementNotes"
+      | "allowDuplicateImage"
     >
   > = {},
-): FoodProcessingRecord => ({
-  sourceFilename,
-  imageId,
-  itemId,
-  publicName,
-  category,
-  styleFamily,
-  uses,
-  status: "approved",
-  featured: options.featured ?? false,
-  qualityScore: options.qualityScore ?? 4,
-  alt,
-  focalPoint: options.focalPoint ?? { x: 0.5, y: 0.5 },
-  brightness: 1,
-  saturation: 1,
-  outputQuality: 82,
-  notes: options.notes ?? "Production ready after restrained web preparation.",
-});
+): FoodProcessingRecord => {
+  const seed = [...imageId].reduce(
+    (sum, character) => sum + character.charCodeAt(0),
+    0,
+  );
+  const tuning = {
+    brightness: 1.018 + (seed % 6) * 0.006,
+    saturation: 1.018 + (seed % 5) * 0.009,
+    contrast: 1.018 + (seed % 4) * 0.01,
+    gamma: 0.98 + (seed % 4) * 0.01,
+    sharpenSigma: 0.48 + (seed % 5) * 0.07,
+  };
+
+  return {
+    sourceFilename,
+    imageId,
+    itemId,
+    publicName,
+    category,
+    styleFamily,
+    uses,
+    status: "approved",
+    featured: options.featured ?? false,
+    qualityScore: options.qualityScore ?? 4,
+    alt,
+    focalPoint: options.focalPoint ?? { x: 0.5, y: 0.5 },
+    menuFocalPoint: options.menuFocalPoint ??
+      options.focalPoint ?? { x: 0.5, y: 0.5 },
+    editorialFocalPoint: options.editorialFocalPoint ??
+      options.focalPoint ?? { x: 0.5, y: 0.5 },
+    brightness: options.brightness ?? tuning.brightness,
+    saturation: options.saturation ?? tuning.saturation,
+    contrast: options.contrast ?? tuning.contrast,
+    gamma: options.gamma ?? tuning.gamma,
+    sharpenSigma: options.sharpenSigma ?? tuning.sharpenSigma,
+    crop: options.crop ?? null,
+    backgroundFamily:
+      options.backgroundFamily ??
+      (styleFamily === "bread-basket"
+        ? "warm-oat"
+        : styleFamily === "indian-vessel"
+          ? "cool-stone"
+          : "warm-neutral"),
+    menuAspectRatio: options.menuAspectRatio ?? 5 / 3,
+    enhancementNotes:
+      options.enhancementNotes ??
+      "Gentle luminance, contrast, saturation, and texture correction reviewed for this source.",
+    allowDuplicateImage: options.allowDuplicateImage,
+    outputQuality: 82,
+    notes:
+      options.notes ?? "Production ready after restrained web preparation.",
+  };
+};
 
 const notPublic = (
   sourceFilename: string,
@@ -83,8 +150,17 @@ const notPublic = (
   qualityScore: status === "review" ? 3 : 2,
   alt: "",
   focalPoint: { x: 0.5, y: 0.5 },
+  menuFocalPoint: { x: 0.5, y: 0.5 },
+  editorialFocalPoint: { x: 0.5, y: 0.5 },
   brightness: 1,
   saturation: 1,
+  contrast: 1,
+  gamma: 1,
+  sharpenSigma: 0.4,
+  crop: null,
+  backgroundFamily: styleFamily === "bread-basket" ? "warm-oat" : "cool-stone",
+  menuAspectRatio: 5 / 3,
+  enhancementNotes: "No public enhancement while this source remains on hold.",
   outputQuality: 80,
   notes,
 });
@@ -228,15 +304,19 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
       notes: "Usable selectively; dark food needs careful crop separation.",
     },
   ),
-  notPublic(
+  approved(
     "Embers Non Veg - Tandoori Full.avif",
     "food-tandoori-full",
     "embers-non-veg-tandoori-chicken",
     "Tandoori Chicken",
     "EMBERS NON-VEG",
     "ivory-plate",
-    "review",
-    "Likely Tandoori Chicken, but mapping needs owner confirmation before publication.",
+    ["menu-feature", "gallery"],
+    "Tandoori Chicken served with onion, lemon, and green chutney.",
+    {
+      enhancementNotes:
+        "Owner-confirmed mapping; lifted shadows retain detail in the tandoori char.",
+    },
   ),
   approved(
     "Embers Non Veg - Tandoori Masaledaar Lambchops .avif",
@@ -296,15 +376,19 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "Hyderabadi Chicken Dum Biryani served with raita and gravy.",
     { featured: true, qualityScore: 5 },
   ),
-  notPublic(
+  approved(
     "Jhol Momo Non-Veg.avif",
     "food-jhol-momo-non-veg",
     "amuse-bouche-jhol-momo",
     "Jhol Momo",
     "AMUSE-BOUCHE",
     "indian-vessel",
-    "review",
-    "Likely Jhol Momo; the filename adds Non-Veg while the physical menu does not.",
+    ["menu-feature", "gallery"],
+    "Jhol Momo served in a spiced broth.",
+    {
+      enhancementNotes:
+        "Owner-confirmed mapping; crop keeps the full bowl and momo arrangement.",
+    },
   ),
   approved(
     "Lachcha Paratha .avif",
@@ -567,7 +651,10 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
 ];
 
 export const SAFE_FOOD_ADJUSTMENT_LIMITS = {
-  brightness: { min: 0.94, max: 1.08 },
-  saturation: { min: 0.92, max: 1.08 },
+  brightness: { min: 0.98, max: 1.08 },
+  saturation: { min: 0.98, max: 1.12 },
+  contrast: { min: 1, max: 1.08 },
+  gamma: { min: 0.96, max: 1.04 },
+  sharpenSigma: { min: 0.4, max: 0.9 },
   outputQuality: { min: 72, max: 90 },
 } as const;

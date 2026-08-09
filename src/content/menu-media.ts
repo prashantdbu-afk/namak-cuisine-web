@@ -3,7 +3,9 @@ import {
   type FoodMediaStatus,
   type FoodMediaStyle,
   type FoodMediaUse,
+  type FoodBackgroundFamily,
 } from "@/media/food-processing-config";
+import { getImageRecord } from "@/media/manifest";
 
 export type MenuMediaPlacement = {
   itemId: string;
@@ -12,6 +14,8 @@ export type MenuMediaPlacement = {
   uses: FoodMediaUse[];
   status: FoodMediaStatus;
   featured: boolean;
+  menuAspectRatio: number;
+  backgroundFamily: FoodBackgroundFamily;
 };
 
 export const menuMediaPlacements: MenuMediaPlacement[] = foodProcessingConfig
@@ -26,30 +30,20 @@ export const menuMediaPlacements: MenuMediaPlacement[] = foodProcessingConfig
     uses: record.uses,
     status: record.status,
     featured: record.featured,
+    menuAspectRatio: record.menuAspectRatio,
+    backgroundFamily: record.backgroundFamily,
   }));
 
-const publicMenuImageIds = new Set([
-  "food-bharwan-paneer-tikka",
-  "food-buratta-bomb",
-  "food-coconut-carrot-soup",
-  "food-classic-chicken-tikka",
-  "food-tandoori-masaledar-lamb-chops",
-  "food-hyderabadi-chicken-dum-biryani",
-  "food-chur-chur-naan",
-  "food-fish-moilee",
-  "food-butter-chicken",
-  "food-dal-makhani",
-  "food-malai-kofta",
-  "food-papdi-chaat",
-  "food-tandoori-salmon",
-  "food-paneer-tikka-masala",
-  "food-punjabi-samosa",
-  "food-samosa-chaat",
-]);
-
 export const publicMenuMediaPlacements = menuMediaPlacements.filter(
-  (record) =>
-    record.status === "approved" && publicMenuImageIds.has(record.imageId),
+  (placement) => {
+    const media = getImageRecord(placement.imageId);
+    return (
+      placement.status === "approved" &&
+      placement.uses.includes("menu-feature") &&
+      media.rightsStatus === "approved" &&
+      media.productionReady
+    );
+  },
 );
 
 export const homepageFoodImageIds = [

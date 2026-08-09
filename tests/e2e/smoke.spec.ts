@@ -33,6 +33,51 @@ test("food menu is searchable, priced, and source-clean", async ({ page }) => {
     "href",
     "/bar",
   );
+  const formerlyMissing = [
+    "Bhutte Ke Kebab",
+    "Burrata Chaat",
+    "Chapli Smash Burger",
+    "Cheese Naan",
+    "Bhatti Da Kukarh",
+    "Lamb Seekh Kebab",
+    "Garlic Naan",
+    "Hara Bhara Kebab",
+    "Chicken Korma",
+    "Chicken Tikka Masala",
+    "Prawn Mango Curry",
+    "Raw Mango Salad",
+    "Tandoori Roti",
+    "Veg Dum Biryani",
+  ];
+  for (const name of formerlyMissing) {
+    const article = main.locator(".priced-menu-item", { hasText: name });
+    await expect(article.locator("img")).toHaveCount(1);
+  }
+  await expect(
+    main.locator('[data-image-id="food-jhol-momo-non-veg"]'),
+  ).toContainText("Jhol Momo");
+  await expect(
+    main.locator('[data-image-id="food-tandoori-full"]'),
+  ).toContainText("Tandoori Chicken");
+});
+
+test("food image cards preserve responsive minimums, prices, and overflow", async ({
+  page,
+}) => {
+  await page.goto("/menu");
+  const card = page.locator(".has-menu-image").first();
+  const image = card.locator(".menu-food-image");
+  const width = await image.evaluate(
+    (element) => element.getBoundingClientRect().width,
+  );
+  expect(width).toBeGreaterThanOrEqual(112);
+  await expect(card.locator(".menu-price").first()).toBeVisible();
+  const overflow = await page.evaluate(
+    () =>
+      document.documentElement.scrollWidth -
+      document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
 });
 test("bar menu search and beer variants work", async ({ page }) => {
   await page.goto("/bar");
@@ -50,6 +95,23 @@ test("bar menu search and beer variants work", async ({ page }) => {
     "href",
     "/menu",
   );
+  await search.fill("");
+  await expect(main.locator(".bar-category-feature")).toHaveCount(7);
+  await expect(main.locator(".priced-menu-item img")).toHaveCount(0);
+  await expect(main).not.toContainText(/pexels\.com|images\.pexels/i);
+});
+
+test("bar stock review is private, noindex, and compares all candidates", async ({
+  page,
+}) => {
+  await page.goto("/stock-review/bar");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(page.locator(".stock-review-slot")).toHaveCount(8);
+  await expect(page.locator(".stock-candidate")).toHaveCount(24);
+  await expect(page.getByText("Recommended", { exact: true })).toHaveCount(8);
 });
 test("media review is private, noindex, and contains every supplied record", async ({
   page,
@@ -63,6 +125,8 @@ test("media review is private, noindex, and contains every supplied record", asy
   await expect(
     page.getByText("Unidentified dessert", { exact: true }),
   ).toBeVisible();
+  await page.getByRole("button", { name: "Missing from public menu" }).click();
+  await expect(page.locator(".media-review-card")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText(
     /DoorDash|Grubhub|Toast|Uber Eats/i,
   );

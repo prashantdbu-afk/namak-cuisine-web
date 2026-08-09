@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
 import type { MenuMediaPlacement } from "@/content/menu-media";
+import type { BarCategoryMedia } from "@/content/bar-media";
 import type { MenuCategory, MenuItem } from "@/content/menu";
 import { formatPrice } from "@/content/menu";
 import { getImageRecord } from "@/media/manifest";
@@ -14,11 +15,13 @@ export function MenuExperience({
   items,
   activeMenu,
   placements = [],
+  categoryMedia = [],
 }: {
   categories: MenuCategory[];
   items: MenuItem[];
   activeMenu: "food" | "bar";
   placements?: MenuMediaPlacement[];
+  categoryMedia?: BarCategoryMedia[];
 }) {
   const [query, setQuery] = useState("");
   const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -98,6 +101,22 @@ export function MenuExperience({
               {activeMenu === "food" ? "Namak menu" : "WINE LIST"}
             </p>
             <h2 id={`${category.id}-heading`}>{category.name}</h2>
+            {categoryMedia
+              .filter((feature) => feature.categoryId === category.id)
+              .map((feature) => (
+                <figure className="bar-category-feature" key={feature.imageId}>
+                  <MediaFrame aspectRatio={5 / 3}>
+                    <ResponsiveImage
+                      media={getImageRecord(feature.imageId)}
+                      priority={false}
+                    />
+                  </MediaFrame>
+                  <figcaption>
+                    <span>{feature.label}</span>
+                    <small>Editorial category presentation</small>
+                  </figcaption>
+                </figure>
+              ))}
             <ul>
               {matchingItems
                 .filter((entry) => entry.categoryId === category.id)
@@ -109,10 +128,13 @@ export function MenuExperience({
                     <li key={entry.id}>
                       <article
                         className={`priced-menu-item${placement ? " has-menu-image" : ""}`}
+                        data-menu-item-id={entry.id}
+                        data-image-id={placement?.imageId}
+                        data-background-family={placement?.backgroundFamily}
                       >
                         {placement && (
                           <MediaFrame
-                            aspectRatio={4 / 3}
+                            aspectRatio={placement.menuAspectRatio}
                             className="menu-food-image"
                           >
                             <ResponsiveImage

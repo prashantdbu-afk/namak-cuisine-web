@@ -17,9 +17,9 @@ export default function MediaReviewPage() {
         <p className="eyebrow">Private review</p>
         <h1>Food media contact sheet.</h1>
         <p>
-          Owner-approved source photographs, proposed crops, mappings, and
-          publication decisions. This page is excluded from navigation and
-          search indexing.
+          Original sources, previous processing, enhanced masters, responsive
+          crops, mappings, completeness, and duplicate checks. This page is
+          excluded from navigation and search indexing.
         </p>
       </section>
       <section className="media-review section">

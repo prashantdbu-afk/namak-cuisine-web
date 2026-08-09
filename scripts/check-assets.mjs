@@ -35,6 +35,10 @@ for (const path of await walk(publicDir)) {
     failures.push(`${name}: prepared menu image exceeds 300 KB`);
   if (name.startsWith("public/media/menu/") && extension !== ".webp")
     failures.push(`${name}: menu output must be a prepared WebP source`);
+  if (name.startsWith("public/media/bar/") && size > 450_000)
+    failures.push(`${name}: prepared bar image exceeds 450 KB`);
+  if (name.startsWith("public/media/bar/") && extension !== ".webp")
+    failures.push(`${name}: bar output must be a prepared WebP source`);
 }
 
 for (const record of manifest) {
@@ -50,6 +54,10 @@ const foodRecords = manifest.filter(
   (record) =>
     record.kind === "image" && record.source?.startsWith("/media/menu/"),
 );
+const barRecords = manifest.filter(
+  (record) =>
+    record.kind === "image" && record.source?.startsWith("/media/bar/"),
+);
 if (
   foodRecords.some((record) =>
     /doordash|grubhub|toast|ubereats|cdn/i.test(record.source),
@@ -59,12 +67,23 @@ if (
     "Prepared food media must not use third-party URLs or CDN paths.",
   );
 
+if (
+  barRecords.length !== 8 ||
+  barRecords.some(
+    (record) =>
+      /^https?:/i.test(record.source) || record.rightsStatus !== "approved",
+  )
+)
+  failures.push(
+    "Selected bar stock must contain eight approved, self-hosted records.",
+  );
+
 const priorityImages = manifest.filter(
   (record) => record.kind === "image" && record.priority,
 );
-if (priorityImages.length > 1)
+if (priorityImages.length > 2)
   failures.push(
-    "Only one priority/LCP image is allowed in the current route manifest.",
+    "Only the route-specific homepage and bar LCP images may be prioritized.",
   );
 
 if (failures.length) {

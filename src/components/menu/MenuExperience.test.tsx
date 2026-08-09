@@ -12,6 +12,7 @@ import {
 } from "@/content/menu";
 import { MenuExperience } from "./MenuExperience";
 import { publicMenuMediaPlacements } from "@/content/menu-media";
+import { barCategoryMedia } from "@/content/bar-media";
 
 describe("physical menu data", () => {
   it("uses exact public names, printed categories, and integer-cent prices", () => {
@@ -63,8 +64,15 @@ describe("physical menu data", () => {
         placements={publicMenuMediaPlacements}
       />,
     );
-    expect(container.querySelectorAll("[data-media-frame]")).toHaveLength(16);
-    expect(container.querySelectorAll('img[loading="lazy"]')).toHaveLength(16);
+    expect(container.querySelectorAll("[data-media-frame]")).toHaveLength(
+      publicMenuMediaPlacements.length,
+    );
+    expect(container.querySelectorAll('img[loading="lazy"]')).toHaveLength(
+      publicMenuMediaPlacements.length,
+    );
+    expect(container.querySelectorAll(".menu-food-image")).toHaveLength(
+      publicMenuMediaPlacements.length,
+    );
     expect(container.querySelectorAll(".priced-menu-item")).toHaveLength(
       foodMenuItems.length,
     );
@@ -106,6 +114,23 @@ describe("physical menu data", () => {
       "href",
       "/menu",
     );
+  });
+
+  it("uses lazy editorial imagery only at bar category level", () => {
+    const { container } = render(
+      <MenuExperience
+        activeMenu="bar"
+        categories={barCategories}
+        items={barMenuItems}
+        categoryMedia={barCategoryMedia}
+      />,
+    );
+    expect(container.querySelectorAll(".bar-category-feature")).toHaveLength(7);
+    expect(
+      container.querySelectorAll('.bar-category-feature img[loading="lazy"]'),
+    ).toHaveLength(7);
+    expect(container.querySelectorAll(".priced-menu-item img")).toHaveLength(0);
+    expect(container.textContent).not.toMatch(/pexels\.com|images\.pexels/i);
   });
 
   it("keeps internal and third-party review language out of public output", () => {

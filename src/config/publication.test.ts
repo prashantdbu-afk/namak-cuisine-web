@@ -4,6 +4,8 @@ import {
   isRouteVisible,
   routePublication,
   isMediaReviewAvailable,
+  isStockReviewAvailable,
+  isStockMediaPreviewAvailable,
 } from "./publication";
 
 describe("publication state", () => {
@@ -24,5 +26,12 @@ describe("publication state", () => {
       }),
     ).toBe(true);
     expect(Object.keys(routePublication)).not.toContain("/media-review");
+    expect(isStockReviewAvailable({ VERCEL_ENV: "preview" })).toBe(true);
+    expect(isStockReviewAvailable({ VERCEL_ENV: "production" })).toBe(false);
+    expect(Object.keys(routePublication)).not.toContain("/stock-review/bar");
+    expect(isStockMediaPreviewAvailable({ VERCEL_ENV: "preview" })).toBe(true);
+    expect(isStockMediaPreviewAvailable({ VERCEL_ENV: "production" })).toBe(
+      false,
+    );
   });
 });

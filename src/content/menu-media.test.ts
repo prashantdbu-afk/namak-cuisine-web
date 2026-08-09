@@ -8,6 +8,7 @@ import {
 } from "./menu-media";
 import { foodProcessingConfig } from "@/media/food-processing-config";
 import { imageMedia } from "@/media/manifest";
+import processingReport from "../../docs/food-media-processing-report.json";
 
 describe("owner-approved food media", () => {
   it("maps only valid menu item IDs and preserves hold records privately", () => {
@@ -18,7 +19,16 @@ describe("owner-approved food media", () => {
     expect(
       publicMenuMediaPlacements.every((entry) => entry.status === "approved"),
     ).toBe(true);
-    expect(publicMenuMediaPlacements).toHaveLength(16);
+    const expectedPublic = foodProcessingConfig.filter(
+      (entry) =>
+        entry.itemId !== null &&
+        entry.status === "approved" &&
+        entry.uses.includes("menu-feature"),
+    );
+    expect(publicMenuMediaPlacements).toHaveLength(expectedPublic.length);
+    expect(
+      new Set(publicMenuMediaPlacements.map((entry) => entry.imageId)),
+    ).toEqual(new Set(expectedPublic.map((entry) => entry.imageId)));
     expect(
       publicMenuMediaPlacements.some(
         (entry) => entry.imageId === "food-unidentified-dessert",
@@ -29,7 +39,7 @@ describe("owner-approved food media", () => {
     ).toHaveLength(3);
     expect(
       foodProcessingConfig.filter((entry) => entry.status === "review"),
-    ).toHaveLength(2);
+    ).toHaveLength(0);
   });
 
   it("requires rights, dimensions, alt text, stable ratios, and local output", () => {
@@ -58,9 +68,54 @@ describe("owner-approved food media", () => {
     );
   });
 
-  it("keeps public image counts editorially restrained", () => {
+  it("keeps homepage and gallery selections restrained without capping menu completeness", () => {
     expect(homepageFoodImageIds.length).toBeLessThanOrEqual(3);
     expect(galleryImageIds.length).toBeLessThanOrEqual(8);
-    expect(publicMenuMediaPlacements.length).toBeLessThanOrEqual(20);
+    expect(publicMenuMediaPlacements.length).toBeGreaterThan(20);
+  });
+
+  it("maps every approved menu image exactly once and never publishes holds", () => {
+    const ids = publicMenuMediaPlacements.map((entry) => entry.imageId);
+    const itemIds = publicMenuMediaPlacements.map((entry) => entry.itemId);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(new Set(itemIds).size).toBe(itemIds.length);
+    expect(
+      publicMenuMediaPlacements.some((entry) =>
+        [
+          "food-chicken-boneless-biryani",
+          "food-unidentified-dessert",
+          "food-kadai-chicken",
+        ].includes(entry.imageId),
+      ),
+    ).toBe(false);
+    expect(publicMenuMediaPlacements).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          imageId: "food-jhol-momo-non-veg",
+          itemId: "amuse-bouche-jhol-momo",
+        }),
+        expect.objectContaining({
+          imageId: "food-tandoori-full",
+          itemId: "embers-non-veg-tandoori-chicken",
+        }),
+      ]),
+    );
+  });
+
+  it("retains deterministic duplicate and non-generative processing evidence", () => {
+    expect(processingReport.exactDuplicates).toEqual([]);
+    expect(
+      processingReport.records.every(
+        (record) =>
+          record.sourceSha256.length === 64 &&
+          record.outputSha256.length === 64 &&
+          record.perceptualDHash.length === 64,
+      ),
+    ).toBe(true);
+    expect(
+      processingReport.records.every(
+        (record) => record.generativeAlteration === false,
+      ),
+    ).toBe(true);
   });
 });
