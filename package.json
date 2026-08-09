@@ -21,6 +21,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test --config=playwright.a11y.config.ts",
+    "test:visual": "playwright test --config=playwright.visual.config.ts",
     "test:performance": "node scripts/run-lighthouse.mjs",
     "check:assets": "node scripts/check-assets.mjs"
   },

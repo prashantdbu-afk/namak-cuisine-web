@@ -25,3 +25,14 @@ jobs:
       - run: pnpm test:e2e
       - run: pnpm test:a11y
       - run: pnpm test:performance
+      - run: pnpm test:visual
+        env:
+          VERCEL_ENV: preview
+      - name: Upload visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: namak-visual-review-${{ github.event.pull_request.number || github.run_number }}
+          path: visual-review
+          if-no-files-found: error
+          retention-days: 14

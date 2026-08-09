@@ -881,6 +881,25 @@ em {
   body {
     padding-bottom: 64px;
   }
+  .wordmark,
+  .menu-toggle,
+  .text-link,
+  .footer a {
+    min-height: 44px;
+  }
+  .wordmark,
+  .text-link,
+  .footer a {
+    align-items: center;
+  }
+  .wordmark,
+  .text-link,
+  .footer a {
+    display: inline-flex;
+  }
+  .menu-toggle {
+    min-width: 44px;
+  }
   .menu-toggle {
     display: block;
   }

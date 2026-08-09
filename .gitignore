@@ -6,6 +6,7 @@ playwright-report
 test-results
 coverage
 .lighthouseci
+visual-review
 .pnpm-store
 *.tsbuildinfo
 .DS_Store
