@@ -9,9 +9,12 @@
     "aspectRatio": 1.6,
     "alt": "",
     "decorative": true,
-    "focalPoint": { "x": 58, "y": 48 },
+    "focalPoint": {
+      "x": 58,
+      "y": 48
+    },
     "sizes": "100vw",
-    "priority": true,
+    "priority": false,
     "rightsStatus": "approved",
     "productionReady": true
   },
@@ -45,5 +48,906 @@
     "priority": false,
     "rightsStatus": "approved",
     "productionReady": false
+  },
+  {
+    "id": "food-bharwan-paneer-tikka",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-bharwan-paneer-tikka.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Bharwan Paneer Tikka served with onion, lemon, and green chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-bhutte-ke-kebab",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-bhutte-ke-kebab.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Bhutte Ke Kebab arranged on a light ceramic plate.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-buratta-bomb",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-buratta-bomb.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Buratta Bomb arranged on a light plate with greens.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-burrata-chaat",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-burrata-chaat.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Burrata Chaat presented on a white plate.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-chapli-smash-burger",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chapli-smash-burger.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Chapli Smash Burger served with chutneys.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-cheese-naan",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-cheese-naan.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Cheese Naan in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-chicken-boneless-biryani",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chicken-boneless-biryani.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": false,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "hold"
+  },
+  {
+    "id": "food-chur-chur-naan",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chur-chur-naan.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Chur Chur Naan in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-coconut-carrot-soup",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-coconut-carrot-soup.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Coconut Carrot Soup served in a natural coconut vessel.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-unidentified-dessert",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-unidentified-dessert.webp",
+    "width": 1057,
+    "height": 607,
+    "aspectRatio": 1.7413509060955519,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": false,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "hold"
+  },
+  {
+    "id": "food-bhatti-da-kukarh",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-bhatti-da-kukarh.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Bhatti Da Kukarh served on a light ceramic plate.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-classic-chicken-tikka",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-classic-chicken-tikka.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Classic Chicken Tikka served with onion, lemon, and green chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-lamb-seekh-kebab",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-lamb-seekh-kebab.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Lamb Seekh Kebab presented with onion and chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-tandoori-full",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-tandoori-full.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": false,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "review"
+  },
+  {
+    "id": "food-tandoori-masaledar-lamb-chops",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-tandoori-masaledar-lamb-chops.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Tandoori Masaledar Lamb chops served with onion, lemon, and chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-tandoori-salmon",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-tandoori-salmon.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Tandoori Salmon plated with greens and edible flowers.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-garlic-naan",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-garlic-naan.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Garlic Naan in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-hara-bhara-kebab",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-hara-bhara-kebab.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Hara Bhara Kebab arranged on a banana leaf with onion and chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-hyderabadi-chicken-dum-biryani",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-hyderabadi-chicken-dum-biryani.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Hyderabadi Chicken Dum Biryani served with raita and gravy.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 55vw",
+    "priority": true,
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-jhol-momo-non-veg",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-jhol-momo-non-veg.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": false,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "review"
+  },
+  {
+    "id": "food-lachcha-paratha",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-lachcha-paratha.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Lachcha Paratha stacked in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "venue-main-outdoor",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/venue-main-outdoor.webp",
+    "width": 1200,
+    "height": 900,
+    "aspectRatio": 1.3333333333333333,
+    "alt": "Namak Indian Restaurant & Bar exterior at night.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-malai-tandoori-broccoli",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-malai-tandoori-broccoli.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Malai Tandoori Broccoli served with onion, lemon, and green chutney.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-masala-roti",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-masala-roti.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Masala Roti in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-murgh-badam-shorba",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-murgh-badam-shorba.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Murgh Badam Shorba served in a shallow blue-gray bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-fish-moilee",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-fish-moilee.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Fish Moilee served in a dark blue-gray bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-prawn-mango-curry",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-prawn-mango-curry.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Prawn Mango Curry served in a light ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-butter-chicken",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-butter-chicken.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Butter Chicken served in a neutral ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-chicken-korma",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chicken-korma.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Chicken Korma served in a light ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-chicken-tikka-masala",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chicken-tikka-masala.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Chicken Tikka Masala served in a white bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-chicken-vindaloo",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-chicken-vindaloo.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Chicken Vindaloo served in a rustic ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-coriander-prawns",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-coriander-prawns.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Coriander Prawns served in a handled metal bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-kadai-chicken",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-kadai-chicken.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": false,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "hold"
+  },
+  {
+    "id": "food-papdi-chaat",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-papdi-chaat.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Papdi Chaat presented in a shallow ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-punjabi-samosa",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-punjabi-samosa.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Punjabi Samosa served with chutneys on a white plate.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-raw-mango-salad",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-raw-mango-salad.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Raw Mango Salad presented on a white plate.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-samosa-chaat",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-samosa-chaat.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Samosa Chaat served in a shallow ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "ivory-plate",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-tandoori-roti",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-tandoori-roti.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Tandoori Roti in a lined bread basket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "bread-basket",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-dal-makhani",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-dal-makhani.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Dal Makhani served in a handled metal bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-malai-kofta",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-malai-kofta.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Malai Kofta served in a light ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-paneer-tikka-masala",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-paneer-tikka-masala.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Paneer Tikka Masala served in a shallow metal bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-pindi-chole",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-pindi-chole.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Pindi Chole served in a ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-saag-burrata",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-saag-burrata.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Saag Burrata presented with greens and roasted vegetables.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-tandoori-paneer-makhani",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-tandoori-paneer-makhani.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Tandoori Paneer Makhani served in a neutral ceramic bowl.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
+  },
+  {
+    "id": "food-veg-dum-biryani",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu/food-veg-dum-biryani.webp",
+    "width": 1000,
+    "height": 600,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Veg Dum Biryani served with raita.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 600px",
+    "rightsStatus": "approved",
+    "productionReady": true,
+    "foodStyleFamily": "indian-vessel",
+    "foodMediaStatus": "approved"
   }
 ]

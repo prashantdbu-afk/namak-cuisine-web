@@ -51,6 +51,22 @@ test("bar menu search and beer variants work", async ({ page }) => {
     "/menu",
   );
 });
+test("media review is private, noindex, and contains every supplied record", async ({
+  page,
+}) => {
+  await page.goto("/media-review");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(page.locator(".media-review-card")).toHaveCount(45);
+  await expect(
+    page.getByText("Unidentified dessert", { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator("main")).not.toContainText(
+    /DoorDash|Grubhub|Toast|Uber Eats/i,
+  );
+});
 test("visit shows verified information", async ({ page }) => {
   await page.goto("/visit");
   await expect(page.locator("main address")).toContainText(

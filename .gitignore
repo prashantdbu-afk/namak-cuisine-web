@@ -10,3 +10,4 @@ visual-review
 .pnpm-store
 *.tsbuildinfo
 .DS_Store
+incoming-media/

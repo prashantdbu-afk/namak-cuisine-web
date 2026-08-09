@@ -12,6 +12,7 @@ const routes = [
   ["private-dining", "/private-dining"],
   ["visit", "/visit"],
   ["contact", "/contact"],
+  ["media-review", "/media-review"],
 ] as const;
 const viewports = [
   ["desktop-1440x1000", { width: 1440, height: 1000 }],
@@ -44,7 +45,10 @@ test("captures every review route and viewport", async ({ page }) => {
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth,
       }));
-      expect(pageWidth.scroll).toBeLessThanOrEqual(pageWidth.client);
+      expect(
+        pageWidth.scroll,
+        `${routeName} at ${viewportName}`,
+      ).toBeLessThanOrEqual(pageWidth.client);
       if (viewport.width <= 430) {
         const undersizedTargets = await page.evaluate(() =>
           [...document.querySelectorAll<HTMLElement>("a, button, input")]

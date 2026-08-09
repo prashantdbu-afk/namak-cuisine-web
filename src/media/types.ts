@@ -20,6 +20,8 @@ export type ImageRecord = MediaBase & {
   focalPoint?: FocalPoint;
   sizes: string;
   priority?: boolean;
+  foodStyleFamily?: "ivory-plate" | "indian-vessel" | "bread-basket";
+  foodMediaStatus?: "approved" | "review" | "hold" | "reshoot";
 };
 
 export type VideoRecord = MediaBase & {

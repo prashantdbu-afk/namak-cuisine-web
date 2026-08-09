@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { MediaFrame } from "@/components/media/MediaFrame";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import type { MenuMediaPlacement } from "@/content/menu-media";
 import type { MenuCategory, MenuItem } from "@/content/menu";
 import { formatPrice } from "@/content/menu";
+import { getImageRecord } from "@/media/manifest";
 
 export function MenuExperience({
   categories,
   items,
   activeMenu,
+  placements = [],
 }: {
   categories: MenuCategory[];
   items: MenuItem[];
   activeMenu: "food" | "bar";
+  placements?: MenuMediaPlacement[];
 }) {
   const [query, setQuery] = useState("");
   const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -95,36 +101,54 @@ export function MenuExperience({
             <ul>
               {matchingItems
                 .filter((entry) => entry.categoryId === category.id)
-                .map((entry) => (
-                  <li key={entry.id}>
-                    <article className="priced-menu-item">
-                      <div className="menu-item-copy">
-                        <h3>{entry.name}</h3>
-                        {entry.description && <p>{entry.description}</p>}
-                      </div>
-                      {entry.priceCents !== null && (
-                        <span className="menu-price">
-                          {formatPrice(entry.priceCents)}
-                        </span>
-                      )}
-                      {entry.variants && (
-                        <ul
-                          className="menu-variants"
-                          aria-label={`${entry.name} sizes`}
-                        >
-                          {entry.variants.map((choice) => (
-                            <li key={choice.label}>
-                              <span>{choice.label}</span>
-                              <span className="menu-price">
-                                {formatPrice(choice.priceCents)}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </article>
-                  </li>
-                ))}
+                .map((entry) => {
+                  const placement = placements.find(
+                    (candidate) => candidate.itemId === entry.id,
+                  );
+                  return (
+                    <li key={entry.id}>
+                      <article
+                        className={`priced-menu-item${placement ? " has-menu-image" : ""}`}
+                      >
+                        {placement && (
+                          <MediaFrame
+                            aspectRatio={4 / 3}
+                            className="menu-food-image"
+                          >
+                            <ResponsiveImage
+                              media={getImageRecord(placement.imageId)}
+                              priority={false}
+                            />
+                          </MediaFrame>
+                        )}
+                        <div className="menu-item-copy">
+                          <h3>{entry.name}</h3>
+                          {entry.description && <p>{entry.description}</p>}
+                        </div>
+                        {entry.priceCents !== null && (
+                          <span className="menu-price">
+                            {formatPrice(entry.priceCents)}
+                          </span>
+                        )}
+                        {entry.variants && (
+                          <ul
+                            className="menu-variants"
+                            aria-label={`${entry.name} sizes`}
+                          >
+                            {entry.variants.map((choice) => (
+                              <li key={choice.label}>
+                                <span>{choice.label}</span>
+                                <span className="menu-price">
+                                  {formatPrice(choice.priceCents)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </article>
+                    </li>
+                  );
+                })}
             </ul>
           </section>
         ))}

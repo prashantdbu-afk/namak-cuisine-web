@@ -23,13 +23,15 @@
     "test:a11y": "playwright test --config=playwright.a11y.config.ts",
     "test:visual": "playwright test --config=playwright.visual.config.ts",
     "test:performance": "node scripts/run-lighthouse.mjs",
-    "check:assets": "node scripts/check-assets.mjs"
+    "check:assets": "node scripts/check-assets.mjs",
+    "prepare:food-media": "node scripts/prepare-food-media.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "sharp": "0.35.3",
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {

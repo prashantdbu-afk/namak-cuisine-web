@@ -5,6 +5,7 @@ for (const path of [
   "/",
   "/menu",
   "/bar",
+  "/media-review",
   "/visit",
   "/contact",
   "/private-dining",

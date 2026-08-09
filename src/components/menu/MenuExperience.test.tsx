@@ -11,6 +11,7 @@ import {
   validateMenuData,
 } from "@/content/menu";
 import { MenuExperience } from "./MenuExperience";
+import { publicMenuMediaPlacements } from "@/content/menu-media";
 
 describe("physical menu data", () => {
   it("uses exact public names, printed categories, and integer-cent prices", () => {
@@ -50,6 +51,22 @@ describe("physical menu data", () => {
     expect(screen.getByRole("link", { name: "Bar & Wine" })).toHaveAttribute(
       "href",
       "/bar",
+    );
+  });
+
+  it("lazy-loads selected menu media without creating empty frames", () => {
+    const { container } = render(
+      <MenuExperience
+        activeMenu="food"
+        categories={foodCategories}
+        items={foodMenuItems}
+        placements={publicMenuMediaPlacements}
+      />,
+    );
+    expect(container.querySelectorAll("[data-media-frame]")).toHaveLength(16);
+    expect(container.querySelectorAll('img[loading="lazy"]')).toHaveLength(16);
+    expect(container.querySelectorAll(".priced-menu-item")).toHaveLength(
+      foodMenuItems.length,
     );
   });
 

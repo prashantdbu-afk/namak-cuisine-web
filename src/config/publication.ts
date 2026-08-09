@@ -29,6 +29,15 @@ export function isRouteIndexable(route: SiteRoute) {
 
 export const isProductionDeployment = process.env.VERCEL_ENV === "production";
 
+export function isMediaReviewAvailable(
+  env: { VERCEL_ENV?: string; ENABLE_MEDIA_REVIEW?: string } = {
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    ENABLE_MEDIA_REVIEW: process.env.ENABLE_MEDIA_REVIEW,
+  },
+) {
+  return env.VERCEL_ENV !== "production" || env.ENABLE_MEDIA_REVIEW === "true";
+}
+
 export function routeRobots(route: SiteRoute) {
   return {
     index: isProductionDeployment && isRouteIndexable(route),

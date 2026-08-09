@@ -31,6 +31,10 @@ for (const path of await walk(publicDir)) {
     failures.push(`${name}: committed video exceeds 5 MB`);
   if (raster.has(extension) && size > 1024 * 1024)
     failures.push(`${name}: committed raster image exceeds 1 MB`);
+  if (name.startsWith("public/media/menu/") && size > 300_000)
+    failures.push(`${name}: prepared menu image exceeds 300 KB`);
+  if (name.startsWith("public/media/menu/") && extension !== ".webp")
+    failures.push(`${name}: menu output must be a prepared WebP source`);
 }
 
 for (const record of manifest) {
@@ -41,6 +45,19 @@ for (const record of manifest) {
   if (record.productionReady && record.rightsStatus !== "approved")
     failures.push(`${record.id}: production-ready media must be approved`);
 }
+
+const foodRecords = manifest.filter(
+  (record) =>
+    record.kind === "image" && record.source?.startsWith("/media/menu/"),
+);
+if (
+  foodRecords.some((record) =>
+    /doordash|grubhub|toast|ubereats|cdn/i.test(record.source),
+  )
+)
+  failures.push(
+    "Prepared food media must not use third-party URLs or CDN paths.",
+  );
 
 const priorityImages = manifest.filter(
   (record) => record.kind === "image" && record.priority,

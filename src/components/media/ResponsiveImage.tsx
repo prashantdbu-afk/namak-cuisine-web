@@ -5,17 +5,20 @@ import type { ImageRecord } from "@/media/types";
 export function ResponsiveImage({
   media,
   className,
+  priority,
 }: {
   media: ImageRecord;
   className?: string;
+  priority?: boolean;
 }) {
   if (!media.width || !media.height || !media.aspectRatio)
     throw new Error(`Media ${media.id} requires stable dimensions.`);
   if (!media.decorative && !media.alt.trim())
     throw new Error(`Meaningful media ${media.id} requires alt text.`);
   const position = media.focalPoint
-    ? `${media.focalPoint.x}% ${media.focalPoint.y}%`
+    ? `${media.focalPoint.x <= 1 ? media.focalPoint.x * 100 : media.focalPoint.x}% ${media.focalPoint.y <= 1 ? media.focalPoint.y * 100 : media.focalPoint.y}%`
     : "50% 50%";
+  const shouldPrioritize = priority ?? media.priority === true;
   return (
     <Image
       className={className}
@@ -24,8 +27,8 @@ export function ResponsiveImage({
       height={media.height}
       alt={media.decorative ? "" : media.alt}
       sizes={media.sizes}
-      priority={media.priority === true}
-      loading={media.priority ? "eager" : "lazy"}
+      priority={shouldPrioritize}
+      loading={shouldPrioritize ? "eager" : "lazy"}
       style={{ objectFit: "cover", objectPosition: position }}
     />
   );

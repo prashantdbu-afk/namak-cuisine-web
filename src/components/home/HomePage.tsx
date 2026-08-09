@@ -6,6 +6,9 @@ import { hoursDisplay } from "@/content/hours";
 import { foodMenuItems } from "@/content/menu";
 import { MapPreview } from "@/components/site/MapPreview";
 import { OpenStatus } from "@/components/site/OpenStatus";
+import { MediaFrame } from "@/components/media/MediaFrame";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import { getImageRecord } from "@/media/manifest";
 
 const featuredDishNames = [
   "Bharwan Paneer Tikka",
@@ -19,6 +22,13 @@ const featuredDishes = featuredDishNames.map((name) => {
   if (!dish) throw new Error(`Published menu item not found: ${name}`);
   return dish;
 });
+
+const featuredDishMedia: Record<string, string> = {
+  "Bharwan Paneer Tikka": "food-bharwan-paneer-tikka",
+  "Butter Chicken": "food-butter-chicken",
+  "Buratta Bomb": "food-buratta-bomb",
+  "Dal Makhani": "food-dal-makhani",
+};
 
 export function HomePage() {
   return (
@@ -44,11 +54,22 @@ export function HomePage() {
             </a>
           </div>
         </div>
-        <div
-          className="hero-media media-placeholder media-hero"
-          aria-hidden="true"
-        >
-          <span>Food, color, and the table at Namak</span>
+        <div className="hero-media hero-food-mosaic">
+          <MediaFrame aspectRatio={5 / 4} className="hero-food-primary">
+            <ResponsiveImage
+              media={getImageRecord("food-hyderabadi-chicken-dum-biryani")}
+            />
+          </MediaFrame>
+          <MediaFrame aspectRatio={1} className="hero-food-secondary">
+            <ResponsiveImage
+              media={getImageRecord("food-bharwan-paneer-tikka")}
+            />
+          </MediaFrame>
+          <MediaFrame aspectRatio={1} className="hero-food-tertiary">
+            <ResponsiveImage
+              media={getImageRecord("food-tandoori-masaledar-lamb-chops")}
+            />
+          </MediaFrame>
         </div>
       </section>
 
@@ -80,6 +101,11 @@ export function HomePage() {
         <div className="dish-grid">
           {featuredDishes.map((dish, index) => (
             <article className="dish-card" key={dish.id}>
+              <MediaFrame aspectRatio={4 / 3} className="dish-card-media">
+                <ResponsiveImage
+                  media={getImageRecord(featuredDishMedia[dish.name])}
+                />
+              </MediaFrame>
               <span className="dish-number" aria-hidden>
                 {String(index + 1).padStart(2, "0")}
               </span>

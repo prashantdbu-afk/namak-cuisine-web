@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MenuExperience } from "@/components/menu/MenuExperience";
+import { publicMenuMediaPlacements } from "@/content/menu-media";
 import {
   createMenuStructuredData,
   foodCategories,
@@ -42,6 +43,7 @@ export default function Menu() {
         activeMenu="food"
         categories={foodCategories}
         items={foodMenuItems}
+        placements={publicMenuMediaPlacements}
       />
     </>
   );
