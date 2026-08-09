@@ -2,10 +2,12 @@ import { test, expect } from "@playwright/test";
 test("homepage presents primary actions", async ({ page }) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: /where spice becomes a story/i }),
+    page.getByRole("heading", {
+      name: /modern indian dining, made for sharing/i,
+    }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: /explore the menu/i }).first(),
+    page.getByRole("link", { name: /explore menu/i }).first(),
   ).toHaveAttribute("href", "/menu");
 });
 test("menu is searchable, price-free, and source-clean", async ({ page }) => {

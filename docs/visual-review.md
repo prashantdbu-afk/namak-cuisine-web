@@ -1,5 +1,8 @@
 # Visual review
 
+Visual direction: **Sunlit Spice — Contemporary Indian Hospitality**. Palette
+and typography documentation live in `docs/design-system.md`.
+
 This document supports temporary review of pull request #1. The preview is not
 the production website and must not use `namakcuisine.com`.
 

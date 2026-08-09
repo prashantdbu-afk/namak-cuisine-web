@@ -1,215 +1,166 @@
 import Link from "next/link";
-import {
-  announcement,
-  approvedReviews,
-  gallery,
-  sensoryMoments,
-} from "@/content/home";
 import { integrations } from "@/config/integrations";
 import { site } from "@/config/site";
+import { announcement, approvedReviews, gallery } from "@/content/home";
 import { hoursDisplay } from "@/content/hours";
-import { OpenStatus } from "@/components/site/OpenStatus";
+import { publishedMenuItems } from "@/content/menu";
 import { MapPreview } from "@/components/site/MapPreview";
-import { DeferredHeroVideo } from "@/components/media/DeferredHeroVideo";
-import { getVideoRecord } from "@/media/manifest";
+import { OpenStatus } from "@/components/site/OpenStatus";
+
+const featuredDishNames = [
+  "Bharwan Paneer Tikka",
+  "Butter Chicken",
+  "Burrata Bomb",
+  "Dal Makhani",
+];
+
+const featuredDishes = featuredDishNames.map((name) => {
+  const dish = publishedMenuItems.find((item) => item.displayName === name);
+  if (!dish) throw new Error(`Published menu item not found: ${name}`);
+  return dish;
+});
+
 export function HomePage() {
   return (
     <>
       {announcement.enabled && (
         <div className="announcement">{announcement.text}</div>
       )}
+
       <section className="hero">
-        <div className="hero-grain" />
-        <div className="hero-orbit orbit-one" />
-        <div className="hero-orbit orbit-two" />
-        {integrations.features.heroVideo && (
-          <DeferredHeroVideo
-            media={getVideoRecord("hero-video")}
-            className="hero-video"
-          />
-        )}
         <div className="hero-copy">
-          <p className="eyebrow">
-            Namak · Indian Restaurant &amp; Bar · Dallas
-          </p>
-          <h1>
-            Where spice
-            <br />
-            becomes <em>a story.</em>
-          </h1>
+          <p className="eyebrow">Namak · Indian Restaurant &amp; Bar</p>
+          <h1>Modern Indian dining, made for sharing.</h1>
           <p className="hero-lede">
-            Bold Indian cooking, crafted cocktails, and warm hospitality in the
-            heart of Greenville, Dallas.
+            Tandoor specialties, layered curries, distinctive cocktails, and
+            warm hospitality on Greenville Avenue.
           </p>
           <div className="button-row">
             <Link className="button" href="/menu">
-              Explore the menu
+              Explore menu
             </Link>
             <a className="button button-quiet" href={site.phoneHref}>
               Call to reserve
             </a>
           </div>
         </div>
-        <div className="hero-vessel" aria-hidden>
-          <div className="steam">S</div>
-          <div className="dish" />
-        </div>
-        <p className="scroll-cue">
-          Scroll to savor <span>↓</span>
-        </p>
-      </section>
-      <section className="intro section">
-        <p className="eyebrow dark">An invitation to the senses</p>
-        <div className="intro-grid">
-          <h2>
-            Flavor has a <em>memory.</em>
-            <br />
-            Let’s make one.
-          </h2>
-          <div>
-            <p className="lead">
-              At Namak, every table begins with anticipation—the hum of
-              conversation, the glow of the room, the first aromatic note
-              arriving from the kitchen.
-            </p>
-            <Link className="text-link" href="/about">
-              Discover our point of view →
-            </Link>
-          </div>
+        <div
+          className="hero-media media-placeholder media-hero"
+          aria-hidden="true"
+        >
+          <span>Food, color, and the table at Namak</span>
         </div>
       </section>
+
+      <section className="welcome-strip" aria-label="Visit at a glance">
+        <OpenStatus />
+        <div>
+          <span className="strip-label">Find us</span>
+          <strong>{site.address.street}</strong>
+        </div>
+        <div>
+          <span className="strip-label">Hours today</span>
+          <strong>{hoursDisplay[0].hours}</strong>
+        </div>
+        <a className="text-link" href={site.directionsUrl}>
+          Get directions <span aria-hidden>↗</span>
+        </a>
+      </section>
+
       <section className="dishes section">
         <div className="section-head">
           <div>
-            <p className="eyebrow">A glimpse of the experience</p>
-            <h2>
-              Composed in
-              <br />
-              <em>layers.</em>
-            </h2>
+            <p className="eyebrow">From the menu</p>
+            <h2>Signature dishes, ready for the table.</h2>
           </div>
-          <p>Warmth, color, and time come together around the table.</p>
+          <Link className="text-link" href="/menu">
+            View the full menu <span aria-hidden>→</span>
+          </Link>
         </div>
         <div className="dish-grid">
-          {sensoryMoments.map((moment, i) => (
-            <article
-              key={moment.name}
-              className={`dish-card tone-${moment.tone}`}
-            >
-              <div className="plate" aria-hidden>
-                <span>{String(i + 1).padStart(2, "0")}</span>
-              </div>
-              <div>
-                <h3>{moment.name}</h3>
-                <p>{moment.note}</p>
-              </div>
+          {featuredDishes.map((dish, index) => (
+            <article className="dish-card" key={dish.id}>
+              <span className="dish-number" aria-hidden>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{dish.displayName}</h3>
             </article>
           ))}
         </div>
-        <Link className="button button-outline" href="/menu">
-          Explore the menu
-        </Link>
       </section>
-      <section className="craft section">
-        <div className="craft-art">
-          <span>FIRE</span>
-        </div>
-        <div className="craft-copy">
-          <p className="eyebrow">Heat · Time · Instinct</p>
-          <h2>
-            The craft is
-            <br />
-            in the <em>attention.</em>
-          </h2>
-          <p>
-            Cooking over heat is an act of listening: to the flame, to the
-            ingredient, to the precise moment when character emerges.
+
+      <section className="experience section">
+        <div className="experience-copy">
+          <p className="eyebrow">The Namak experience</p>
+          <h2>Contemporary Indian hospitality, grounded in warmth.</h2>
+          <p className="lead">
+            Come for a generous meal and settle into the evening. Our dining
+            room brings together expressive cooking, considered service, and the
+            ease of sharing a table.
           </p>
-          <Link className="text-link light" href="/about">
-            Meet the story →
+          <Link className="button button-quiet" href="/about">
+            Our story
           </Link>
         </div>
+        <div className="media-placeholder media-editorial" aria-hidden="true">
+          <span>Interior &amp; hospitality</span>
+        </div>
       </section>
+
       {integrations.features.bar && (
         <section className="bar section">
           <div>
-            <p className="eyebrow dark">The evening unfolds</p>
-            <h2>
-              Stay for
-              <br />
-              <em>another round.</em>
-            </h2>
+            <p className="eyebrow">Friday &amp; Saturday evenings</p>
+            <h2>Cocktails, conversation, and a longer evening.</h2>
             <p>
-              As daylight fades, the room deepens. Thoughtful pours, warm
-              conversation, and a little more time at the table.
+              Distinctive pours and a relaxed bar rhythm carry the table into
+              the night, with Namak open until midnight Friday and Saturday.
             </p>
-            <Link className="button button-dark" href="/bar">
+            <Link className="button button-light" href="/bar">
               Explore the bar
             </Link>
           </div>
-          <div
-            className="bar-art"
-            role="img"
-            aria-label="An abstract copper-toned study of an evening glass"
-          >
-            <div className="glass" />
+          <div className="media-placeholder media-cocktail" aria-hidden="true">
+            <span>Cocktails after dark</span>
           </div>
         </section>
       )}
-      <section className="gather section">
-        <p className="eyebrow">Your table, made larger</p>
-        <h2>
-          Gather with <em>intention.</em>
-        </h2>
-        <p>
-          Planning a dinner, celebration, or team gathering? Start a
-          conversation with us.
-        </p>
-        <Link className="button" href="/private-dining">
-          Plan a gathering
-        </Link>
-      </section>
+
       <section className="gallery section">
-        <div className="section-head light-head">
+        <div className="section-head">
           <div>
-            <p className="eyebrow">Seen at Namak</p>
-            <h2>
-              Moments,
-              <br />
-              <em>held.</em>
-            </h2>
+            <p className="eyebrow">Around the restaurant</p>
+            <h2>Food, hospitality, and the room between.</h2>
           </div>
-          <Link className="text-link light" href="/gallery">
-            View gallery →
+          <Link className="text-link" href="/gallery">
+            View gallery <span aria-hidden>→</span>
           </Link>
         </div>
         <div className="gallery-grid">
-          {gallery.map((x, i) => (
-            <figure key={x} className={`gallery-shot shot-${i + 1}`}>
-              <div />
-              <figcaption>{x}</figcaption>
+          {gallery.map((label, index) => (
+            <figure key={label} className={`gallery-shot shot-${index + 1}`}>
+              <div className="media-placeholder" aria-hidden />
+              <figcaption>{label}</figcaption>
             </figure>
           ))}
         </div>
       </section>
+
       {integrations.features.reviews && approvedReviews.length > 0 && (
         <section aria-label="Guest reviews">
-          {approvedReviews.map((r) => (
-            <blockquote key={r.quote}>
-              {r.quote}
-              <cite>{r.source}</cite>
+          {approvedReviews.map((review) => (
+            <blockquote key={review.quote}>
+              {review.quote}
+              <cite>{review.source}</cite>
             </blockquote>
           ))}
         </section>
       )}
+
       <section className="visit section">
-        <div>
-          <p className="eyebrow dark">Visit Namak</p>
-          <h2>
-            Your table
-            <br />
-            <em>is this way.</em>
-          </h2>
+        <div className="visit-copy">
+          <p className="eyebrow">Visit Namak</p>
+          <h2>Your table on Greenville Avenue.</h2>
           <OpenStatus />
           <address>
             {site.address.street}
@@ -221,13 +172,13 @@ export function HomePage() {
           </a>
         </div>
         <div className="hours">
-          {hoursDisplay.map((x) => (
-            <div key={x.days}>
-              <strong>{x.days}</strong>
-              <span>{x.hours}</span>
+          {hoursDisplay.map((entry) => (
+            <div key={entry.days}>
+              <strong>{entry.days}</strong>
+              <span>{entry.hours}</span>
             </div>
           ))}
-          <a className="button button-dark" href={site.directionsUrl}>
+          <a className="button" href={site.directionsUrl}>
             Get directions
           </a>
         </div>

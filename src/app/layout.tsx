@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -6,6 +7,7 @@ import { MobileActions } from "@/components/site/MobileActions";
 import { site } from "@/config/site";
 import { isProductionDeployment } from "@/config/publication";
 import { getOpeningHoursSpecification } from "@/content/hours";
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
@@ -25,21 +27,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: site.name,
     title: "Namak Indian Restaurant & Bar",
-    description: "Where spice becomes a story.",
+    description: "Modern Indian dining, made for sharing.",
     url: site.domain,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Namak Indian Restaurant & Bar — Where spice becomes a story",
+        alt: "Namak Indian Restaurant & Bar — Modern Indian dining, made for sharing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
-    description: "Where spice becomes a story.",
+    description: "Modern Indian dining, made for sharing.",
     images: ["/twitter-image"],
   },
 };
@@ -69,7 +71,7 @@ export default function RootLayout({
   };
   return (
     <html lang="en">
-      <body>
+      <body className={geist.variable}>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
