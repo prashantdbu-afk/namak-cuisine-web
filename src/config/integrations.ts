@@ -1,7 +1,14 @@
 export type ReservationMode = "call" | "external" | "native";
+export type ContactFormMode = "disabled" | "external" | "native";
 export const integrations = {
-  reservation: { mode: "call" as ReservationMode, externalUrl: undefined as string | undefined },
+  reservation: {
+    mode: "call" as ReservationMode,
+    externalUrl: undefined as string | undefined,
+  },
   ordering: { url: undefined as string | undefined },
-  contactForm: { enabled: false, endpoint: process.env.CONTACT_FORM_ENDPOINT },
-  features: { bar: true, reviews: false },
+  contactForm: {
+    mode: "disabled" as ContactFormMode,
+    externalUrl: undefined as string | undefined,
+  },
+  features: { bar: true, reviews: false, heroVideo: false },
 } as const;

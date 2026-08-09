@@ -13,15 +13,24 @@ export const site = {
     formatted: "5500 Greenville Ave #600, Dallas, TX 75206",
   },
   timeZone: "America/Chicago",
-  directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=5500+Greenville+Ave+%23600%2C+Dallas%2C+TX+75206",
+  directionsUrl:
+    "https://www.google.com/maps/dir/?api=1&destination=5500+Greenville+Ave+%23600%2C+Dallas%2C+TX+75206",
   social: {
     instagram: "https://www.instagram.com/namak_greenvilledallas/",
     facebook: "https://www.facebook.com/profile.php?id=61575667318010",
   },
 } as const;
 
-export const navigation = [
-  { href: "/menu", label: "Menu" }, { href: "/bar", label: "Bar" },
-  { href: "/about", label: "Our story" }, { href: "/private-dining", label: "Gather" },
-  { href: "/gallery", label: "Gallery" }, { href: "/visit", label: "Visit" },
+const allNavigation = [
+  { href: "/menu", label: "Menu" },
+  { href: "/bar", label: "Bar" },
+  { href: "/about", label: "Our story" },
+  { href: "/private-dining", label: "Gather" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/visit", label: "Visit" },
 ] as const;
+
+import { isRouteVisible, type SiteRoute } from "./publication";
+export const navigation = allNavigation.filter((item) =>
+  isRouteVisible(item.href as SiteRoute),
+);

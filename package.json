@@ -2,17 +2,27 @@
   "name": "namak-cuisine-web",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "packageManager": "pnpm@11.16.0",
-  "pnpm": { "ignoredBuiltDependencies": ["unrs-resolver"] },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "unrs-resolver"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
+    "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test --config=playwright.a11y.config.ts",
+    "test:performance": "node scripts/run-lighthouse.mjs",
+    "check:assets": "node scripts/check-assets.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
@@ -22,6 +32,8 @@
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@lhci/cli": "0.15.1",
     "@playwright/test": "1.58.2",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
@@ -31,6 +43,7 @@
     "eslint": "9.39.3",
     "eslint-config-next": "16.3.0",
     "jsdom": "28.1.0",
+    "prettier": "3.9.6",
     "typescript": "5.9.3",
     "vitest": "4.1.0"
   }

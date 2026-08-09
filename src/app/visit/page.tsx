@@ -1,3 +1,39 @@
-import type { Metadata } from "next"; import { InteriorPage } from "@/components/site/InteriorPage"; import { site } from "@/config/site"; import { hoursDisplay } from "@/content/hours"; import { OpenStatus } from "@/components/site/OpenStatus"; import { MapPreview } from "@/components/site/MapPreview";
-export const metadata:Metadata={title:"Visit",description:"Hours, address, phone, and directions for Namak Indian Restaurant & Bar in Dallas.",alternates:{canonical:"/visit"}};
-export default function Visit(){return <InteriorPage eyebrow="Visit Namak" title="We’ll meet you on Greenville." intro="Everything verified for planning your visit is collected below."><section className="visit-page section"><div><OpenStatus/><address>{site.address.formatted}</address><a className="text-link" href={site.phoneHref}>{site.phone}</a>{hoursDisplay.map(x=><p key={x.days}><strong>{x.days}</strong><br/>{x.hours}</p>)}</div><MapPreview/></section></InteriorPage>}
+import type { Metadata } from "next";
+import { InteriorPage } from "@/components/site/InteriorPage";
+import { site } from "@/config/site";
+import { hoursDisplay } from "@/content/hours";
+import { OpenStatus } from "@/components/site/OpenStatus";
+import { MapPreview } from "@/components/site/MapPreview";
+export const metadata: Metadata = {
+  title: "Visit",
+  description:
+    "Hours, address, phone, and directions for Namak Indian Restaurant & Bar in Dallas.",
+  alternates: { canonical: "/visit" },
+};
+export default function Visit() {
+  return (
+    <InteriorPage
+      eyebrow="Visit Namak"
+      title="We’ll meet you on Greenville."
+      intro="Everything verified for planning your visit is collected below."
+    >
+      <section className="visit-page section">
+        <div>
+          <OpenStatus />
+          <address>{site.address.formatted}</address>
+          <a className="text-link" href={site.phoneHref}>
+            {site.phone}
+          </a>
+          {hoursDisplay.map((x) => (
+            <p key={x.days}>
+              <strong>{x.days}</strong>
+              <br />
+              {x.hours}
+            </p>
+          ))}
+        </div>
+        <MapPreview />
+      </section>
+    </InteriorPage>
+  );
+}

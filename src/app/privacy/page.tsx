@@ -1,3 +1,16 @@
-import type { Metadata } from "next"; import { InteriorPage } from "@/components/site/InteriorPage";
-export const metadata:Metadata={title:"Privacy",description:"Privacy information for the Namak Cuisine website.",alternates:{canonical:"/privacy"}};
-export default function Privacy(){return <InteriorPage eyebrow="Legal" title="Privacy, plainly stated." intro="This Phase 1 website does not submit inquiry forms, create customer accounts, or load analytics, advertising, embedded maps, or third-party media. Standard hosting logs may still be processed by the hosting provider for security and operation. This notice will be updated before additional data collection is enabled."/>}
+import type { Metadata } from "next";
+import { InteriorPage } from "@/components/site/InteriorPage";
+export const metadata: Metadata = {
+  title: "Privacy",
+  description: "Privacy information for the Namak Cuisine website.",
+  alternates: { canonical: "/privacy" },
+};
+export default function Privacy() {
+  return (
+    <InteriorPage
+      eyebrow="Legal"
+      title="Privacy, plainly stated."
+      intro="This website does not submit inquiry forms, create customer accounts, or load advertising, embedded maps, or third-party media. Standard hosting logs may be processed by the hosting provider for security and reliable operation."
+    />
+  );
+}

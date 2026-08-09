@@ -1,3 +1,34 @@
-import type { Metadata } from "next"; import { InteriorPage } from "@/components/site/InteriorPage"; import { menuSections } from "@/content/menu";
-export const metadata:Metadata={title:"Menu",description:"Explore the evolving food menu at Namak Indian Restaurant & Bar in Dallas.",alternates:{canonical:"/menu"}};
-export default function Menu(){return <InteriorPage eyebrow="The menu" title="Built in layers." intro="Our current menu and pricing are being prepared for owner approval. This early glimpse preserves a crawlable, accessible structure without presenting unverified dishes as final."><section className="menu-list section">{menuSections.map(s=><article key={s.title}><p className="eyebrow dark">{s.title}</p><h2>{s.intro}</h2><ul>{s.items.map(i=><li key={i}>{i}<span>Details forthcoming</span></li>)}</ul></article>)}</section></InteriorPage>}
+import type { Metadata } from "next";
+import { MenuExperience } from "@/components/menu/MenuExperience";
+import { publishedCategories, publishedMenuItems } from "@/content/menu";
+
+export const metadata: Metadata = {
+  title: "Indian Restaurant Menu in Dallas",
+  description:
+    "Explore the Namak Indian Restaurant & Bar menu on Greenville Avenue in Dallas, including soups, chaat, tandoor selections, and entrées.",
+  keywords: [
+    "Indian restaurant menu Dallas",
+    "Indian restaurant Greenville Avenue Dallas",
+    "Namak Indian Restaurant & Bar menu",
+  ],
+  alternates: { canonical: "/menu" },
+};
+
+export default function Menu() {
+  return (
+    <>
+      <section className="interior-hero menu-hero">
+        <p className="eyebrow">The menu</p>
+        <h1>Built in layers.</h1>
+        <p>
+          Explore a focused selection from Namak’s menu, gathered for the table
+          and shaped by the depth and range of Indian cooking.
+        </p>
+      </section>
+      <MenuExperience
+        categories={publishedCategories}
+        items={publishedMenuItems}
+      />
+    </>
+  );
+}

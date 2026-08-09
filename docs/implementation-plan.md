@@ -5,6 +5,8 @@
 - Next.js 16 App Router with strict TypeScript, React Server Components by default, and isolated client islands for navigation, hours status, map consent, and validated form UI.
 - Typed verified configuration in `src/config`, editable copy in `src/content`, provider-neutral reservation/ordering helpers in `src/lib`, and reusable site/home components.
 - Routes: home, menu, bar, about, private dining, gallery, visit, contact, privacy, accessibility, plus robots, sitemap, and not-found.
+- A typed media manifest supports local and future Cloudinary delivery behind a resolver boundary. Responsive images preserve dimensions and focal points; poster-first hero video is deferred, controllable, network-aware, and feature flagged.
+- Centralized publication states drive navigation and sitemap visibility. Metadata and response headers block indexing outside Vercel production and for any hidden/noindex route.
 
 ## Experience and accessibility
 
@@ -12,7 +14,7 @@
 
 ## Content, forms, and integrations
 
-Business truth is centralized. Draft dishes and stories are explicitly owner-review content internally and avoid unsupported factual claims. Ordering is hidden while its URL is unset. Reservations currently resolve to phone. Forms validate locally but remain visibly disabled until a provider is configured; submissions are never discarded.
+Business truth is centralized. Draft notes remain internal and public pages contain no development language or invented dishes. Ordering is hidden while its URL is unset. Reservations currently resolve to one combined phone action. Contact mode is typed and disabled; editable fields are not rendered until a real delivery adapter exists.
 
 ## SEO and performance
 
@@ -20,7 +22,7 @@ Each route has unique canonical metadata. Restaurant JSON-LD contains verified f
 
 ## Tests and delivery
 
-Vitest covers Dallas hours (including midnight and overrides), integration switches, form validation, and navigation data. Playwright covers home, menu, visit, primary CTAs, and mobile navigation. GitHub Actions runs frozen install, lint, typecheck, unit tests, and production build on pull requests and `main`. Vercel is expected to import the Git repository and deploy previews from branches.
+Vitest covers Dallas hours, integration switches, media rules, publication state, disabled forms, and mobile actions. Playwright covers the production build, key routes, mobile navigation, Axe WCAG checks, and unexpected third-party requests. Asset policy and Lighthouse CI add media and performance budgets. GitHub Actions runs every gate on pull requests and `main`.
 
 ## Owner inputs
 

@@ -1,0 +1,49 @@
+[
+  {
+    "id": "hero-poster",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/hero-poster.svg",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": 1.6,
+    "alt": "",
+    "decorative": true,
+    "focalPoint": { "x": 58, "y": 48 },
+    "sizes": "100vw",
+    "priority": true,
+    "rightsStatus": "approved",
+    "productionReady": true
+  },
+  {
+    "id": "hero-video",
+    "kind": "video",
+    "provider": "local",
+    "desktopSource": "/media/hero-desktop.mp4",
+    "mobileSource": "/media/hero-mobile.mp4",
+    "mp4Fallback": "/media/hero-desktop.mp4",
+    "posterId": "hero-poster",
+    "width": 1600,
+    "height": 1000,
+    "durationSeconds": 8,
+    "muted": true,
+    "decorative": true,
+    "rightsStatus": "pending",
+    "productionReady": false
+  },
+  {
+    "id": "menu-test-image",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/menu-test.svg",
+    "width": 320,
+    "height": 240,
+    "aspectRatio": 1.333333,
+    "alt": "Abstract test fixture for a menu image",
+    "decorative": false,
+    "sizes": "(max-width: 600px) 25vw, 120px",
+    "priority": false,
+    "rightsStatus": "approved",
+    "productionReady": false
+  }
+]

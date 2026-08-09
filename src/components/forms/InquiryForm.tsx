@@ -1,5 +1,33 @@
-"use client";
-import { useState } from "react"; import { integrations } from "@/config/integrations"; import { site } from "@/config/site"; import { validateInquiry, type Inquiry } from "@/lib/forms";
-export function InquiryForm({kind="general"}:{kind?:"general"|"private"}){const [values,setValues]=useState<Inquiry>({name:"",email:"",message:""});const [errors,setErrors]=useState<Partial<Record<keyof Inquiry,string>>>({}); const enabled=integrations.contactForm.enabled;
- const update=(key:keyof Inquiry,value:string)=>setValues({...values,[key]:value});
- return <form className="inquiry-form" onSubmit={(e)=>{e.preventDefault();setErrors(validateInquiry(values));}} noValidate><div><label htmlFor={`${kind}-name`}>Name</label><input id={`${kind}-name`} value={values.name} onChange={e=>update("name",e.target.value)} aria-describedby={`${kind}-name-error`}/>{errors.name&&<p id={`${kind}-name-error`} className="error">{errors.name}</p>}</div><div><label htmlFor={`${kind}-email`}>Email</label><input id={`${kind}-email`} type="email" value={values.email} onChange={e=>update("email",e.target.value)}/>{errors.email&&<p className="error">{errors.email}</p>}</div><div className="full"><label htmlFor={`${kind}-message`}>How can we help?</label><textarea id={`${kind}-message`} rows={5} value={values.message} onChange={e=>update("message",e.target.value)}/>{errors.message&&<p className="error">{errors.message}</p>}</div>{enabled?<button className="button" type="submit">Send inquiry</button>:<div className="form-unavailable" role="status"><p>Online inquiries are not yet available. Please call us and we’ll be glad to help.</p><a className="button" href={site.phoneHref}>Call {site.phone}</a></div>}</form>}
+import { integrations } from "@/config/integrations";
+import { site } from "@/config/site";
+
+export function InquiryForm({
+  kind = "general",
+}: {
+  kind?: "general" | "private";
+}) {
+  const external =
+    integrations.contactForm.mode === "external" &&
+    integrations.contactForm.externalUrl;
+  return (
+    <div className="contact-cta" data-inquiry-kind={kind}>
+      <p className="eyebrow dark">Speak with our team</p>
+      <h2>
+        {kind === "private"
+          ? "Tell us about your gathering."
+          : "We’re here to help."}
+      </h2>
+      <p>Call Namak directly for personal assistance.</p>
+      <div className="button-row">
+        <a className="button button-dark" href={site.phoneHref}>
+          Call {site.phone}
+        </a>
+        {external && (
+          <a className="button button-dark" href={external}>
+            Open inquiry form
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,1 +1,17 @@
-import type { MetadataRoute } from "next"; import { site } from "@/config/site"; const routes=["","/menu","/bar","/about","/private-dining","/gallery","/visit","/contact","/privacy","/accessibility"]; export default function sitemap():MetadataRoute.Sitemap{return routes.map((route)=>({url:`${site.domain}${route}`,lastModified:new Date(),changeFrequency:route===""?"weekly":"monthly",priority:route===""?1:0.7}))}
+import type { MetadataRoute } from "next";
+import { site } from "@/config/site";
+import {
+  isRouteIndexable,
+  routePublication,
+  type SiteRoute,
+} from "@/config/publication";
+export default function sitemap(): MetadataRoute.Sitemap {
+  return (Object.keys(routePublication) as SiteRoute[])
+    .filter(isRouteIndexable)
+    .map((route) => ({
+      url: `${site.domain}${route === "/" ? "" : route}`,
+      lastModified: new Date(),
+      changeFrequency: route === "/" ? "weekly" : "monthly",
+      priority: route === "/" ? 1 : 0.7,
+    }));
+}

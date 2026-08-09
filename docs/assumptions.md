@@ -8,3 +8,5 @@
 - Reservation mode is `call`; order action is hidden because no URL is verified.
 - Forms are unavailable because no provider is configured. The UI directs guests to call instead and never pretends a message was sent.
 - Regular published hours are used with an empty special-hours override list; owners must add holiday exceptions.
+- Hero video is off until an approved poster and video sources are configured. The committed SVG poster is a small original brand treatment; no media masters are stored in GitHub.
+- Vercel production is the only indexable environment. Local, CI, and preview responses use `noindex, nofollow` and disallow crawling.
