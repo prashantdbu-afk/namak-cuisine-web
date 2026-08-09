@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { InteriorPage } from "@/components/site/InteriorPage";
-import { site } from "@/config/site";
-import { hoursDisplay } from "@/content/hours";
-import { OpenStatus } from "@/components/site/OpenStatus";
-import { MapPreview } from "@/components/site/MapPreview";
+import { getMapConfiguration } from "@/config/map";
+import { RestaurantMap } from "@/components/site/RestaurantMap";
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Visit",
   description:
@@ -18,21 +17,7 @@ export default function Visit() {
       intro="Everything verified for planning your visit is collected below."
     >
       <section className="visit-page section">
-        <div>
-          <OpenStatus />
-          <address>{site.address.formatted}</address>
-          <a className="text-link" href={site.phoneHref}>
-            {site.phone}
-          </a>
-          {hoursDisplay.map((x) => (
-            <p key={x.days}>
-              <strong>{x.days}</strong>
-              <br />
-              {x.hours}
-            </p>
-          ))}
-        </div>
-        <MapPreview />
+        <RestaurantMap configuration={getMapConfiguration()} />
       </section>
     </InteriorPage>
   );

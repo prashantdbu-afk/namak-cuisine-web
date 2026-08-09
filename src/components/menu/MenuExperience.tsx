@@ -8,6 +8,7 @@ import type { MenuMediaPlacement } from "@/content/menu-media";
 import type { BarCategoryMedia } from "@/content/bar-media";
 import type { MenuCategory, MenuItem } from "@/content/menu";
 import { formatPrice } from "@/content/menu";
+import { getMenuSectionEyebrow } from "@/content/menu-eyebrow";
 import { getImageRecord } from "@/media/manifest";
 
 export function MenuExperience({
@@ -113,7 +114,7 @@ export function MenuExperience({
                 </figure>
               ))}
             <p className="eyebrow dark">
-              {activeMenu === "food" ? "Namak menu" : "WINE LIST"}
+              {getMenuSectionEyebrow(activeMenu, category)}
             </p>
             <h2 id={`${category.id}-heading`}>{category.name}</h2>
             <ul>

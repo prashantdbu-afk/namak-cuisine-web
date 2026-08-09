@@ -6,7 +6,11 @@ export default defineConfig({
   workers: 1,
   webServer: {
     command: "pnpm start",
-    env: { VERCEL_ENV: "preview" },
+    env: {
+      VERCEL_ENV: "preview",
+      NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY:
+        "visual-test-placeholder-not-a-real-key",
+    },
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
   },

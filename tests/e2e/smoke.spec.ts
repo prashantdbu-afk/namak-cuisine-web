@@ -99,6 +99,15 @@ test("bar menu search and beer variants work", async ({ page }) => {
   await expect(main.locator(".bar-category-feature")).toHaveCount(11);
   await expect(main.locator(".priced-menu-item img")).toHaveCount(0);
   await expect(main).not.toContainText(/pexels\.com|images\.pexels/i);
+  for (const id of ["bar-draft-beer", "bar-whiskey", "bar-gin"]) {
+    await expect(page.locator(`#${id} .eyebrow`)).toHaveText("NAMAK BAR MENU");
+  }
+  await expect(page.locator("#bar-wines-by-the-glass .eyebrow")).toHaveText(
+    "WINES BY THE GLASS",
+  );
+  for (const id of ["bar-bubbles", "bar-white", "bar-red"]) {
+    await expect(page.locator(`#${id} .eyebrow`)).toHaveText("WINE LIST");
+  }
 });
 
 test("bar stock review is private, noindex, and compares all candidates", async ({
@@ -132,11 +141,81 @@ test("media review is private, noindex, and contains every supplied record", asy
   );
 });
 test("visit shows verified information", async ({ page }) => {
+  await page.route("**/api/map/embed", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><title>Map test frame</title>",
+    }),
+  );
   await page.goto("/visit");
   await expect(page.locator("main address")).toContainText(
     "5500 Greenville Ave",
   );
   await expect(page.locator("main").getByText("214-730-0047")).toBeVisible();
+  const directions = page.getByRole("link", { name: "Get Directions" });
+  await expect(directions).toHaveAttribute(
+    "href",
+    "https://www.google.com/maps/dir/?api=1&destination=5500+Greenville+Ave+%23600%2C+Dallas%2C+TX+75206",
+  );
+  await expect(page.locator("iframe")).toHaveCount(0);
+  await page.getByRole("button", { name: "View Interactive Map" }).click();
+  await expect(
+    page.getByTitle(
+      "Map showing Namak Indian Restaurant & Bar on Greenville Avenue in Dallas",
+    ),
+  ).toHaveAttribute("loading", "lazy");
+  await page.getByRole("button", { name: "Return to map preview" }).click();
+  await expect(page.locator("iframe")).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText(
+    /Reveal location details|map unavailable|⌖/i,
+  );
+});
+
+test("visit fallback has touch-safe controls and no horizontal overflow", async ({
+  page,
+}) => {
+  await page.goto("/visit");
+  const controls = page.locator(
+    ".location-actions a, .location-actions button",
+  );
+  for (let index = 0; index < (await controls.count()); index += 1) {
+    const box = await controls.nth(index).boundingBox();
+    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  }
+  const overflow = await page.evaluate(
+    () =>
+      document.documentElement.scrollWidth -
+      document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+});
+
+test("privacy explains deliberate interactive map loading", async ({
+  page,
+}) => {
+  await page.goto("/privacy");
+  await expect(
+    page.getByRole("heading", { name: "Google Maps" }),
+  ).toBeVisible();
+  await expect(page.locator("main")).toContainText(
+    "loads only after you choose “View Interactive Map.”",
+  );
+});
+
+test("visit remains useful without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("/visit");
+  await expect(page.locator("main address")).toContainText(
+    "5500 Greenville Ave #600, Dallas, TX 75206",
+  );
+  await expect(
+    page.getByRole("link", { name: "Get Directions" }),
+  ).toBeVisible();
+  await expect(
+    page.locator("main").getByText("Sunday–Thursday", { exact: true }),
+  ).toBeVisible();
+  await context.close();
 });
 test("mobile menu and actions are accessible", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile");

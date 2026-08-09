@@ -8,9 +8,10 @@ import { site } from "@/config/site";
 import { announcement, approvedReviews, gallery } from "@/content/home";
 import { hoursDisplay } from "@/content/hours";
 import { foodMenuItems } from "@/content/menu";
-import { MapPreview } from "@/components/site/MapPreview";
+import { RestaurantMap } from "@/components/site/RestaurantMap";
 import { OpenStatus } from "@/components/site/OpenStatus";
 import { isStockMediaPreviewAvailable } from "@/config/publication";
+import { getMapConfiguration } from "@/config/map";
 
 const featuredDishNames = [
   "Bharwan Paneer Tikka",
@@ -202,28 +203,8 @@ export function HomePage() {
         <div className="visit-copy">
           <p className="eyebrow">Visit Namak</p>
           <h2>Your table on Greenville Avenue.</h2>
-          <OpenStatus />
-          <address>
-            {site.address.street}
-            <br />
-            {site.address.city}, {site.address.region} {site.address.postalCode}
-          </address>
-          <a className="text-link" href={site.phoneHref}>
-            {site.phone}
-          </a>
         </div>
-        <div className="hours">
-          {hoursDisplay.map((entry) => (
-            <div key={entry.days}>
-              <strong>{entry.days}</strong>
-              <span>{entry.hours}</span>
-            </div>
-          ))}
-          <a className="button" href={site.directionsUrl}>
-            Get directions
-          </a>
-        </div>
-        <MapPreview />
+        <RestaurantMap configuration={getMapConfiguration()} />
       </section>
     </>
   );

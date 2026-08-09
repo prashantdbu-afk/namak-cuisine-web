@@ -102,6 +102,42 @@ test("captures homepage review sections", async ({ page }) => {
       animations: "disabled",
     });
   }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.locator(".visit").scrollIntoViewIfNeeded();
+  await page.locator(".visit").screenshot({
+    path: path.join(outputDirectory, "home-section--visit-mobile.png"),
+    animations: "disabled",
+  });
+});
+
+test("captures visit map states", async ({ page }) => {
+  await page.route("**/api/map/embed", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><style>html{background:#dfe8e3}</style><title>Map test frame</title>",
+    }),
+  );
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/visit");
+  const card = page.locator(".location-card");
+  await card.screenshot({
+    path: path.join(outputDirectory, "visit--desktop-no-key-fallback.png"),
+    animations: "disabled",
+  });
+  await page.getByRole("button", { name: "View Interactive Map" }).click();
+  await card.screenshot({
+    path: path.join(outputDirectory, "visit--interactive-map.png"),
+    animations: "disabled",
+  });
+  await page.getByRole("button", { name: "Return to map preview" }).click();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await card.screenshot({
+    path: path.join(outputDirectory, "visit--mobile-no-key-fallback.png"),
+    animations: "disabled",
+  });
 });
 
 test("captures menu search and mobile states", async ({ page }) => {
