@@ -1,0 +1,2 @@
+import { describe,expect,it } from "vitest"; import { getReservationAction } from "."; import { getOrderAction } from "@/lib/ordering";
+describe("integration switches",()=>{it("uses the phone for call reservations",()=>expect(getReservationAction("call")).toMatchObject({available:true,href:"tel:+12147300047"}));it("hides unavailable native reservations",()=>expect(getReservationAction("native").available).toBe(false));it("hides ordering until configured",()=>expect(getOrderAction().available).toBe(false))});

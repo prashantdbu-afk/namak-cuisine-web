@@ -1,0 +1,5 @@
+import { test,expect } from "@playwright/test";
+test("homepage presents primary actions",async({page})=>{await page.goto("/");await expect(page.getByRole("heading",{name:/where spice becomes a story/i})).toBeVisible();await expect(page.getByRole("link",{name:/explore the menu/i})).toHaveAttribute("href","/menu")});
+test("menu is crawlable HTML",async({page})=>{await page.goto("/menu");await expect(page.getByRole("heading",{name:"Built in layers."})).toBeVisible();await expect(page.locator("li")).not.toHaveCount(0)});
+test("visit shows verified information",async({page})=>{await page.goto("/visit");await expect(page.locator("main address")).toContainText("5500 Greenville Ave");await expect(page.locator("main").getByText("214-730-0047")).toBeVisible()});
+test("mobile menu and actions are accessible",async({page},testInfo)=>{test.skip(testInfo.project.name!=="mobile");await page.goto("/");const toggle=page.locator(".menu-toggle");await expect(toggle).toHaveAccessibleName("Menu");await toggle.click();await expect(toggle).toHaveAttribute("aria-expanded","true");await expect(page.getByRole("navigation",{name:"Quick actions"})).toBeVisible()});

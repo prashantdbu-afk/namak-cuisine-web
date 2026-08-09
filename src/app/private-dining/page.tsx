@@ -1,0 +1,3 @@
+import type { Metadata } from "next"; import { InteriorPage } from "@/components/site/InteriorPage"; import { InquiryForm } from "@/components/forms/InquiryForm";
+export const metadata:Metadata={title:"Private Dining",description:"Start a conversation about a gathering at Namak in Dallas.",alternates:{canonical:"/private-dining"}};
+export default function PrivateDining(){return <InteriorPage eyebrow="Gather" title="Make room for a memorable table." intro="Tell us what you’re planning. Event formats, capacity, menus, and availability will be confirmed directly by our team."><section className="section form-section"><InquiryForm kind="private"/></section></InteriorPage>}
