@@ -16,9 +16,9 @@ export default function BarStockReviewPage() {
         <p className="eyebrow">Private review</p>
         <h1>Licensed bar stock curation.</h1>
         <p>
-          Eight editorial category slots, each with one recommendation and two
-          alternates. Source links are available only in this review
-          environment.
+          One hero and eleven editorial category slots, each with one
+          recommendation and two alternates. Source links are available only in
+          this review environment.
         </p>
       </section>
       <BarStockReview />

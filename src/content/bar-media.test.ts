@@ -5,9 +5,9 @@ import { barMenuItems } from "./menu";
 import { imageMedia } from "@/media/manifest";
 
 describe("licensed editorial bar media", () => {
-  it("defines exactly eight reviewed slots with two alternates each", () => {
-    expect(selectedBarStock).toHaveLength(8);
-    expect(barStockCandidates).toHaveLength(24);
+  it("defines the hero and eleven reviewed category slots with two alternates each", () => {
+    expect(selectedBarStock).toHaveLength(12);
+    expect(barStockCandidates).toHaveLength(36);
     for (const selected of selectedBarStock) {
       const slot = barStockCandidates.filter(
         (candidate) => candidate.slotId === selected.slotId,
@@ -30,7 +30,7 @@ describe("licensed editorial bar media", () => {
     const records = imageMedia.filter((record) =>
       record.id.startsWith("bar-stock-"),
     );
-    expect(records).toHaveLength(8);
+    expect(records).toHaveLength(12);
     expect(
       records.every(
         (record) =>
@@ -39,7 +39,7 @@ describe("licensed editorial bar media", () => {
           record.productionReady === false,
       ),
     ).toBe(true);
-    expect(barCategoryMedia).toHaveLength(7);
+    expect(barCategoryMedia).toHaveLength(11);
     const brandedNames = barMenuItems.map((item) => item.name.toLowerCase());
     expect(
       records.some((record) =>

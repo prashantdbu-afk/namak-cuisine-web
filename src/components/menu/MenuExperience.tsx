@@ -97,10 +97,6 @@ export function MenuExperience({
             key={category.id}
             aria-labelledby={`${category.id}-heading`}
           >
-            <p className="eyebrow dark">
-              {activeMenu === "food" ? "Namak menu" : "WINE LIST"}
-            </p>
-            <h2 id={`${category.id}-heading`}>{category.name}</h2>
             {categoryMedia
               .filter((feature) => feature.categoryId === category.id)
               .map((feature) => (
@@ -111,12 +107,15 @@ export function MenuExperience({
                       priority={false}
                     />
                   </MediaFrame>
-                  <figcaption>
-                    <span>{feature.label}</span>
-                    <small>Editorial category presentation</small>
+                  <figcaption className="visually-hidden">
+                    {feature.label} editorial category image
                   </figcaption>
                 </figure>
               ))}
+            <p className="eyebrow dark">
+              {activeMenu === "food" ? "Namak menu" : "WINE LIST"}
+            </p>
+            <h2 id={`${category.id}-heading`}>{category.name}</h2>
             <ul>
               {matchingItems
                 .filter((entry) => entry.categoryId === category.id)

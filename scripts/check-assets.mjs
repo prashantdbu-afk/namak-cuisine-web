@@ -68,14 +68,14 @@ if (
   );
 
 if (
-  barRecords.length !== 8 ||
+  barRecords.length !== 12 ||
   barRecords.some(
     (record) =>
       /^https?:/i.test(record.source) || record.rightsStatus !== "approved",
   )
 )
   failures.push(
-    "Selected bar stock must contain eight approved, self-hosted records.",
+    "Selected bar stock must contain the hero and eleven approved, self-hosted category records.",
   );
 
 const priorityImages = manifest.filter(

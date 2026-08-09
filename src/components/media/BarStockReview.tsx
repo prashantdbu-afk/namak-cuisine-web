@@ -1,14 +1,22 @@
-import { barStockCandidates, type BarStockSlotId } from "@/media/bar-stock";
+import {
+  barStockCandidates,
+  barStockPresentation,
+  type BarStockSlotId,
+} from "@/media/bar-stock";
 
 const slotNames: Record<BarStockSlotId, string> = {
   "bar-stock-hero": "Bar hero",
+  "bar-stock-draft-beer": "Draft Beer",
   "bar-stock-beer": "Beer",
   "bar-stock-whiskey": "Whiskey",
-  "bar-stock-clear-spirits": "Gin & Vodka",
-  "bar-stock-agave-rum": "Tequila & Rum",
-  "bar-stock-aperitivo": "Aperitivo & Liquor",
-  "bar-stock-wine-glass": "Wines by the Glass",
-  "bar-stock-wine-list": "Wine List",
+  "bar-stock-gin": "Gin",
+  "bar-stock-vodka": "Vodka",
+  "bar-stock-tequila": "Tequila",
+  "bar-stock-rum": "Rum",
+  "bar-stock-aperitivo-liquor": "Aperitivo / Liquor",
+  "bar-stock-white-wine": "White Wine",
+  "bar-stock-red-wine": "Red Wine",
+  "bar-stock-sparkling-wine": "Sparkling Wine",
 };
 
 export function BarStockReview() {
@@ -25,79 +33,85 @@ export function BarStockReview() {
           <div className="stock-candidate-grid">
             {barStockCandidates
               .filter((candidate) => candidate.slotId === slotId)
-              .map((candidate) => (
-                <article
-                  className="stock-candidate"
-                  key={candidate.candidateId}
-                >
-                  <p className="stock-decision">
-                    {candidate.role === "recommended"
-                      ? "Recommended"
-                      : candidate.role === "alternate-1"
-                        ? "Alternate 1"
-                        : "Alternate 2"}
-                  </p>
-                  <div
-                    className="stock-full-preview"
-                    role="img"
-                    aria-label={candidate.title}
-                    style={{ backgroundImage: `url(${candidate.previewUrl})` }}
-                  />
-                  <div className="stock-crops">
+              .map((candidate) => {
+                const previewUrl =
+                  candidate.role === "recommended"
+                    ? `/media/bar/${barStockPresentation[candidate.slotId].output}`
+                    : candidate.previewUrl;
+                return (
+                  <article
+                    className="stock-candidate"
+                    key={candidate.candidateId}
+                  >
+                    <p className="stock-decision">
+                      {candidate.role === "recommended"
+                        ? "Recommended"
+                        : candidate.role === "alternate-1"
+                          ? "Alternate 1"
+                          : "Alternate 2"}
+                    </p>
                     <div
-                      style={{
-                        backgroundImage: `url(${candidate.previewUrl})`,
-                      }}
-                      aria-label="Proposed desktop crop"
+                      className="stock-full-preview"
                       role="img"
+                      aria-label={candidate.title}
+                      style={{ backgroundImage: `url(${previewUrl})` }}
                     />
-                    <div
-                      style={{
-                        backgroundImage: `url(${candidate.previewUrl})`,
-                      }}
-                      aria-label="Proposed mobile crop"
-                      role="img"
-                    />
-                  </div>
-                  <div className="stock-candidate-copy">
-                    <h3>{candidate.title}</h3>
-                    <p>{candidate.rationale}</p>
-                    <dl>
-                      <div>
-                        <dt>Score</dt>
-                        <dd>{candidate.score}/5</dd>
-                      </div>
-                      <div>
-                        <dt>Provider</dt>
-                        <dd>Pexels</dd>
-                      </div>
-                      <div>
-                        <dt>Photographer</dt>
-                        <dd>{candidate.photographer}</dd>
-                      </div>
-                      <div>
-                        <dt>License</dt>
-                        <dd>{candidate.licenseName}</dd>
-                      </div>
-                      <div>
-                        <dt>Brand/logo</dt>
-                        <dd>{candidate.brandCheck}</dd>
-                      </div>
-                      <div>
-                        <dt>People</dt>
-                        <dd>{candidate.peopleCheck}</dd>
-                      </div>
-                    </dl>
-                    <a
-                      href={candidate.sourcePageUrl}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Review source page
-                    </a>
-                  </div>
-                </article>
-              ))}
+                    <div className="stock-crops">
+                      <div
+                        style={{
+                          backgroundImage: `url(${previewUrl})`,
+                        }}
+                        aria-label="Proposed desktop crop"
+                        role="img"
+                      />
+                      <div
+                        style={{
+                          backgroundImage: `url(${previewUrl})`,
+                        }}
+                        aria-label="Proposed mobile crop"
+                        role="img"
+                      />
+                    </div>
+                    <div className="stock-candidate-copy">
+                      <h3>{candidate.title}</h3>
+                      <p>{candidate.rationale}</p>
+                      <dl>
+                        <div>
+                          <dt>Score</dt>
+                          <dd>{candidate.score}/5</dd>
+                        </div>
+                        <div>
+                          <dt>Provider</dt>
+                          <dd>Pexels</dd>
+                        </div>
+                        <div>
+                          <dt>Photographer</dt>
+                          <dd>{candidate.photographer}</dd>
+                        </div>
+                        <div>
+                          <dt>License</dt>
+                          <dd>{candidate.licenseName}</dd>
+                        </div>
+                        <div>
+                          <dt>Brand/logo</dt>
+                          <dd>{candidate.brandCheck}</dd>
+                        </div>
+                        <div>
+                          <dt>People</dt>
+                          <dd>{candidate.peopleCheck}</dd>
+                        </div>
+                      </dl>
+                      <a
+                        href={candidate.sourcePageUrl}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Review source page
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
           </div>
         </section>
       ))}

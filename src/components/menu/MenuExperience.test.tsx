@@ -125,11 +125,20 @@ describe("physical menu data", () => {
         categoryMedia={barCategoryMedia}
       />,
     );
-    expect(container.querySelectorAll(".bar-category-feature")).toHaveLength(7);
+    expect(container.querySelectorAll(".bar-category-feature")).toHaveLength(
+      11,
+    );
     expect(
       container.querySelectorAll('.bar-category-feature img[loading="lazy"]'),
-    ).toHaveLength(7);
+    ).toHaveLength(11);
     expect(container.querySelectorAll(".priced-menu-item img")).toHaveLength(0);
+    for (const feature of container.querySelectorAll(".bar-category-feature")) {
+      const heading = feature.parentElement?.querySelector("h2");
+      expect(
+        feature.compareDocumentPosition(heading as Node) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    }
     expect(container.textContent).not.toMatch(/pexels\.com|images\.pexels/i);
   });
 

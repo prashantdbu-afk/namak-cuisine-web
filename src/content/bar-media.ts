@@ -7,13 +7,17 @@ export type BarCategoryMedia = {
 };
 
 const labels: Record<string, string> = {
+  "bar-stock-draft-beer": "Draft Beer",
   "bar-stock-beer": "Beer",
   "bar-stock-whiskey": "Whiskey",
-  "bar-stock-clear-spirits": "Gin & Vodka",
-  "bar-stock-agave-rum": "Tequila & Rum",
-  "bar-stock-aperitivo": "Aperitivo & Liquor",
-  "bar-stock-wine-glass": "Wines by the Glass",
-  "bar-stock-wine-list": "Wine List",
+  "bar-stock-gin": "Gin",
+  "bar-stock-vodka": "Vodka",
+  "bar-stock-tequila": "Tequila",
+  "bar-stock-rum": "Rum",
+  "bar-stock-aperitivo-liquor": "Aperitivo / Liquor",
+  "bar-stock-white-wine": "White Wine",
+  "bar-stock-red-wine": "Red Wine",
+  "bar-stock-sparkling-wine": "Sparkling Wine",
 };
 
 export const barCategoryMedia: BarCategoryMedia[] = Object.entries(

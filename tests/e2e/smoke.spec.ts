@@ -96,7 +96,7 @@ test("bar menu search and beer variants work", async ({ page }) => {
     "/menu",
   );
   await search.fill("");
-  await expect(main.locator(".bar-category-feature")).toHaveCount(7);
+  await expect(main.locator(".bar-category-feature")).toHaveCount(11);
   await expect(main.locator(".priced-menu-item img")).toHaveCount(0);
   await expect(main).not.toContainText(/pexels\.com|images\.pexels/i);
 });
@@ -109,9 +109,9 @@ test("bar stock review is private, noindex, and compares all candidates", async 
     "content",
     /noindex/,
   );
-  await expect(page.locator(".stock-review-slot")).toHaveCount(8);
-  await expect(page.locator(".stock-candidate")).toHaveCount(24);
-  await expect(page.getByText("Recommended", { exact: true })).toHaveCount(8);
+  await expect(page.locator(".stock-review-slot")).toHaveCount(12);
+  await expect(page.locator(".stock-candidate")).toHaveCount(36);
+  await expect(page.getByText("Recommended", { exact: true })).toHaveCount(12);
 });
 test("media review is private, noindex, and contains every supplied record", async ({
   page,

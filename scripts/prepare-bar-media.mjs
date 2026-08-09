@@ -13,13 +13,17 @@ const output = path.join(root, "public/media/bar");
 const manifestPath = path.join(root, "src/media/manifest.json");
 const sourceNames = {
   "bar-stock-hero": "bar-hero-source.jpeg",
+  "bar-stock-draft-beer": "bar-draft-beer-source.jpeg",
   "bar-stock-beer": "bar-beer-source.jpeg",
   "bar-stock-whiskey": "bar-whiskey-source.jpeg",
-  "bar-stock-clear-spirits": "bar-clear-spirits-source.jpeg",
-  "bar-stock-agave-rum": "bar-agave-rum-source.jpeg",
-  "bar-stock-aperitivo": "bar-aperitivo-source.jpeg",
-  "bar-stock-wine-glass": "bar-wine-glass-source.jpeg",
-  "bar-stock-wine-list": "bar-wine-list-source.jpeg",
+  "bar-stock-gin": "bar-gin-source.jpeg",
+  "bar-stock-vodka": "bar-vodka-source.jpeg",
+  "bar-stock-tequila": "bar-tequila-source.jpeg",
+  "bar-stock-rum": "bar-rum-source.jpeg",
+  "bar-stock-aperitivo-liquor": "bar-aperitivo-liquor-source.jpeg",
+  "bar-stock-white-wine": "bar-white-wine-source.jpeg",
+  "bar-stock-red-wine": "bar-red-wine-source.jpeg",
+  "bar-stock-sparkling-wine": "bar-sparkling-wine-source.jpeg",
 };
 
 await mkdir(output, { recursive: true });
@@ -27,18 +31,48 @@ const records = [];
 for (const candidate of selectedBarStock) {
   const presentation = barStockPresentation[candidate.slotId];
   const source = path.join(incoming, sourceNames[candidate.slotId]);
-  const metadata = await sharp(source).metadata();
   const hero = candidate.slotId === "bar-stock-hero";
-  const width = Math.min(
-    metadata.width ?? (hero ? 1800 : 1400),
-    hero ? 1800 : 1400,
-  );
   const target = path.join(output, presentation.output);
-  await sharp(source)
+  const { data: oriented, info } = await sharp(source)
     .rotate()
-    .resize({ width, withoutEnlargement: true })
-    .modulate({ brightness: 1.015, saturation: 0.99 })
-    .linear(1.025, -3.2)
+    .toBuffer({ resolveWithObject: true });
+  const targetRatio = hero ? 3 / 2 : 5 / 3;
+  let cropWidth = info.width;
+  let cropHeight = info.height;
+  if (info.width / info.height > targetRatio) {
+    cropWidth = Math.round(info.height * targetRatio);
+  } else {
+    cropHeight = Math.round(info.width / targetRatio);
+  }
+  const cropLeft = Math.max(
+    0,
+    Math.min(
+      info.width - cropWidth,
+      Math.round(info.width * presentation.focalPoint.x - cropWidth / 2),
+    ),
+  );
+  const cropTop = Math.max(
+    0,
+    Math.min(
+      info.height - cropHeight,
+      Math.round(info.height * presentation.focalPoint.y - cropHeight / 2),
+    ),
+  );
+  await sharp(oriented)
+    .extract({
+      left: cropLeft,
+      top: cropTop,
+      width: cropWidth,
+      height: cropHeight,
+    })
+    .resize({
+      width: hero ? 1800 : 1440,
+      height: hero ? 1200 : 864,
+      fit: "cover",
+      withoutEnlargement: false,
+    })
+    .modulate({ brightness: 0.98, saturation: 0.9 })
+    .linear(1.06, -6)
     .sharpen({ sigma: 0.5 })
     .webp({ quality: hero ? 78 : 72, smartSubsample: true })
     .toFile(target);
@@ -96,6 +130,6 @@ const registerRows = barStockCandidates.map(
 );
 await writeFile(
   path.join(root, "docs/bar-stock-license-register.md"),
-  `# Bar stock license register\n\nAll records are documented as: **Licensed stock image used for editorial bar-category presentation.** The restaurant does not claim copyright ownership. Pexels was sufficient for all eight slots; Unsplash was not used.\n\n| Candidate ID | Slot | Provider | Asset ID | Source page | Direct download used | Photographer | Profile | Title | Original dimensions | License | License page | Checked | Attribution required | Attribution recommended | Visible trademarks | Recognizable people | Separate releases | Commercial use | Evidence | Decision | Rejection reason |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n${registerRows.join("\n")}\n\n## Rejected during research\n\n- Pexels 30622216: rejected for a visibly branded beer glass.\n- Pexels 16142763: rejected for a prominent recognizable rum bottle and nightlife styling.\n- Pexels 14794082 and 9170933: rejected for readable wine labels.\n- People-forward beer and wine results were rejected before the candidate set because recognizable people or venue context reduced release and representation safety.\n\nNo image is mapped to an individual named menu item. Selected files are self-hosted; no selected image is hotlinked.\n`,
+  `# Bar stock license register\n\nInternal record only. All records are documented as: **Licensed stock image used for editorial bar-category presentation.** The restaurant does not claim copyright ownership. Pexels was sufficient for the hero and all eleven category slots; Unsplash was not used.\n\n| Candidate ID | Slot | Provider | Asset ID | Source page | Direct download used | Photographer | Profile | Title | Original dimensions | License | License page | Checked | Attribution required | Attribution recommended | Visible trademarks | Recognizable people | Separate releases | Commercial use | Evidence | Decision | Rejection reason |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n${registerRows.join("\n")}\n\n## Rejected during research\n\n- Pexels 30622216: rejected for a visibly branded beer glass.\n- Pexels 16142763: rejected for a prominent recognizable rum bottle and nightlife styling.\n- Pexels 14794082 and 9170933: rejected for readable wine labels.\n- Pexels 31631254, 27305292, and 35740712: rejected because bottle-shelf imagery conflicts with the approved editorial direction.\n- People-forward beer and wine results were rejected before the candidate set because recognizable people or venue context reduced release and representation safety.\n\nNo image is mapped to an individual named menu item. Selected files are self-hosted; no selected image is hotlinked. The category assets are normalized to a 5:3 crop with a shared muted-teal grade and warm highlights.\n`,
 );
 console.log(`Prepared ${records.length} licensed editorial bar images.`);

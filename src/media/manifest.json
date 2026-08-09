@@ -50,151 +50,6 @@
     "productionReady": false
   },
   {
-    "id": "bar-stock-hero",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-hero.webp",
-    "width": 1800,
-    "height": 2358,
-    "aspectRatio": 0.7633587786259542,
-    "alt": "Pale cocktail with lime and rosemary garnish in warm evening light.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.44,
-      "y": 0.5
-    },
-    "sizes": "(max-width: 760px) 100vw, 52vw",
-    "priority": true,
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-beer",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-beer.webp",
-    "width": 1400,
-    "height": 935,
-    "aspectRatio": 1.4973262032085561,
-    "alt": "Beer being poured into an unbranded glass.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.48,
-      "y": 0.55
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-whiskey",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-whiskey.webp",
-    "width": 1400,
-    "height": 2104,
-    "aspectRatio": 0.6653992395437263,
-    "alt": "Amber spirit served over ice in a rocks glass.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.52,
-      "y": 0.55
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-clear-spirits",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-clear-spirits.webp",
-    "width": 1400,
-    "height": 2100,
-    "aspectRatio": 0.6666666666666666,
-    "alt": "Pale cocktail with a restrained botanical garnish.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.55,
-      "y": 0.5
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-agave-rum",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-agave-rum.webp",
-    "width": 1400,
-    "height": 1231,
-    "aspectRatio": 1.1372867587327375,
-    "alt": "Pale-gold cocktail with lime garnish.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.5,
-      "y": 0.5
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-aperitivo",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-aperitivo.webp",
-    "width": 1400,
-    "height": 2102,
-    "aspectRatio": 0.6660323501427212,
-    "alt": "Red-orange aperitivo-style drink with citrus peel.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.52,
-      "y": 0.48
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-wine-glass",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-wine-glass.webp",
-    "width": 1400,
-    "height": 875,
-    "aspectRatio": 1.6,
-    "alt": "Red wine being poured into a stemmed glass.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.52,
-      "y": 0.5
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
-    "id": "bar-stock-wine-list",
-    "kind": "image",
-    "provider": "local",
-    "source": "/media/bar/bar-wine-list.webp",
-    "width": 1400,
-    "height": 1865,
-    "aspectRatio": 0.7506702412868632,
-    "alt": "Rows of wine bottles resting in a dim cellar.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.5,
-      "y": 0.5
-    },
-    "sizes": "(max-width: 760px) 100vw, 420px",
-    "rightsStatus": "approved",
-    "productionReady": false
-  },
-  {
     "id": "food-bharwan-paneer-tikka",
     "kind": "image",
     "provider": "local",
@@ -1094,5 +949,222 @@
     "productionReady": true,
     "foodStyleFamily": "indian-vessel",
     "foodMediaStatus": "approved"
+  },
+  {
+    "id": "bar-stock-hero",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-hero.webp",
+    "width": 1800,
+    "height": 1200,
+    "aspectRatio": 1.5,
+    "alt": "Pale cocktail with lime and rosemary garnish in warm evening light.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.44,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 52vw",
+    "priority": true,
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-draft-beer",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-draft-beer.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Beer being poured into an unbranded glass against a dark background.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.48,
+      "y": 0.55
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-beer",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-beer.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Dark ale with a soft frothy head against a charcoal background.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-whiskey",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-whiskey.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Amber spirit served over ice in a rocks glass.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.55
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-gin",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-gin.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Pale botanical cocktail with a restrained herb garnish.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.72,
+      "y": 0.34
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-vodka",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-vodka.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Clear cocktail with lemon and herbs on a dark background.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-tequila",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-tequila.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Pale-gold cocktail with lime in warm evening light.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-rum",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-rum.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Amber cocktail in a crystal glass against black.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-aperitivo-liquor",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-aperitivo-liquor.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Red-orange aperitivo-style drink with citrus peel.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.36
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-white-wine",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-white-wine.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "White wine being poured into a stemmed glass against black.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-red-wine",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-red-wine.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Red wine being poured into a stemmed glass against black.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.52,
+      "y": 0.5
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
+  },
+  {
+    "id": "bar-stock-sparkling-wine",
+    "kind": "image",
+    "provider": "local",
+    "source": "/media/bar/bar-sparkling-wine.webp",
+    "width": 1440,
+    "height": 864,
+    "aspectRatio": 1.6666666666666667,
+    "alt": "Sparkling wine in a stemmed glass with warm evening bokeh.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.3
+    },
+    "sizes": "(max-width: 760px) 100vw, 420px",
+    "rightsStatus": "approved",
+    "productionReady": false
   }
 ]
