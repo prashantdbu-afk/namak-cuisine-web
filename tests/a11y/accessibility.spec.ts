@@ -9,9 +9,14 @@ for (const path of [
   "/media-review/plating",
   "/media-review/menu-completeness",
   "/stock-review/bar",
+  "/about",
+  "/gallery",
   "/visit",
   "/contact",
   "/catering",
+  "/privacy",
+  "/accessibility",
+  "/admin/marketing-dashboard",
 ]) {
   test(`${path} has no automated WCAG A/AA violations`, async ({ page }) => {
     await page.goto(path);

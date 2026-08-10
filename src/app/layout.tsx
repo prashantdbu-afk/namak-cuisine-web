@@ -7,6 +7,12 @@ import { MobileActions } from "@/components/site/MobileActions";
 import { site } from "@/config/site";
 import { isProductionDeployment } from "@/config/publication";
 import { getOpeningHoursSpecification } from "@/content/hours";
+import {
+  Analytics,
+  GoogleTagManagerNoScript,
+} from "@/components/analytics/Analytics";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createRestaurantSchema } from "@/lib/seo";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -44,34 +50,20 @@ export const metadata: Metadata = {
     description: "Modern Indian dining, made for sharing.",
     images: ["/twitter-image"],
   },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    name: site.name,
-    url: site.domain,
-    telephone: site.phone,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: site.address.street,
-      addressLocality: site.address.city,
-      addressRegion: site.address.region,
-      postalCode: site.address.postalCode,
-      addressCountry: site.address.country,
-    },
-    servesCuisine: "Indian",
-    openingHoursSpecification: getOpeningHoursSpecification(),
-    sameAs: [site.social.instagram, site.social.facebook],
-    menu: `${site.domain}/menu`,
-  };
+  const jsonLd = createRestaurantSchema(getOpeningHoursSpecification());
   return (
     <html lang="en">
       <body className={geist.variable}>
+        <GoogleTagManagerNoScript />
         <a className="skip-link" href="#main">
           Skip to content
         </a>
@@ -79,12 +71,8 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <MobileActions />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
+        <JsonLd data={jsonLd} />
+        <Analytics />
       </body>
     </html>
   );

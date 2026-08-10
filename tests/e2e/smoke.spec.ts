@@ -210,7 +210,12 @@ test("visit shows verified information", async ({ page }) => {
   await expect(page.locator("main address")).toContainText(
     "5500 Greenville Ave",
   );
-  await expect(page.locator("main").getByText("214-730-0047")).toBeVisible();
+  await expect(
+    page.locator("main").getByRole("link", {
+      name: "214-730-0047",
+      exact: true,
+    }),
+  ).toBeVisible();
   const directions = page.getByRole("link", { name: "Get Directions" });
   await expect(directions).toHaveAttribute(
     "href",
@@ -439,4 +444,163 @@ test("homepage and footer expose Catering and no public Gather label", async ({
       .getByRole("link", { name: "Catering" }),
   ).toHaveAttribute("href", "/catering");
   await expect(page.getByText("Gather", { exact: true })).toHaveCount(0);
+});
+
+const seoPages = [
+  ["/", "Indian Restaurant & Bar on Greenville Ave, Dallas | Namak"],
+  ["/menu", "Indian Restaurant Menu in Dallas | Namak"],
+  ["/bar", "Indian Bar & Wine Menu | Namak Dallas"],
+  ["/catering", "Indian Catering in Dallas | Namak"],
+  ["/gallery", "Restaurant Gallery | Namak Dallas"],
+  ["/visit", "Directions & Hours | Namak Dallas"],
+  ["/about", "Our Story | Namak Indian Restaurant & Bar"],
+  ["/contact", "Contact Namak | Dallas"],
+  ["/privacy", "Privacy | Namak Indian Restaurant & Bar"],
+  ["/accessibility", "Accessibility | Namak Indian Restaurant & Bar"],
+] as const;
+
+test("public pages expose unique complete SEO metadata", async ({ page }) => {
+  for (const [path, title] of seoPages) {
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    expect(description?.length, path).toBeGreaterThanOrEqual(140);
+    expect(description?.length, path).toBeLessThanOrEqual(160);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `https://namakcuisine.com${path === "/" ? "" : path}`,
+    );
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      "content",
+      title,
+    );
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+      "content",
+      "summary_large_image",
+    );
+  }
+});
+
+test("public pages have one H1 and no skipped heading levels", async ({
+  page,
+}) => {
+  for (const [path] of seoPages) {
+    await page.goto(path);
+    await expect(page.locator("main h1"), `${path} H1`).toHaveCount(1);
+    const levels = await page
+      .locator("main h1, main h2, main h3, main h4, main h5, main h6")
+      .evaluateAll((headings) =>
+        headings.map((heading) => Number(heading.tagName.slice(1))),
+      );
+    for (let index = 1; index < levels.length; index += 1) {
+      expect(
+        levels[index] - levels[index - 1],
+        `${path} heading hierarchy`,
+      ).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test("breadcrumbs and FAQs are visible and represented in JSON-LD", async ({
+  page,
+}) => {
+  for (const path of [
+    "/menu",
+    "/bar",
+    "/catering",
+    "/gallery",
+    "/visit",
+    "/about",
+    "/contact",
+  ]) {
+    await page.goto(path);
+    const types = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) =>
+        scripts.map(
+          (script) => JSON.parse(script.textContent ?? "{}")["@type"],
+        ),
+      );
+    expect(types, path).toContain("BreadcrumbList");
+  }
+  for (const path of ["/visit", "/catering"]) {
+    await page.goto(path);
+    await expect(page.locator(".faq-grid article")).toHaveCount(4);
+    const types = await page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) =>
+        scripts.map(
+          (script) => JSON.parse(script.textContent ?? "{}")["@type"],
+        ),
+      );
+    expect(types, path).toContain("FAQPage");
+  }
+});
+
+test("conversion actions are annotated without exposing analytics IDs", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(
+    page.locator('[data-analytics-event="reserve_click"]'),
+  ).not.toHaveCount(0);
+  await expect(
+    page.locator('[data-analytics-event="directions_click"]'),
+  ).not.toHaveCount(0);
+  await expect(
+    page.locator('[data-analytics-event="social_click"]'),
+  ).toHaveCount(2);
+  await expect(page.locator("body")).not.toContainText(/GTM-|G-[A-Z0-9]{6,}/);
+});
+
+test("development marketing dashboard is noindex and reports readiness", async ({
+  page,
+}) => {
+  await page.goto("/admin/marketing-dashboard");
+  await expect(page).toHaveTitle("Marketing Dashboard | Namak Internal");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(
+    page.getByRole("heading", { name: "Marketing readiness." }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Google Analytics 4", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("catering_submit", { exact: true }),
+  ).toBeVisible();
+});
+
+test("preview responses carry a defense-in-depth noindex header", async ({
+  request,
+}) => {
+  const response = await request.get("/menu");
+  expect(response.headers()["x-robots-tag"]).toMatch(
+    /\bnoindex\b.*\bnofollow\b/,
+  );
+});
+
+test("public internal links resolve without errors", async ({
+  page,
+  request,
+}) => {
+  const links = new Set<string>();
+  for (const [path] of seoPages) {
+    await page.goto(path);
+    for (const href of await page
+      .locator('a[href^="/"]')
+      .evaluateAll((anchors) =>
+        anchors.map((anchor) => anchor.getAttribute("href") ?? ""),
+      )) {
+      if (href && !href.startsWith("/#")) links.add(href.split("#")[0]);
+    }
+  }
+  for (const href of links) {
+    const response = await request.get(href);
+    expect(response.status(), href).toBeLessThan(400);
+  }
 });

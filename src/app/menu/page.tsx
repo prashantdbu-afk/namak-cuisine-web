@@ -6,18 +6,10 @@ import {
   foodCategories,
   foodMenuItems,
 } from "@/content/menu";
+import { PageBreadcrumb } from "@/components/seo/PageBreadcrumb";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Indian Restaurant Menu in Dallas",
-  description:
-    "Explore the Namak Indian Restaurant & Bar menu on Greenville Avenue in Dallas, including soups, chaat, tandoor selections, and entrées.",
-  keywords: [
-    "Indian restaurant menu Dallas",
-    "Indian restaurant Greenville Avenue Dallas",
-    "Namak Indian Restaurant & Bar menu",
-  ],
-  alternates: { canonical: "/menu" },
-};
+export const metadata: Metadata = createPageMetadata("menu");
 
 export default function Menu() {
   const structuredData = createMenuStructuredData(
@@ -27,6 +19,7 @@ export default function Menu() {
   );
   return (
     <>
+      <PageBreadcrumb name="Menu" path="/menu" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -36,7 +29,8 @@ export default function Menu() {
         <h1>Built in layers.</h1>
         <p>
           Explore the complete food menu, with descriptions and current prices
-          verified from Namak’s physical menu.
+          verified from Namak’s physical menu and served at our Greenville
+          Avenue Indian restaurant in Dallas.
         </p>
       </section>
       <MenuExperience

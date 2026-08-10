@@ -31,7 +31,12 @@ export function Header() {
             </Link>
           ))}
           {reserve.available && (
-            <a className="button button-small" href={reserve.href}>
+            <a
+              className="button button-small"
+              href={reserve.href}
+              data-analytics-event="reserve_click"
+              data-analytics-placement="header"
+            >
               {reserve.label}
             </a>
           )}

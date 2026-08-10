@@ -41,7 +41,12 @@ export function HomePage() {
             <Link className="button" href="/menu">
               Explore menu
             </Link>
-            <a className="button button-quiet" href={site.phoneHref}>
+            <a
+              className="button button-quiet"
+              href={site.phoneHref}
+              data-analytics-event="reserve_click"
+              data-analytics-placement="home-hero"
+            >
               Call to reserve
             </a>
           </div>
@@ -76,7 +81,12 @@ export function HomePage() {
           <span className="strip-label">Hours today</span>
           <strong>{hoursDisplay[0].hours}</strong>
         </div>
-        <a className="text-link" href={site.directionsUrl}>
+        <a
+          className="text-link"
+          href={site.directionsUrl}
+          data-analytics-event="directions_click"
+          data-analytics-placement="home-welcome"
+        >
           Get directions <span aria-hidden>↗</span>
         </a>
       </section>
@@ -201,7 +211,12 @@ export function HomePage() {
           <Link className="button" href="/catering">
             Explore Catering
           </Link>
-          <a className="button button-quiet" href={site.phoneHref}>
+          <a
+            className="button button-quiet"
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="home-catering"
+          >
             Call Our Team
           </a>
         </div>

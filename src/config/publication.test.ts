@@ -6,6 +6,7 @@ import {
   isMediaReviewAvailable,
   isStockReviewAvailable,
   isStockMediaPreviewAvailable,
+  routeRobots,
 } from "./publication";
 
 describe("publication state", () => {
@@ -37,5 +38,12 @@ describe("publication state", () => {
     expect(isStockMediaPreviewAvailable({ VERCEL_ENV: "production" })).toBe(
       false,
     );
+  });
+  it("indexes public routes only in production", () => {
+    expect(routeRobots("/menu", true)).toEqual({ index: true, follow: true });
+    expect(routeRobots("/menu", false)).toEqual({
+      index: false,
+      follow: false,
+    });
   });
 });
