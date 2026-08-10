@@ -33,7 +33,7 @@ test("food menu is searchable, priced, and source-clean", async ({ page }) => {
     "href",
     "/bar",
   );
-  const formerlyMissing = [
+  const auditedTextOnly = [
     "Bhutte Ke Kebab",
     "Burrata Chaat",
     "Chapli Smash Burger",
@@ -49,16 +49,23 @@ test("food menu is searchable, priced, and source-clean", async ({ page }) => {
     "Tandoori Roti",
     "Veg Dum Biryani",
   ];
-  for (const name of formerlyMissing) {
+  for (const name of auditedTextOnly) {
     const article = main.locator(".priced-menu-item", { hasText: name });
-    await expect(article.locator("img")).toHaveCount(1);
+    await expect(article).toBeVisible();
+    await expect(article.locator(".menu-price").first()).toBeVisible();
   }
   await expect(
     main.locator('[data-image-id="food-jhol-momo-non-veg"]'),
-  ).toContainText("Jhol Momo");
+  ).toHaveCount(0);
   await expect(
     main.locator('[data-image-id="food-tandoori-full"]'),
-  ).toContainText("Tandoori Chicken");
+  ).toHaveCount(0);
+  await expect(
+    main.locator('[data-image-id="food-bharwan-paneer-tikka"]'),
+  ).toHaveCount(0);
+  await expect(
+    main.locator('[data-image-id="food-bhutte-ke-kebab"]'),
+  ).toHaveCount(1);
 });
 
 test("food image cards preserve responsive minimums, prices, and overflow", async ({
@@ -135,10 +142,25 @@ test("media review is private, noindex, and contains every supplied record", asy
     page.getByText("Unidentified dessert", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Missing from public menu" }).click();
-  await expect(page.locator(".media-review-card")).toHaveCount(0);
+  await expect(page.locator(".media-review-card")).not.toHaveCount(0);
   await expect(page.locator("main")).not.toContainText(
     /DoorDash|Grubhub|Toast|Uber Eats/i,
   );
+});
+test("plating review is private and no public photograph is noncompliant", async ({
+  page,
+}) => {
+  await page.goto("/media-review/plating");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(page.locator(".plating-review-card")).toHaveCount(45);
+  await page
+    .getByRole("button", { name: "Currently Public but Noncompliant" })
+    .click();
+  await expect(page.locator(".plating-review-card")).toHaveCount(0);
+  await expect(page.getByText("0 photographs")).toBeVisible();
 });
 test("visit shows verified information", async ({ page }) => {
   await page.route("**/api/map/embed", (route) =>

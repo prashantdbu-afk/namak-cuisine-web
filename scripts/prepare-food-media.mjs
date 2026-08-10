@@ -16,6 +16,7 @@ const manifestPath = path.join(root, "src/media/manifest.json");
 const reportPath = path.join(root, "docs/food-media-processing-report.json");
 const duplicatePath = path.join(root, "docs/menu-image-duplicate-review.md");
 const completenessPath = path.join(root, "docs/menu-image-completeness.md");
+const platingAuditPath = path.join(root, "docs/plating-compliance-audit.md");
 
 const assertRange = (label, value, limits) => {
   if (value < limits.min || value > limits.max)
@@ -256,6 +257,14 @@ for (const record of foodProcessingConfig) {
     productionReady,
     foodStyleFamily: record.styleFamily,
     foodMediaStatus: record.status,
+    targetPlateSystem: record.targetPlateSystem,
+    visualCompliance: record.visualCompliance,
+    menuEligible: record.menuEligible,
+    actualVisiblePlate: record.actualVisiblePlate,
+    actualBackground: record.actualBackground,
+    actualCameraAngle: record.actualCameraAngle,
+    actualLightingStyle: record.actualLightingStyle,
+    complianceReason: record.complianceReason,
   });
 }
 
@@ -335,14 +344,20 @@ const completenessRows = foodProcessingConfig.map((record) => {
   const publicPlacement =
     record.itemId !== null &&
     record.status === "approved" &&
-    record.uses.includes("menu-feature");
+    record.uses.includes("menu-feature") &&
+    record.visualCompliance === "pass" &&
+    record.menuEligible;
   const reason = publicPlacement
     ? "—"
     : record.itemId === null
       ? record.notes
       : record.status !== "approved"
         ? `Status is ${record.status}.`
-        : "Not designated for menu-feature use.";
+        : record.visualCompliance !== "pass"
+          ? `Visual compliance is ${record.visualCompliance}: ${record.complianceReason}`
+          : !record.menuEligible
+            ? "Not eligible for public menu placement."
+            : "Not designated for menu-feature use.";
   const anchor = record.itemId
     ? `/menu#food-${record.category
         .toLowerCase()
@@ -353,9 +368,25 @@ const completenessRows = foodProcessingConfig.map((record) => {
 });
 await writeFile(
   completenessPath,
-  `# Menu image completeness\n\nGenerated from the typed owner-media configuration. Every approved, production-ready record with a valid item mapping and \`menu-feature\` use is publicly placed.\n\n| Source filename | Image ID | Menu-item ID | Exact menu name | Category | Rights | Media status | Production ready | Public menu placement | Reason if not public | Preview anchor |\n|---|---|---|---|---|---|---|---|---|---|---|\n${completenessRows.join("\n")}\n\n## Remaining holds\n\n- Chicken Boneless Biryani: no exact physical-menu item; the exact Hyderabadi Chicken Dum Biryani photograph is retained separately.\n- Unidentified dessert: exact dessert name is not confirmed.\n- Kadai Chicken: absent from the approved physical menu.\n`,
+  `# Menu image completeness\n\nGenerated from the typed owner-media configuration. Public placement additionally requires a passing visual-compliance audit and explicit menu eligibility. Noncompliant photographs remain private while their exact menu items render as text-only rows.\n\n| Source filename | Image ID | Menu-item ID | Exact menu name | Category | Rights | Media status | Production ready | Public menu placement | Reason if not public | Preview anchor |\n|---|---|---|---|---|---|---|---|---|---|---|\n${completenessRows.join("\n")}\n\n## Remaining holds\n\n- Chicken Boneless Biryani: no exact physical-menu item; the exact Hyderabadi Chicken Dum Biryani photograph is retained separately.\n- Unidentified dessert: exact dessert name is not confirmed.\n- Kadai Chicken: absent from the approved physical menu.\n`,
+);
+const platingRows = foodProcessingConfig.map(
+  (record) =>
+    `| ${record.sourceFilename.replaceAll("|", "\\|")} | ${record.publicName} | ${record.category} | ${record.actualVisiblePlate} | ${record.actualVisiblePlate} | ${record.actualBackground} | ${record.actualCameraAngle} | ${record.targetPlateSystem} | ${record.visualCompliance} | ${record.complianceReason.replaceAll("|", "\\|")} | ${record.menuEligible && record.visualCompliance === "pass" ? "yes" : "no"} | ${record.replacementRecommendation.replaceAll("|", "\\|")} |`,
+);
+await writeFile(
+  platingAuditPath,
+  `# Plating compliance audit\n\nManual visual audit of the actual visible presentation in every owner-supplied food-media record. Classification is based on the photograph, never its filename or menu category.\n\n| Exact filename | Exact menu item | Category | Current vessel | Current plate color | Current background | Current angle | Target plating system | Status | Reason | Public menu eligible | Reshoot or controlled-editing recommendation |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n${platingRows.join("\n")}\n`,
 );
 console.log(`Prepared ${prepared.length} owner-supplied source files.`);
+const eligibleCount = foodProcessingConfig.filter(
+  (record) =>
+    record.itemId !== null &&
+    record.status === "approved" &&
+    record.uses.includes("menu-feature") &&
+    record.visualCompliance === "pass" &&
+    record.menuEligible,
+).length;
 console.log(
-  `Approved public menu records: ${publicRecords.length}. Near-duplicate warnings: ${nearDuplicates.length}.`,
+  `Compliant public menu records: ${eligibleCount}. Near-duplicate warnings: ${nearDuplicates.length}.`,
 );

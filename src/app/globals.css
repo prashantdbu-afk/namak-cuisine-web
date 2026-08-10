@@ -456,12 +456,13 @@ em {
 
 .dish-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
 
 .dish-card {
+  min-width: 0;
   min-height: 220px;
   padding: 1.6rem;
   border-right: 1px solid var(--line);
@@ -504,6 +505,7 @@ em {
 
 .dish-card h3 {
   margin: 0;
+  overflow-wrap: anywhere;
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   font-weight: 580;
 }
@@ -1097,7 +1099,7 @@ em {
   background: #f2f4ef;
 }
 
-.priced-menu-item.has-menu-image[data-background-family="warm-oat"] {
+.priced-menu-item.has-menu-image[data-background-family="warm-limestone"] {
   background: #f5eddd;
 }
 
@@ -1236,6 +1238,39 @@ em {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--surface);
+}
+
+.review-result-count {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.plating-review-image {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  background: #eee9e0;
+}
+
+.plating-review-image img {
+  object-fit: contain;
+}
+
+.plating-review-card[data-compliance="pass"] {
+  border-top: 4px solid #37634f;
+}
+
+.plating-review-card[data-compliance="temporary"] {
+  border-top: 4px solid var(--saffron);
+}
+
+.plating-review-card[data-compliance="reject"] {
+  border-top: 4px solid var(--pomegranate);
+}
+
+.plating-review-empty {
+  margin-top: 2rem;
 }
 
 .review-full,

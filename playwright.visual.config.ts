@@ -5,7 +5,7 @@ export default defineConfig({
   timeout: 120_000,
   workers: 1,
   webServer: {
-    command: "pnpm start",
+    command: "pnpm build && pnpm start",
     env: {
       VERCEL_ENV: "preview",
       NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY:

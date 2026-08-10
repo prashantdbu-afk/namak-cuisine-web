@@ -6,6 +6,7 @@ for (const path of [
   "/menu",
   "/bar",
   "/media-review",
+  "/media-review/plating",
   "/stock-review/bar",
   "/visit",
   "/contact",

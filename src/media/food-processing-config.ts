@@ -1,4 +1,11 @@
-export type FoodMediaStyle = "ivory-plate" | "indian-vessel" | "bread-basket";
+import { platingAuditByImageId } from "./plating-audit.ts";
+import type {
+  PlateSystem,
+  VisualCompliance,
+  PlatingAudit,
+} from "./plating-audit.ts";
+
+export type FoodMediaStyle = PlateSystem;
 export type FoodMediaUse =
   | "homepage-hero"
   | "homepage-signature"
@@ -7,7 +14,7 @@ export type FoodMediaUse =
   | "gallery"
   | "gallery-only";
 export type FoodMediaStatus = "approved" | "review" | "hold" | "reshoot";
-export type FoodBackgroundFamily = "warm-neutral" | "cool-stone" | "warm-oat";
+export type FoodBackgroundFamily = "warm-limestone" | "cool-stone";
 export type FoodCrop = {
   left: number;
   top: number;
@@ -42,6 +49,15 @@ export type FoodProcessingRecord = {
   allowDuplicateImage?: boolean;
   outputQuality: number;
   notes: string;
+  targetPlateSystem: PlateSystem;
+  actualVisiblePlate: string;
+  actualBackground: string;
+  actualCameraAngle: string;
+  actualLightingStyle: string;
+  visualCompliance: VisualCompliance;
+  complianceReason: string;
+  menuEligible: boolean;
+  replacementRecommendation: string;
 };
 
 const approved = (
@@ -74,19 +90,7 @@ const approved = (
       | "allowDuplicateImage"
     >
   > = {},
-): FoodProcessingRecord => {
-  const seed = [...imageId].reduce(
-    (sum, character) => sum + character.charCodeAt(0),
-    0,
-  );
-  const tuning = {
-    brightness: 1.018 + (seed % 6) * 0.006,
-    saturation: 1.018 + (seed % 5) * 0.009,
-    contrast: 1.018 + (seed % 4) * 0.01,
-    gamma: 0.98 + (seed % 4) * 0.01,
-    sharpenSigma: 0.48 + (seed % 5) * 0.07,
-  };
-
+): Omit<FoodProcessingRecord, keyof PlatingAudit> => {
   return {
     sourceFilename,
     imageId,
@@ -104,19 +108,15 @@ const approved = (
       options.focalPoint ?? { x: 0.5, y: 0.5 },
     editorialFocalPoint: options.editorialFocalPoint ??
       options.focalPoint ?? { x: 0.5, y: 0.5 },
-    brightness: options.brightness ?? tuning.brightness,
-    saturation: options.saturation ?? tuning.saturation,
-    contrast: options.contrast ?? tuning.contrast,
-    gamma: options.gamma ?? tuning.gamma,
-    sharpenSigma: options.sharpenSigma ?? tuning.sharpenSigma,
+    brightness: options.brightness ?? 1,
+    saturation: options.saturation ?? 1,
+    contrast: options.contrast ?? 1,
+    gamma: options.gamma ?? 1,
+    sharpenSigma: options.sharpenSigma ?? 0.4,
     crop: options.crop ?? null,
     backgroundFamily:
       options.backgroundFamily ??
-      (styleFamily === "bread-basket"
-        ? "warm-oat"
-        : styleFamily === "indian-vessel"
-          ? "cool-stone"
-          : "warm-neutral"),
+      (styleFamily === "charcoal-kadhai" ? "cool-stone" : "warm-limestone"),
     menuAspectRatio: options.menuAspectRatio ?? 5 / 3,
     enhancementNotes:
       options.enhancementNotes ??
@@ -137,7 +137,7 @@ const notPublic = (
   styleFamily: FoodMediaStyle,
   status: "review" | "hold" | "reshoot",
   notes: string,
-): FoodProcessingRecord => ({
+): Omit<FoodProcessingRecord, keyof PlatingAudit> => ({
   sourceFilename,
   imageId,
   itemId,
@@ -158,21 +158,25 @@ const notPublic = (
   gamma: 1,
   sharpenSigma: 0.4,
   crop: null,
-  backgroundFamily: styleFamily === "bread-basket" ? "warm-oat" : "cool-stone",
+  backgroundFamily:
+    styleFamily === "charcoal-kadhai" ? "cool-stone" : "warm-limestone",
   menuAspectRatio: 5 / 3,
   enhancementNotes: "No public enhancement while this source remains on hold.",
   outputQuality: 80,
   notes,
 });
 
-export const foodProcessingConfig: FoodProcessingRecord[] = [
+const foodProcessingConfigBase: Omit<
+  FoodProcessingRecord,
+  keyof PlatingAudit
+>[] = [
   approved(
     "Bharwan Paneer Tikka  - This is Siganture Dish.avif",
     "food-bharwan-paneer-tikka",
     "embers-veg-bharwan-paneer-tikka",
     "Bharwan Paneer Tikka",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["homepage-signature", "category-feature", "menu-feature"],
     "Bharwan Paneer Tikka served with onion, lemon, and green chutney.",
     { featured: true, qualityScore: 5 },
@@ -183,7 +187,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-veg-bhutte-ke-kebab",
     "Bhutte Ke Kebab",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Bhutte Ke Kebab arranged on a light ceramic plate.",
   ),
@@ -193,7 +197,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-buratta-bomb",
     "Buratta Bomb",
     "AMUSE-BOUCHE",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Buratta Bomb arranged on a light plate with greens.",
   ),
@@ -203,7 +207,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-veg-burrata-chaat",
     "Burrata Chaat",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Burrata Chaat presented on a white plate.",
   ),
@@ -213,7 +217,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-chapli-smash-burger",
     "Chapli Smash Burger",
     "AMUSE-BOUCHE",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Chapli Smash Burger served with chutneys.",
   ),
@@ -233,7 +237,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     null,
     "Chicken Boneless Biryani",
     "UNMAPPED",
-    "indian-vessel",
+    "charcoal-kadhai",
     "hold",
     "No exact physical-menu item is confirmed; do not substitute the Hyderabadi biryani mapping.",
   ),
@@ -254,7 +258,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "soups-coconut-carrot-soup",
     "Coconut Carrot Soup",
     "SOUPS",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["category-feature", "menu-feature", "gallery"],
     "Coconut Carrot Soup served in a natural coconut vessel.",
     { qualityScore: 5 },
@@ -265,7 +269,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     null,
     "Unidentified dessert",
     "UNMAPPED",
-    "indian-vessel",
+    "charcoal-kadhai",
     "hold",
     "Filename and presentation do not identify an exact physical-menu dessert.",
   ),
@@ -275,7 +279,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-bhatti-da-kukarh",
     "Bhatti Da Kukarh",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Bhatti Da Kukarh served on a light ceramic plate.",
   ),
@@ -285,7 +289,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-classic-chicken-tikka",
     "Classic Chicken Tikka",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["homepage-signature", "menu-feature", "gallery"],
     "Classic Chicken Tikka served with onion, lemon, and green chutney.",
     { featured: true },
@@ -296,7 +300,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-lamb-seekh-kebab",
     "Lamb Seekh Kebab",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Lamb Seekh Kebab presented with onion and chutney.",
     {
@@ -310,7 +314,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-tandoori-chicken",
     "Tandoori Chicken",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Tandoori Chicken served with onion, lemon, and green chutney.",
     {
@@ -324,7 +328,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-tandoori-masaledar-lamb-chops",
     "Tandoori Masaledar Lamb chops",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["homepage-signature", "category-feature", "menu-feature", "gallery"],
     "Tandoori Masaledar Lamb chops served with onion, lemon, and chutney.",
     { featured: true, qualityScore: 5 },
@@ -335,7 +339,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-non-veg-tandoori-salmon",
     "Tandoori Salmon",
     "EMBERS NON-VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Tandoori Salmon plated with greens and edible flowers.",
   ),
@@ -355,7 +359,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-veg-hara-bhara-kebab",
     "Hara Bhara Kebab",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Hara Bhara Kebab arranged on a banana leaf with onion and chutney.",
   ),
@@ -365,7 +369,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "biryani-and-pulao-hyderabadi-chicken-dum-biryani",
     "Hyderabadi Chicken Dum Biryani",
     "BIRYANI AND PULAO",
-    "indian-vessel",
+    "charcoal-kadhai",
     [
       "homepage-hero",
       "homepage-signature",
@@ -382,7 +386,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-jhol-momo",
     "Jhol Momo",
     "AMUSE-BOUCHE",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Jhol Momo served in a spiced broth.",
     {
@@ -406,7 +410,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     null,
     "Namak restaurant exterior",
     "VENUE",
-    "ivory-plate",
+    "ivory-coupe",
     ["gallery"],
     "Namak Indian Restaurant & Bar exterior at night.",
     {
@@ -420,7 +424,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-veg-malai-tandoori-broccoli",
     "Malai Tandoori Broccoli",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Malai Tandoori Broccoli served with onion, lemon, and green chutney.",
   ),
@@ -440,7 +444,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "soups-murgh-badam-shorba",
     "Murgh Badam Shorba",
     "SOUPS",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Murgh Badam Shorba served in a shallow blue-gray bowl.",
   ),
@@ -450,7 +454,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-fish-moilee",
     "Fish Moilee",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["category-feature", "menu-feature", "gallery"],
     "Fish Moilee served in a dark blue-gray bowl.",
   ),
@@ -460,7 +464,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-prawn-mango-curry",
     "Prawn Mango Curry",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Prawn Mango Curry served in a light ceramic bowl.",
   ),
@@ -470,7 +474,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-butter-chicken",
     "Butter Chicken",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["homepage-signature", "menu-feature", "gallery"],
     "Butter Chicken served in a neutral ceramic bowl.",
   ),
@@ -480,7 +484,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-chicken-korma",
     "Chicken Korma",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Chicken Korma served in a light ceramic bowl.",
   ),
@@ -490,7 +494,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-chicken-tikka-masala",
     "Chicken Tikka Masala",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Chicken Tikka Masala served in a white bowl.",
   ),
@@ -500,7 +504,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-chicken-vindaloo",
     "Chicken Vindaloo",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Chicken Vindaloo served in a rustic ceramic bowl.",
   ),
@@ -510,7 +514,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "non-veg-entrees-coriander-prawns",
     "Coriander Prawns",
     "NON-VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Coriander Prawns served in a handled metal bowl.",
   ),
@@ -520,7 +524,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     null,
     "Kadai Chicken",
     "UNMAPPED",
-    "indian-vessel",
+    "charcoal-kadhai",
     "hold",
     "Kadai Chicken is not present in the current physical menu.",
   ),
@@ -530,7 +534,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-papdi-chaat",
     "Papdi Chaat",
     "AMUSE-BOUCHE",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Papdi Chaat presented in a shallow ceramic bowl.",
   ),
@@ -540,7 +544,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "embers-veg-punjabi-samosa",
     "Punjabi Samosa",
     "EMBERS VEG",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Punjabi Samosa served with chutneys on a white plate.",
   ),
@@ -550,7 +554,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-raw-mango-salad",
     "Raw Mango Salad",
     "AMUSE-BOUCHE",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Raw Mango Salad presented on a white plate.",
   ),
@@ -560,7 +564,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "amuse-bouche-samosa-chaat",
     "Samosa Chaat",
     "AMUSE-BOUCHE",
-    "ivory-plate",
+    "ivory-coupe",
     ["menu-feature", "gallery"],
     "Samosa Chaat served in a shallow ceramic bowl.",
   ),
@@ -580,7 +584,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-dal-makhani",
     "Dal Makhani",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["category-feature", "menu-feature", "gallery"],
     "Dal Makhani served in a handled metal bowl.",
   ),
@@ -590,7 +594,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-malai-kofta",
     "Malai Kofta",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Malai Kofta served in a light ceramic bowl.",
   ),
@@ -600,7 +604,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-paneer-tikka-masala",
     "Paneer Tikka Masala",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Paneer Tikka Masala served in a shallow metal bowl.",
   ),
@@ -610,7 +614,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-pindi-chole",
     "Pindi Chole",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Pindi Chole served in a ceramic bowl.",
   ),
@@ -620,7 +624,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-saag-burrata",
     "Saag Burrata",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Saag Burrata presented with greens and roasted vegetables.",
   ),
@@ -630,7 +634,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "veg-entrees-tandoori-paneer-makhani",
     "Tandoori Paneer Makhani",
     "VEG ENTREES",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Tandoori Paneer Makhani served in a neutral ceramic bowl.",
   ),
@@ -640,7 +644,7 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     "biryani-and-pulao-veg-dum-biryani",
     "Veg Dum Biryani",
     "BIRYANI AND PULAO",
-    "indian-vessel",
+    "charcoal-kadhai",
     ["menu-feature", "gallery"],
     "Veg Dum Biryani served with raita.",
     {
@@ -649,6 +653,13 @@ export const foodProcessingConfig: FoodProcessingRecord[] = [
     },
   ),
 ];
+
+export const foodProcessingConfig: FoodProcessingRecord[] =
+  foodProcessingConfigBase.map((record) => {
+    const audit = platingAuditByImageId[record.imageId];
+    if (!audit) throw new Error(`Missing plating audit for ${record.imageId}`);
+    return { ...record, ...audit };
+  });
 
 export const SAFE_FOOD_ADJUSTMENT_LIMITS = {
   brightness: { min: 0.98, max: 1.08 },

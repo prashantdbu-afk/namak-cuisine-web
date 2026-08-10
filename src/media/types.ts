@@ -32,8 +32,16 @@ export type ImageRecord = MediaBase & {
   focalPoint?: FocalPoint;
   sizes: string;
   priority?: boolean;
-  foodStyleFamily?: "ivory-plate" | "indian-vessel" | "bread-basket";
+  foodStyleFamily?: "ivory-coupe" | "charcoal-kadhai" | "bread-basket";
   foodMediaStatus?: "approved" | "review" | "hold" | "reshoot";
+  targetPlateSystem?: "ivory-coupe" | "charcoal-kadhai" | "bread-basket";
+  visualCompliance?: "pass" | "temporary" | "reject";
+  menuEligible?: boolean;
+  actualVisiblePlate?: string;
+  actualBackground?: string;
+  actualCameraAngle?: string;
+  actualLightingStyle?: string;
+  complianceReason?: string;
 };
 
 export type VideoRecord = MediaBase & {

@@ -9,6 +9,18 @@ import {
 import { foodProcessingConfig } from "@/media/food-processing-config";
 import { imageMedia } from "@/media/manifest";
 import processingReport from "../../docs/food-media-processing-report.json";
+import { readFileSync } from "node:fs";
+
+const requiredSystems = {
+  "AMUSE-BOUCHE": "ivory-coupe",
+  SOUPS: "charcoal-kadhai",
+  "EMBERS VEG": "ivory-coupe",
+  "EMBERS NON-VEG": "ivory-coupe",
+  "VEG ENTREES": "charcoal-kadhai",
+  "NON-VEG ENTREES": "charcoal-kadhai",
+  "BIRYANI AND PULAO": "charcoal-kadhai",
+  "INDIAN BREADS": "bread-basket",
+} as const;
 
 describe("owner-approved food media", () => {
   it("maps only valid menu item IDs and preserves hold records privately", () => {
@@ -23,7 +35,9 @@ describe("owner-approved food media", () => {
       (entry) =>
         entry.itemId !== null &&
         entry.status === "approved" &&
-        entry.uses.includes("menu-feature"),
+        entry.uses.includes("menu-feature") &&
+        entry.visualCompliance === "pass" &&
+        entry.menuEligible,
     );
     expect(publicMenuMediaPlacements).toHaveLength(expectedPublic.length);
     expect(
@@ -68,10 +82,22 @@ describe("owner-approved food media", () => {
     );
   });
 
-  it("keeps homepage and gallery selections restrained without capping menu completeness", () => {
-    expect(homepageFoodImageIds.length).toBeLessThanOrEqual(3);
+  it("keeps a four-image, single-system homepage row and a restrained gallery", () => {
+    expect(homepageFoodImageIds).toHaveLength(4);
+    expect(
+      homepageFoodImageIds.every((id) => {
+        const record = foodProcessingConfig.find(
+          (entry) => entry.imageId === id,
+        );
+        return (
+          record?.targetPlateSystem === "ivory-coupe" &&
+          record.visualCompliance === "pass" &&
+          record.menuEligible
+        );
+      }),
+    ).toBe(true);
     expect(galleryImageIds.length).toBeLessThanOrEqual(8);
-    expect(publicMenuMediaPlacements.length).toBeGreaterThan(20);
+    expect(publicMenuMediaPlacements.length).toBeGreaterThan(0);
   });
 
   it("maps every approved menu image exactly once and never publishes holds", () => {
@@ -88,18 +114,75 @@ describe("owner-approved food media", () => {
         ].includes(entry.imageId),
       ),
     ).toBe(false);
-    expect(publicMenuMediaPlacements).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          imageId: "food-jhol-momo-non-veg",
-          itemId: "amuse-bouche-jhol-momo",
-        }),
-        expect.objectContaining({
-          imageId: "food-tandoori-full",
-          itemId: "embers-non-veg-tandoori-chicken",
-        }),
-      ]),
+    expect(
+      publicMenuMediaPlacements.some((entry) =>
+        ["food-jhol-momo-non-veg", "food-tandoori-full"].includes(
+          entry.imageId,
+        ),
+      ),
+    ).toBe(false);
+  });
+
+  it("publishes only passing, explicitly eligible photographs", () => {
+    expect(
+      publicMenuMediaPlacements.every(
+        (entry) =>
+          entry.visualCompliance === "pass" && entry.menuEligible === true,
+      ),
+    ).toBe(true);
+    const publicIds = new Set(
+      publicMenuMediaPlacements.map((entry) => entry.imageId),
     );
+    expect(
+      foodProcessingConfig
+        .filter((entry) =>
+          ["temporary", "reject"].includes(entry.visualCompliance),
+        )
+        .every((entry) => !publicIds.has(entry.imageId)),
+    ).toBe(true);
+  });
+
+  it("enforces one audited plate system within each public category", () => {
+    for (const [category, target] of Object.entries(requiredSystems)) {
+      const publicRecords = foodProcessingConfig.filter(
+        (entry) =>
+          entry.category === category &&
+          publicMenuMediaPlacements.some(
+            (placement) => placement.imageId === entry.imageId,
+          ),
+      );
+      expect(
+        publicRecords.every((entry) => entry.targetPlateSystem === target),
+        category,
+      ).toBe(true);
+      expect(
+        new Set(publicRecords.map((entry) => entry.targetPlateSystem)).size,
+        category,
+      ).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("does not misclassify known gold-charger or grill photographs", () => {
+    const gold = foodProcessingConfig.find(
+      (entry) => entry.imageId === "food-bharwan-paneer-tikka",
+    );
+    const grill = foodProcessingConfig.find(
+      (entry) => entry.imageId === "food-tandoori-full",
+    );
+    expect(gold?.actualVisiblePlate).toMatch(/gold charger/i);
+    expect(gold?.visualCompliance).toBe("reject");
+    expect(grill?.actualVisiblePlate).toMatch(/tabletop grill/i);
+    expect(grill?.visualCompliance).toBe("reject");
+  });
+
+  it("uses neutral defaults instead of image-ID seeded corrections", () => {
+    const source = readFileSync(
+      `${process.cwd()}/src/media/food-processing-config.ts`,
+      "utf8",
+    );
+    expect(source).not.toMatch(/charCodeAt|const seed|seed %/);
+    expect(source).toContain("brightness: options.brightness ?? 1");
+    expect(source).toContain("sharpenSigma: options.sharpenSigma ?? 0.4");
   });
 
   it("retains deterministic duplicate and non-generative processing evidence", () => {

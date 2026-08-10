@@ -13,6 +13,7 @@ const routes = [
   ["visit", "/visit"],
   ["contact", "/contact"],
   ["media-review", "/media-review"],
+  ["plating-review", "/media-review/plating"],
   ["stock-review-bar", "/stock-review/bar"],
 ] as const;
 const viewports = [
@@ -43,7 +44,7 @@ test("captures every review route and viewport", async ({ page }) => {
     await page.setViewportSize(viewport);
     for (const [routeName, route] of routes) {
       await page.goto(route);
-      await revealPage(page);
+      if (routeName !== "plating-review") await revealPage(page);
       const pageWidth = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth,
@@ -76,7 +77,7 @@ test("captures every review route and viewport", async ({ page }) => {
       }
       await page.screenshot({
         path: path.join(outputDirectory, `${routeName}--${viewportName}.png`),
-        fullPage: true,
+        fullPage: routeName !== "plating-review",
         animations: "disabled",
       });
     }
@@ -180,6 +181,7 @@ test("captures photographed menu categories for owner review", async ({
 }) => {
   const desktopCategories = [
     "food-amuse-bouche",
+    "food-soups",
     "food-embers-veg",
     "food-embers-non-veg",
     "food-veg-entrees",
@@ -202,6 +204,7 @@ test("captures photographed menu categories for owner review", async ({
   await page.setViewportSize({ width: 390, height: 844 });
   for (const id of [
     "food-amuse-bouche",
+    "food-soups",
     "food-embers-veg",
     "food-non-veg-entrees",
     "food-indian-breads",
@@ -214,4 +217,30 @@ test("captures photographed menu categories for owner review", async ({
       animations: "disabled",
     });
   }
+});
+
+test("captures plating compliance before and after evidence", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/media-review/plating");
+  await page.getByRole("button", { name: "Reject", exact: true }).click();
+  await page
+    .locator(".plating-review-card")
+    .first()
+    .screenshot({
+      path: path.join(
+        outputDirectory,
+        "plating-before--mixed-vessel-reject.png",
+      ),
+      animations: "disabled",
+    });
+  await page.goto("/menu");
+  await page.locator("#food-embers-veg").screenshot({
+    path: path.join(
+      outputDirectory,
+      "plating-after--compliant-and-text-only.png",
+    ),
+    animations: "disabled",
+  });
 });

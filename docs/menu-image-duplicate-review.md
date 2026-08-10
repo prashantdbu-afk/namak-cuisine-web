@@ -8,7 +8,7 @@ None detected.
 
 ## Near duplicates
 
-- food-bhutte-ke-kebab ↔ food-tandoori-salmon (dHash distance 8)
+- food-bhutte-ke-kebab ↔ food-tandoori-salmon (dHash distance 9)
 - food-papdi-chaat ↔ food-samosa-chaat (dHash distance 9)
 
 ## Intentional duplicates

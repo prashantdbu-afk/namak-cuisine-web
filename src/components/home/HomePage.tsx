@@ -12,26 +12,13 @@ import { RestaurantMap } from "@/components/site/RestaurantMap";
 import { OpenStatus } from "@/components/site/OpenStatus";
 import { isStockMediaPreviewAvailable } from "@/config/publication";
 import { getMapConfiguration } from "@/config/map";
+import { homepageFoodFeatures } from "@/content/menu-media";
 
-const featuredDishNames = [
-  "Bharwan Paneer Tikka",
-  "Butter Chicken",
-  "Buratta Bomb",
-  "Dal Makhani",
-];
-
-const featuredDishes = featuredDishNames.map((name) => {
-  const dish = foodMenuItems.find((item) => item.name === name);
-  if (!dish) throw new Error(`Published menu item not found: ${name}`);
-  return dish;
+const featuredDishes = homepageFoodFeatures.map((feature) => {
+  const dish = foodMenuItems.find((item) => item.name === feature.name);
+  if (!dish) throw new Error(`Published menu item not found: ${feature.name}`);
+  return { dish, imageId: feature.imageId };
 });
-
-const featuredDishMedia: Record<string, string> = {
-  "Bharwan Paneer Tikka": "food-bharwan-paneer-tikka",
-  "Butter Chicken": "food-butter-chicken",
-  "Buratta Bomb": "food-buratta-bomb",
-  "Dal Makhani": "food-dal-makhani",
-};
 
 export function HomePage() {
   const stockPreview = isStockMediaPreviewAvailable();
@@ -61,17 +48,18 @@ export function HomePage() {
         <div className="hero-media hero-food-mosaic">
           <MediaFrame aspectRatio={5 / 4} className="hero-food-primary">
             <ResponsiveImage
-              media={getImageRecord("food-hyderabadi-chicken-dum-biryani")}
+              media={getImageRecord(homepageFoodFeatures[1].imageId)}
+              priority
             />
           </MediaFrame>
           <MediaFrame aspectRatio={1} className="hero-food-secondary">
             <ResponsiveImage
-              media={getImageRecord("food-bharwan-paneer-tikka")}
+              media={getImageRecord(homepageFoodFeatures[0].imageId)}
             />
           </MediaFrame>
           <MediaFrame aspectRatio={1} className="hero-food-tertiary">
             <ResponsiveImage
-              media={getImageRecord("food-tandoori-masaledar-lamb-chops")}
+              media={getImageRecord(homepageFoodFeatures[3].imageId)}
             />
           </MediaFrame>
         </div>
@@ -103,12 +91,10 @@ export function HomePage() {
           </Link>
         </div>
         <div className="dish-grid">
-          {featuredDishes.map((dish, index) => (
+          {featuredDishes.map(({ dish, imageId }, index) => (
             <article className="dish-card" key={dish.id}>
               <MediaFrame aspectRatio={4 / 3} className="dish-card-media">
-                <ResponsiveImage
-                  media={getImageRecord(featuredDishMedia[dish.name])}
-                />
+                <ResponsiveImage media={getImageRecord(imageId)} />
               </MediaFrame>
               <span className="dish-number" aria-hidden>
                 {String(index + 1).padStart(2, "0")}

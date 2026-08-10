@@ -14,8 +14,8 @@ const filters = [
   "Review",
   "Hold",
   "Duplicate warning",
-  "Ivory Plate",
-  "Indian Vessel",
+  "Ivory Coupe",
+  "Charcoal Kadhai",
   "Bread Basket",
 ] as const;
 
@@ -45,7 +45,7 @@ export function MediaReviewGrid({
     if (filter === "Duplicate warning") return duplicateIds.has(record.imageId);
     if (["Review", "Hold"].includes(filter))
       return record.status === filter.toLowerCase();
-    if (["Ivory Plate", "Indian Vessel", "Bread Basket"].includes(filter))
+    if (["Ivory Coupe", "Charcoal Kadhai", "Bread Basket"].includes(filter))
       return record.styleFamily === filter.toLowerCase().replace(" ", "-");
     return record.uses.some((use) => use.startsWith(filter.toLowerCase()));
   });
