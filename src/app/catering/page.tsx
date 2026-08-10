@@ -13,13 +13,12 @@ import {
 import { site } from "@/config/site";
 import { getCateringFormConfiguration } from "@/lib/catering/submit";
 import { getImageRecord } from "@/media/manifest";
+import { PageBreadcrumb } from "@/components/seo/PageBreadcrumb";
+import { FaqSection } from "@/components/seo/FaqSection";
+import { cateringFaqs } from "@/content/faqs";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Indian Catering in Dallas | Namak Indian Restaurant & Bar",
-  description:
-    "Contact Namak Indian Restaurant & Bar about catering for corporate events, birthdays, Sweet 16 celebrations, engagements, weddings, cultural gatherings, religious functions, and family occasions in Dallas.",
-  alternates: { canonical: "https://namakcuisine.com/catering" },
-};
+export const metadata: Metadata = createPageMetadata("catering");
 
 export default async function CateringPage({
   searchParams,
@@ -46,6 +45,7 @@ export default async function CateringPage({
   };
   return (
     <div className="catering-page">
+      <PageBreadcrumb name="Catering" path="/catering" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -58,13 +58,19 @@ export default async function CateringPage({
           <p className="lead">
             From office lunches and milestone celebrations to weddings, cultural
             functions, and family gatherings, share a few details and our team
-            will help you explore the menu experience you have in mind.
+            will help you explore the Indian catering experience you have in
+            mind for your Dallas-area event.
           </p>
           <div className="button-row">
             <a className="button" href="#catering-inquiry">
               Start a Catering Inquiry
             </a>
-            <a className="button button-quiet" href={site.phoneHref}>
+            <a
+              className="button button-quiet"
+              href={site.phoneHref}
+              data-analytics-event="call_click"
+              data-analytics-placement="catering-hero"
+            >
               Call Our Team
             </a>
           </div>
@@ -192,6 +198,8 @@ export default async function CateringPage({
         </RevealOnScroll>
       </section>
 
+      <FaqSection title="Catering questions." faqs={cateringFaqs} />
+
       <section className="catering-final-cta">
         <CateringCelebrationMotif />
         <div>
@@ -203,7 +211,12 @@ export default async function CateringPage({
           </p>
         </div>
         <div className="button-row">
-          <a className="button button-light" href={site.phoneHref}>
+          <a
+            className="button button-light"
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="catering-final"
+          >
             Call {site.phone}
           </a>
           <Link className="text-link" href="/menu">

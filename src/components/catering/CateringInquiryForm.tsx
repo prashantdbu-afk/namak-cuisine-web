@@ -7,6 +7,7 @@ import { cateringEventOptions, cateringMealOptions } from "@/content/catering";
 import type { CateringFormMode, CateringFormState } from "@/lib/catering/types";
 import { site } from "@/config/site";
 import { CateringMenuSelector } from "./CateringMenuSelector";
+import { trackEvent } from "@/lib/analytics";
 
 const idleState: CateringFormState = { status: "idle" };
 
@@ -35,9 +36,18 @@ export function CateringInquiryForm({
     : idleState;
   const [state, action, pending] = useActionState(sendCateringInquiry, seeded);
   const statusRef = useRef<HTMLDivElement>(null);
+  const successTracked = useRef(false);
   useEffect(() => {
     if (state.status !== "idle") statusRef.current?.focus();
-  }, [state.status]);
+    if (
+      state.status === "success" &&
+      !previewState &&
+      !successTracked.current
+    ) {
+      successTracked.current = true;
+      trackEvent("catering_submit", { form_name: "catering_inquiry" });
+    }
+  }, [previewState, state.status]);
 
   if (state.status === "success")
     return (
@@ -88,7 +98,13 @@ export function CateringInquiryForm({
             {errors.form ??
               "Please review the highlighted fields or call Namak directly at 214-730-0047."}
           </p>
-          <a href={site.phoneHref}>Call Namak</a>
+          <a
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="catering-error"
+          >
+            Call Namak
+          </a>
         </div>
       )}
       <div className="catering-form-grid">
@@ -307,14 +323,25 @@ export function CateringInquiryForm({
           <div className="catering-disabled-fallback">
             <strong>Online inquiries are being prepared.</strong>
             <p>Please call our team to discuss your event.</p>
-            <a className="button" href={site.phoneHref}>
+            <a
+              className="button"
+              href={site.phoneHref}
+              data-analytics-event="call_click"
+              data-analytics-placement="catering-disabled"
+            >
               Call {site.phone}
             </a>
           </div>
         )}
         <p>
           Prefer to speak directly?{" "}
-          <a href={site.phoneHref}>Call {site.phone}.</a>
+          <a
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="catering-form"
+          >
+            Call {site.phone}.
+          </a>
         </p>
         <small>
           Submitting this form does not confirm availability or a catering

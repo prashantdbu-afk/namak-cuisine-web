@@ -49,9 +49,12 @@ export function isStockMediaPreviewAvailable(
   return env.VERCEL_ENV !== "production" || env.ENABLE_BAR_STOCK === "true";
 }
 
-export function routeRobots(route: SiteRoute) {
+export function routeRobots(
+  route: SiteRoute,
+  production = isProductionDeployment,
+) {
   return {
-    index: isProductionDeployment && isRouteIndexable(route),
-    follow: isProductionDeployment && isRouteIndexable(route),
+    index: production && isRouteIndexable(route),
+    follow: production && isRouteIndexable(route),
   };
 }

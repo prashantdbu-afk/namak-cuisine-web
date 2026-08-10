@@ -52,10 +52,15 @@ export function RestaurantMap({ configuration }: RestaurantMapProps) {
       <div className="location-details">
         <div>
           <p className="eyebrow dark">Dallas, Texas</p>
-          <h3>{site.name}</h3>
+          <h2>{site.name}</h2>
           <OpenStatus />
           <address>{configuration.address}</address>
-          <a className="location-phone" href={site.phoneHref}>
+          <a
+            className="location-phone"
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="visit-card"
+          >
             {site.phone}
           </a>
         </div>
@@ -68,7 +73,12 @@ export function RestaurantMap({ configuration }: RestaurantMapProps) {
           ))}
         </div>
         <div className="location-actions">
-          <a className="button" href={site.directionsUrl}>
+          <a
+            className="button"
+            href={site.directionsUrl}
+            data-analytics-event="directions_click"
+            data-analytics-placement="visit-card"
+          >
             Get Directions
           </a>
           {configuration.interactiveMapEnabled &&

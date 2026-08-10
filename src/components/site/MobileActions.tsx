@@ -10,13 +10,29 @@ export function MobileActions() {
   return (
     <nav className="mobile-actions" aria-label="Quick actions">
       <Link href="/menu">Menu</Link>
-      <a href={site.phoneHref}>
+      <a
+        href={site.phoneHref}
+        data-analytics-event={callReservation ? "reserve_click" : "call_click"}
+        data-analytics-placement="mobile-actions"
+      >
         {callReservation ? "Call to Reserve" : "Call"}
       </a>
-      <a href={site.directionsUrl}>Directions</a>
+      <a
+        href={site.directionsUrl}
+        data-analytics-event="directions_click"
+        data-analytics-placement="mobile-actions"
+      >
+        Directions
+      </a>
       {order.available && <a href={order.href}>Order</a>}
       {!callReservation && reserve.available && (
-        <a href={reserve.href}>Reserve</a>
+        <a
+          href={reserve.href}
+          data-analytics-event="reserve_click"
+          data-analytics-placement="mobile-actions"
+        >
+          Reserve
+        </a>
       )}
     </nav>
   );

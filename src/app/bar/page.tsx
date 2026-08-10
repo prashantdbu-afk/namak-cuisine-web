@@ -10,13 +10,10 @@ import {
   barMenuItems,
   createMenuStructuredData,
 } from "@/content/menu";
+import { PageBreadcrumb } from "@/components/seo/PageBreadcrumb";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Bar & Wine Menu",
-  description:
-    "Explore Namak’s draft beer, spirits, wines by the glass, and full wine list in Dallas.",
-  alternates: { canonical: "/bar" },
-};
+export const metadata: Metadata = createPageMetadata("bar");
 
 export default function Bar() {
   const stockPreview = isStockMediaPreviewAvailable();
@@ -27,6 +24,7 @@ export default function Bar() {
   );
   return (
     <>
+      <PageBreadcrumb name="Bar" path="/bar" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -37,7 +35,7 @@ export default function Bar() {
           <h1>Bar &amp; Wine.</h1>
           <p>
             Explore draft beer, spirits, wines by the glass, and the complete
-            wine list.
+            wine list at Namak’s Greenville Avenue bar in Dallas.
           </p>
         </div>
         {stockPreview && (

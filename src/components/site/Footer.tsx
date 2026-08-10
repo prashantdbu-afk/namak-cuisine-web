@@ -25,12 +25,16 @@ export function Footer() {
             <a
               href={site.social.instagram}
               aria-label="Follow Namak on Instagram"
+              data-analytics-event="social_click"
+              data-analytics-placement="footer-instagram"
             >
               Instagram ↗
             </a>
             <a
               href={site.social.facebook}
               aria-label="Follow Namak on Facebook"
+              data-analytics-event="social_click"
+              data-analytics-placement="footer-facebook"
             >
               Facebook ↗
             </a>
@@ -52,7 +56,12 @@ export function Footer() {
             <br />
             {site.address.city}, {site.address.region} {site.address.postalCode}
           </address>
-          <a className="footer-phone" href={site.phoneHref}>
+          <a
+            className="footer-phone"
+            href={site.phoneHref}
+            data-analytics-event="call_click"
+            data-analytics-placement="footer"
+          >
             {site.phone}
           </a>
           <div className="footer-hours">
