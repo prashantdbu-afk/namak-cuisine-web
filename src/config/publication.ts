@@ -5,7 +5,7 @@ export const routePublication = {
   "/menu": "published",
   "/bar": "published",
   "/about": "published",
-  "/private-dining": "published",
+  "/catering": "published",
   "/gallery": "published",
   "/visit": "published",
   "/contact": "published",

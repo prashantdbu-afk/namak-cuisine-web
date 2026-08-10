@@ -9,7 +9,7 @@ const routes = [
   ["bar", "/bar"],
   ["about", "/about"],
   ["gallery", "/gallery"],
-  ["private-dining", "/private-dining"],
+  ["catering", "/catering"],
   ["visit", "/visit"],
   ["contact", "/contact"],
   ["media-review", "/media-review"],
@@ -70,11 +70,16 @@ test("captures every review route and viewport", async ({ page }) => {
             })
             .map(
               (element) =>
-                element.getAttribute("aria-label") ?? element.innerText.trim(),
+                element.getAttribute("aria-label") ||
+                element.innerText.trim() ||
+                `${element.tagName.toLowerCase()}[name="${element.getAttribute("name") ?? ""}"]`,
             )
             .filter((label) => label !== "Skip to content"),
         );
-        expect(undersizedTargets).toEqual([]);
+        expect(
+          undersizedTargets,
+          `${routeName} touch targets at ${viewportName}`,
+        ).toEqual([]);
       }
       await page.screenshot({
         path: path.join(outputDirectory, `${routeName}--${viewportName}.png`),
@@ -138,6 +143,78 @@ test("captures the refined footer and homepage transition", async ({
   await page.goto("/");
   await page.locator(".visit").screenshot({
     path: path.join(outputDirectory, "home-footer--transition-desktop.png"),
+    animations: "disabled",
+  });
+});
+
+test("captures Catering and Events desktop and mobile states", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/catering");
+  await revealPage(page);
+  await page.screenshot({
+    path: path.join(outputDirectory, "catering--desktop-full.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
+  for (const [name, selector] of [
+    ["hero", ".catering-hero"],
+    ["event-cards", ".catering-events"],
+    ["menu-preference", ".catering-preferences"],
+    ["process", ".catering-process"],
+    ["form-empty", ".catering-form-section"],
+    ["event-category", ".catering-field:has(#eventType)"],
+    ["menu-selector", ".menu-interest-field"],
+    ["disabled-provider", ".catering-disabled-fallback"],
+    ["final-cta", ".catering-final-cta"],
+  ] as const) {
+    await page.locator(selector).screenshot({
+      path: path.join(outputDirectory, `catering--desktop-${name}.png`),
+      animations: "disabled",
+    });
+  }
+
+  await page.goto("/catering?form-preview=error");
+  await page.locator(".catering-form-card").screenshot({
+    path: path.join(outputDirectory, "catering--desktop-validation-error.png"),
+    animations: "disabled",
+  });
+  await page.goto("/catering?form-preview=success");
+  await page.locator(".catering-form-card").screenshot({
+    path: path.join(outputDirectory, "catering--desktop-success.png"),
+    animations: "disabled",
+  });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/catering");
+  await revealPage(page);
+  await page.screenshot({
+    path: path.join(outputDirectory, "catering--mobile-full.png"),
+    fullPage: true,
+    animations: "disabled",
+  });
+  for (const [name, selector] of [
+    ["hero", ".catering-hero"],
+    ["event-cards", ".catering-events"],
+    ["food-preference", ".meal-preference"],
+    ["event-category", ".catering-field:has(#eventType)"],
+    ["menu-selector", ".menu-interest-field"],
+    ["submit", ".catering-submit-area"],
+  ] as const) {
+    await page.locator(selector).screenshot({
+      path: path.join(outputDirectory, `catering--mobile-${name}.png`),
+      animations: "disabled",
+    });
+  }
+  await page.goto("/catering?form-preview=error");
+  await page.locator(".catering-form-card").screenshot({
+    path: path.join(outputDirectory, "catering--mobile-validation-error.png"),
+    animations: "disabled",
+  });
+  await page.goto("/catering?form-preview=success");
+  await page.locator(".catering-form-card").screenshot({
+    path: path.join(outputDirectory, "catering--mobile-success.png"),
     animations: "disabled",
   });
 });

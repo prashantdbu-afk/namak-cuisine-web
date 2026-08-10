@@ -167,9 +167,6 @@ test("media review is private, noindex, and contains every supplied record", asy
   ).toBeVisible();
   await page.getByRole("button", { name: "Missing from public menu" }).click();
   await expect(page.locator(".media-review-card")).toHaveCount(0);
-  await expect(page.locator("main")).not.toContainText(
-    /DoorDash|Grubhub|Toast|Uber Eats/i,
-  );
 });
 test("plating review keeps future-standard audits separate from menu visibility", async ({
   page,
@@ -302,4 +299,144 @@ test("the initial page makes no unexpected third-party requests", async ({
   await page.goto("/");
   await page.waitForLoadState("networkidle");
   expect(unexpected).toEqual([]);
+});
+
+test("catering navigation, route, copy, and media are public and source-clean", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/catering");
+  await expect(page).toHaveTitle(/Indian Catering in Dallas/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://namakcuisine.com/catering",
+  );
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Bring Namak to your gathering.",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Corporate & Office" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Weddings & Celebrations" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Cultural, Religious & Family Gatherings",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "A menu shaped around your event." }),
+  ).toBeVisible();
+  await expect(page.locator(".catering-process li")).toHaveCount(3);
+  await expect(page.locator(".catering-page img")).toHaveCount(4);
+  await expect(page.locator(".catering-page")).not.toContainText(
+    /pexels\.com|unsplash\.com/,
+  );
+  await expect(page.locator(".catering-page")).not.toContainText(
+    /DoorDash|Grubhub|Toast|Uber Eats/i,
+  );
+  await expect(page.getByText("Gather", { exact: true })).toHaveCount(0);
+  const redirect = await request.get("/private-dining", { maxRedirects: 0 });
+  expect(redirect.status()).toBe(308);
+  expect(redirect.headers().location).toBe("/catering");
+});
+
+test("catering form uses exact menu data and safe disabled mode", async ({
+  page,
+}) => {
+  await page.goto("/catering");
+  const form = page.locator(".catering-inquiry-form");
+  await expect(form.getByLabel("Full Name")).toBeVisible();
+  await expect(form.getByLabel("Event Category")).toBeVisible();
+  await expect(
+    form.getByText("Vegetarian", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(
+    form.getByText("Non-Vegetarian", { exact: true }).first(),
+  ).toBeVisible();
+  await expect(form.getByText("Mixed", { exact: true }).first()).toBeVisible();
+  await expect(
+    form.getByText("Bharwan Paneer Tikka", { exact: true }),
+  ).toBeVisible();
+  await expect(form).not.toContainText(/Macallan|Taj Mahal|\$\d/);
+  await expect(
+    form.getByText("Online inquiries are being prepared."),
+  ).toBeVisible();
+  await expect(
+    form.getByRole("button", { name: "Send Catering Inquiry" }),
+  ).toHaveCount(0);
+  await expect(
+    form.getByRole("link", { name: "Call 214-730-0047", exact: true }),
+  ).toBeVisible();
+});
+
+test("catering is usable on mobile without horizontal overflow", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/catering");
+  const eventSelect = page.getByLabel("Event Category");
+  await eventSelect.selectOption("pre-wedding");
+  await expect(eventSelect).toHaveValue("pre-wedding");
+  const widths = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(widths.scroll).toBeLessThanOrEqual(widths.client);
+  const undersizedTargets = await page.evaluate(() =>
+    [...document.querySelectorAll<HTMLElement>("a, button, input")]
+      .filter((element) => {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return (
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          rect.width > 0 &&
+          rect.height > 0 &&
+          (rect.width < 44 || rect.height < 44)
+        );
+      })
+      .map(
+        (element) =>
+          element.getAttribute("aria-label") ||
+          element.innerText.trim() ||
+          `${element.tagName.toLowerCase()}[name="${element.getAttribute("name") ?? ""}"]`,
+      ),
+  );
+  expect(undersizedTargets).toEqual([]);
+  for (const control of await page
+    .locator(".meal-preference-grid label, .catering-menu-selector label")
+    .all()) {
+    const box = await control.boundingBox();
+    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  }
+});
+
+test("homepage and footer expose Catering and no public Gather label", async ({
+  page,
+}) => {
+  await page.goto("/");
+  if ((page.viewportSize()?.width ?? 1000) <= 760)
+    await page.locator(".menu-toggle").click();
+  await expect(
+    page.getByRole("heading", { name: "Bring Namak to your next gathering." }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Explore Catering" }),
+  ).toHaveAttribute("href", "/catering");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: "Catering" }),
+  ).toHaveAttribute("href", "/catering");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Footer navigation" })
+      .getByRole("link", { name: "Catering" }),
+  ).toHaveAttribute("href", "/catering");
+  await expect(page.getByText("Gather", { exact: true })).toHaveCount(0);
 });

@@ -11,7 +11,7 @@ for (const path of [
   "/stock-review/bar",
   "/visit",
   "/contact",
-  "/private-dining",
+  "/catering",
 ]) {
   test(`${path} has no automated WCAG A/AA violations`, async ({ page }) => {
     await page.goto(path);

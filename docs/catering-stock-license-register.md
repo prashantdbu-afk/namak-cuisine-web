@@ -1,0 +1,20 @@
+# Catering stock license register
+
+Reviewed: 2026-08-09. All records use `representation: "editorial-generic"` and are presented only as generic event context. Namak does not claim ownership of the original photographs or represent them as actual Namak events, staff, customers, venue interiors, packages, or guaranteed service styles.
+
+| Internal image ID                | Provider / asset ID | Source page                                                                    | Photographer                                                   | Original dimensions | License                                          | Attribution  | Logo review                                       | Person review                                               | Placement                                                              | Rights / production status |
+| -------------------------------- | ------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------- | ------------------------------------------------ | ------------ | ------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------- |
+| `catering-stock-hero`            | Pexels 31243102     | https://www.pexels.com/photo/elegant-wedding-reception-table-setting-31243102/ | Alexander Mass — https://www.pexels.com/@rebornfilmes/         | 6720×4480           | Pexels License — https://www.pexels.com/license/ | Not required | No visible brand or company logo in selected crop | No recognizable person                                      | Hero; generic catered-event atmosphere                                 | approved; production-ready |
+| `catering-stock-corporate`       | Pexels 12919431     | https://www.pexels.com/photo/dining-tables-at-a-wedding-reception-12919431/    | Rene Terp — https://www.pexels.com/@reneterp/                  | 6000×4000           | Pexels License — https://www.pexels.com/license/ | Not required | No visible brand or company logo                  | No recognizable person                                      | Corporate & Office card; professional event-table context              | approved; production-ready |
+| `catering-stock-celebrations`    | Pexels 17023147     | https://www.pexels.com/photo/elegant-table-setting-17023147/                   | Matheus Bertelli — https://www.pexels.com/@bertellifotografia/ | 6720×4480           | Pexels License — https://www.pexels.com/license/ | Not required | No visible brand or company logo                  | No recognizable person                                      | Weddings & Celebrations card; generic celebration context              | approved; production-ready |
+| `catering-stock-cultural-family` | Pexels 20488500     | https://www.pexels.com/photo/people-hands-over-food-on-table-20488500/         | Gül Işık — https://www.pexels.com/@ekrulila/                   | 4672×7008           | Pexels License — https://www.pexels.com/license/ | Not required | No visible brand or company logo                  | Only cropped hands and partial bodies; no recognizable face | Cultural, Religious & Family Gatherings card; communal sharing context | approved; production-ready |
+
+## Processing and use
+
+- Source files remain under ignored `incoming-media/catering-stock/`.
+- Production derivatives are self-hosted under `public/media/catering/`.
+- Hero output: 1800×1125 WebP, 16:10, 210 KB.
+- Event-card outputs: 1400×1050 WebP, 4:3, 47–125 KB.
+- Processing was limited to orientation correction, crop, resize, metadata stripping, and restrained WebP compression.
+- No people, logos, food, decorations, table settings, or cultural details were generated, removed, or altered.
+- Source URLs are retained in this internal register and typed media metadata; they are not rendered on the public page.

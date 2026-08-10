@@ -25,7 +25,7 @@ const allNavigation = [
   { href: "/menu", label: "Menu" },
   { href: "/bar", label: "Bar" },
   { href: "/about", label: "Our story" },
-  { href: "/private-dining", label: "Gather" },
+  { href: "/catering", label: "Catering" },
   { href: "/gallery", label: "Gallery" },
   { href: "/visit", label: "Visit" },
 ] as const;

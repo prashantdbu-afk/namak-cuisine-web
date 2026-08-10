@@ -13,6 +13,7 @@ import { OpenStatus } from "@/components/site/OpenStatus";
 import { isStockMediaPreviewAvailable } from "@/config/publication";
 import { getMapConfiguration } from "@/config/map";
 import { homepageFoodFeatures } from "@/content/menu-media";
+import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
 
 const featuredDishes = homepageFoodFeatures.map((feature) => {
   const dish = foodMenuItems.find((item) => item.name === feature.name);
@@ -184,6 +185,27 @@ export function HomePage() {
           ))}
         </section>
       )}
+
+      <section className="home-catering section">
+        <CateringCelebrationMotif />
+        <div>
+          <p className="eyebrow">Catering &amp; Events</p>
+          <h2>Bring Namak to your next gathering.</h2>
+          <p>
+            From office events and milestone celebrations to wedding functions
+            and cultural gatherings, tell us about your plans and the menu
+            experience you have in mind.
+          </p>
+        </div>
+        <div className="button-row">
+          <Link className="button" href="/catering">
+            Explore Catering
+          </Link>
+          <a className="button button-quiet" href={site.phoneHref}>
+            Call Our Team
+          </a>
+        </div>
+      </section>
 
       <section className="visit section">
         <div className="visit-copy">

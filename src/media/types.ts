@@ -32,6 +32,8 @@ export type ImageRecord = MediaBase & {
   focalPoint?: FocalPoint;
   sizes: string;
   priority?: boolean;
+  stock?: StockMediaMetadata;
+  usageRole?: string;
   foodStyleFamily?: "ivory-coupe" | "charcoal-kadhai" | "bread-basket";
   foodMediaStatus?: "approved" | "review" | "hold" | "reshoot";
   targetPlateSystem?: "ivory-coupe" | "charcoal-kadhai" | "bread-basket";
