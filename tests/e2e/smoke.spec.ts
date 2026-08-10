@@ -33,7 +33,9 @@ test("food menu is searchable, priced, and source-clean", async ({ page }) => {
     "href",
     "/bar",
   );
-  const auditedTextOnly = [
+  const restoredPhotographs = [
+    "Jhol Momo",
+    "Tandoori Chicken",
     "Bhutte Ke Kebab",
     "Burrata Chaat",
     "Chapli Smash Burger",
@@ -42,27 +44,34 @@ test("food menu is searchable, priced, and source-clean", async ({ page }) => {
     "Lamb Seekh Kebab",
     "Garlic Naan",
     "Hara Bhara Kebab",
+    "Hyderabadi Chicken Dum Biryani",
     "Chicken Korma",
     "Chicken Tikka Masala",
+    "Chicken Vindaloo",
     "Prawn Mango Curry",
+    "Coriander Prawns",
     "Raw Mango Salad",
+    "Saag Burrata",
+    "Tandoori Paneer Makhani",
     "Tandoori Roti",
     "Veg Dum Biryani",
+    "Pindi Chole",
   ];
-  for (const name of auditedTextOnly) {
+  for (const name of restoredPhotographs) {
     const article = main.locator(".priced-menu-item", { hasText: name });
     await expect(article).toBeVisible();
     await expect(article.locator(".menu-price").first()).toBeVisible();
+    await expect(article.locator(".menu-food-image img")).toHaveCount(1);
   }
   await expect(
     main.locator('[data-image-id="food-jhol-momo-non-veg"]'),
-  ).toHaveCount(0);
+  ).toHaveCount(1);
   await expect(
     main.locator('[data-image-id="food-tandoori-full"]'),
-  ).toHaveCount(0);
+  ).toHaveCount(1);
   await expect(
     main.locator('[data-image-id="food-bharwan-paneer-tikka"]'),
-  ).toHaveCount(0);
+  ).toHaveCount(1);
   await expect(
     main.locator('[data-image-id="food-bhutte-ke-kebab"]'),
   ).toHaveCount(1);
@@ -78,6 +87,21 @@ test("food image cards preserve responsive minimums, prices, and overflow", asyn
     (element) => element.getBoundingClientRect().width,
   );
   expect(width).toBeGreaterThanOrEqual(112);
+  const presentation = await image.evaluate((element) => {
+    const imageElement = element.querySelector("img");
+    const frame = element.getBoundingClientRect();
+    return {
+      ratio: frame.width / frame.height,
+      fit: imageElement ? getComputedStyle(imageElement).objectFit : "missing",
+      complete:
+        imageElement instanceof HTMLImageElement
+          ? imageElement.complete && imageElement.naturalWidth > 0
+          : false,
+    };
+  });
+  expect(presentation.ratio).toBeCloseTo(5 / 3, 1);
+  expect(presentation.fit).toBe("cover");
+  expect(presentation.complete).toBe(true);
   await expect(card.locator(".menu-price").first()).toBeVisible();
   const overflow = await page.evaluate(
     () =>
@@ -142,12 +166,12 @@ test("media review is private, noindex, and contains every supplied record", asy
     page.getByText("Unidentified dessert", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Missing from public menu" }).click();
-  await expect(page.locator(".media-review-card")).not.toHaveCount(0);
+  await expect(page.locator(".media-review-card")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText(
     /DoorDash|Grubhub|Toast|Uber Eats/i,
   );
 });
-test("plating review is private and no public photograph is noncompliant", async ({
+test("plating review keeps future-standard audits separate from menu visibility", async ({
   page,
 }) => {
   await page.goto("/media-review/plating");
@@ -159,8 +183,24 @@ test("plating review is private and no public photograph is noncompliant", async
   await page
     .getByRole("button", { name: "Currently Public but Noncompliant" })
     .click();
-  await expect(page.locator(".plating-review-card")).toHaveCount(0);
-  await expect(page.getByText("0 photographs")).toBeVisible();
+  await expect(page.locator(".plating-review-card")).not.toHaveCount(0);
+});
+
+test("menu completeness review shows all food sources and only three holds", async ({
+  page,
+}) => {
+  await page.goto("/media-review/menu-completeness");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(page.locator(".menu-completeness-card")).toHaveCount(44);
+  await expect(
+    page.locator('.menu-completeness-card[data-visible="yes"]'),
+  ).toHaveCount(41);
+  await expect(
+    page.locator('.menu-completeness-card[data-visible="no"]'),
+  ).toHaveCount(3);
 });
 test("visit shows verified information", async ({ page }) => {
   await page.route("**/api/map/embed", (route) =>

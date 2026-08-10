@@ -64,7 +64,7 @@ describe("physical menu data", () => {
         placements={publicMenuMediaPlacements}
       />,
     );
-    expect(container.querySelectorAll("[data-media-frame]")).toHaveLength(
+    expect(container.querySelectorAll("[data-menu-image-stage]")).toHaveLength(
       publicMenuMediaPlacements.length,
     );
     expect(container.querySelectorAll('img[loading="lazy"]')).toHaveLength(
@@ -76,6 +76,15 @@ describe("physical menu data", () => {
     expect(container.querySelectorAll(".priced-menu-item")).toHaveLength(
       foodMenuItems.length,
     );
+    expect(
+      container.querySelectorAll('[data-presentation-tier="curated"]').length,
+    ).toBeGreaterThan(0);
+    expect(
+      container.querySelectorAll(
+        '[data-presentation-tier="standardized-original"]',
+      ).length,
+    ).toBeGreaterThan(0);
+    expect(container.textContent).not.toMatch(/standardized-original|curated/);
   });
 
   it("searches descriptions and aliases without changing the visible name", () => {

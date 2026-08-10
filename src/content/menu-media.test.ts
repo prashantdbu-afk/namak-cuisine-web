@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { menuItems } from "./menu";
 import {
   galleryImageIds,
+  getMenuImagePresentationTier,
   homepageFoodImageIds,
   menuMediaPlacements,
   publicMenuMediaPlacements,
@@ -34,10 +35,9 @@ describe("owner-approved food media", () => {
     const expectedPublic = foodProcessingConfig.filter(
       (entry) =>
         entry.itemId !== null &&
+        itemIds.has(entry.itemId) &&
         entry.status === "approved" &&
-        entry.uses.includes("menu-feature") &&
-        entry.visualCompliance === "pass" &&
-        entry.menuEligible,
+        entry.uses.includes("menu-feature"),
     );
     expect(publicMenuMediaPlacements).toHaveLength(expectedPublic.length);
     expect(
@@ -115,30 +115,71 @@ describe("owner-approved food media", () => {
       ),
     ).toBe(false);
     expect(
-      publicMenuMediaPlacements.some((entry) =>
+      publicMenuMediaPlacements.filter((entry) =>
         ["food-jhol-momo-non-veg", "food-tandoori-full"].includes(
           entry.imageId,
         ),
       ),
-    ).toBe(false);
+    ).toHaveLength(2);
   });
 
-  it("publishes only passing, explicitly eligible photographs", () => {
+  it("uses compliance only for presentation tier, never full-menu visibility", () => {
     expect(
-      publicMenuMediaPlacements.every(
+      publicMenuMediaPlacements.some(
         (entry) =>
-          entry.visualCompliance === "pass" && entry.menuEligible === true,
+          entry.visualCompliance !== "pass" || entry.menuEligible === false,
       ),
     ).toBe(true);
+    expect(
+      publicMenuMediaPlacements.every((entry) =>
+        ["curated", "standardized-original"].includes(entry.presentationTier),
+      ),
+    ).toBe(true);
+    expect(
+      publicMenuMediaPlacements.some(
+        (entry) => entry.presentationTier === "curated",
+      ),
+    ).toBe(true);
+    expect(
+      publicMenuMediaPlacements.some(
+        (entry) => entry.presentationTier === "standardized-original",
+      ),
+    ).toBe(true);
+    expect(
+      foodProcessingConfig
+        .filter((entry) => entry.status === "hold")
+        .every((entry) => getMenuImagePresentationTier(entry) === "hold"),
+    ).toBe(true);
+  });
+
+  it("publishes every valid approved production-ready menu-feature image", () => {
     const publicIds = new Set(
       publicMenuMediaPlacements.map((entry) => entry.imageId),
     );
+    const mediaById = new Map(imageMedia.map((entry) => [entry.id, entry]));
+    const validItemIds = new Set(menuItems.map((entry) => entry.id));
+    const eligible = foodProcessingConfig.filter((entry) => {
+      const media = mediaById.get(entry.imageId);
+      return (
+        entry.itemId !== null &&
+        validItemIds.has(entry.itemId) &&
+        entry.status === "approved" &&
+        entry.uses.includes("menu-feature") &&
+        media?.rightsStatus === "approved" &&
+        media.productionReady
+      );
+    });
+    expect(publicIds).toEqual(new Set(eligible.map((entry) => entry.imageId)));
+    expect(publicMenuMediaPlacements).toHaveLength(eligible.length);
     expect(
       foodProcessingConfig
         .filter((entry) =>
           ["temporary", "reject"].includes(entry.visualCompliance),
         )
-        .every((entry) => !publicIds.has(entry.imageId)),
+        .filter((entry) =>
+          eligible.some((candidate) => candidate.imageId === entry.imageId),
+        )
+        .every((entry) => publicIds.has(entry.imageId)),
     ).toBe(true);
   });
 

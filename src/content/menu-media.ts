@@ -7,6 +7,10 @@ import {
 } from "@/media/food-processing-config";
 import type { PlateSystem, VisualCompliance } from "@/media/plating-audit";
 import { getImageRecord } from "@/media/manifest";
+import { menuItems } from "@/content/menu";
+
+export type MenuImagePresentationTier =
+  "curated" | "standardized-original" | "hold";
 
 export type MenuMediaPlacement = {
   itemId: string;
@@ -20,12 +24,35 @@ export type MenuMediaPlacement = {
   targetPlateSystem: PlateSystem;
   visualCompliance: VisualCompliance;
   menuEligible: boolean;
+  presentationTier: Exclude<MenuImagePresentationTier, "hold">;
 };
+
+const validMenuItemIds = new Set(menuItems.map((item) => item.id));
+
+export function getMenuImagePresentationTier(record: {
+  itemId: string | null;
+  status: FoodMediaStatus;
+  uses: FoodMediaUse[];
+  visualCompliance: VisualCompliance;
+}): MenuImagePresentationTier {
+  if (
+    record.itemId === null ||
+    !validMenuItemIds.has(record.itemId) ||
+    record.status !== "approved" ||
+    !record.uses.includes("menu-feature")
+  ) {
+    return "hold";
+  }
+
+  return record.visualCompliance === "pass"
+    ? "curated"
+    : "standardized-original";
+}
 
 export const menuMediaPlacements: MenuMediaPlacement[] = foodProcessingConfig
   .filter(
     (record): record is typeof record & { itemId: string } =>
-      record.itemId !== null,
+      record.itemId !== null && validMenuItemIds.has(record.itemId),
   )
   .map((record) => ({
     itemId: record.itemId,
@@ -39,6 +66,8 @@ export const menuMediaPlacements: MenuMediaPlacement[] = foodProcessingConfig
     targetPlateSystem: record.targetPlateSystem,
     visualCompliance: record.visualCompliance,
     menuEligible: record.menuEligible,
+    presentationTier:
+      record.visualCompliance === "pass" ? "curated" : "standardized-original",
   }));
 
 export const publicMenuMediaPlacements = menuMediaPlacements.filter(
@@ -47,8 +76,6 @@ export const publicMenuMediaPlacements = menuMediaPlacements.filter(
     return (
       placement.status === "approved" &&
       placement.uses.includes("menu-feature") &&
-      placement.visualCompliance === "pass" &&
-      placement.menuEligible &&
       media.rightsStatus === "approved" &&
       media.productionReady
     );

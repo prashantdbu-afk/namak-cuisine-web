@@ -4,12 +4,30 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import {
+  MenuImageStage,
+  type MenuImageStageSurface,
+} from "@/components/menu/MenuImageStage";
 import type { MenuMediaPlacement } from "@/content/menu-media";
 import type { BarCategoryMedia } from "@/content/bar-media";
 import type { MenuCategory, MenuItem } from "@/content/menu";
 import { formatPrice } from "@/content/menu";
 import { getMenuSectionEyebrow } from "@/content/menu-eyebrow";
 import { getImageRecord } from "@/media/manifest";
+
+function getMenuImageStageSurface(
+  category: MenuCategory,
+): MenuImageStageSurface {
+  if (category.name === "INDIAN BREADS") return "bread";
+  if (
+    ["SOUPS", "VEG ENTREES", "NON-VEG ENTREES", "BIRYANI AND PULAO"].includes(
+      category.name,
+    )
+  ) {
+    return "main";
+  }
+  return "dry";
+}
 
 export function MenuExperience({
   categories,
@@ -131,17 +149,13 @@ export function MenuExperience({
                         data-menu-item-id={entry.id}
                         data-image-id={placement?.imageId}
                         data-background-family={placement?.backgroundFamily}
+                        data-presentation-tier={placement?.presentationTier}
                       >
                         {placement && (
-                          <MediaFrame
-                            aspectRatio={placement.menuAspectRatio}
-                            className="menu-food-image"
-                          >
-                            <ResponsiveImage
-                              media={getImageRecord(placement.imageId)}
-                              priority={false}
-                            />
-                          </MediaFrame>
+                          <MenuImageStage
+                            media={getImageRecord(placement.imageId)}
+                            surface={getMenuImageStageSurface(category)}
+                          />
                         )}
                         <div className="menu-item-copy">
                           <h3>{entry.name}</h3>

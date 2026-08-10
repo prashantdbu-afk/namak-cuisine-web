@@ -14,6 +14,7 @@ const routes = [
   ["contact", "/contact"],
   ["media-review", "/media-review"],
   ["plating-review", "/media-review/plating"],
+  ["menu-completeness", "/media-review/menu-completeness"],
   ["stock-review-bar", "/stock-review/bar"],
 ] as const;
 const viewports = [

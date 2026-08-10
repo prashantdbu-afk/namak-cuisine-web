@@ -1118,10 +1118,116 @@ em {
   grid-row: 1 / span 2;
   width: 100%;
   min-width: 175px;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
   border-radius: 11px;
+  background: #eee9e0;
   box-shadow:
     inset 0 0 0 1px rgb(255 255 255 / 42%),
     0 6px 15px rgb(31 50 44 / 10%);
+}
+
+.menu-image-stage[data-stage-surface="dry"] {
+  background: #eee9e0;
+}
+
+.menu-image-stage[data-stage-surface="main"] {
+  background: #e3e5e1;
+}
+
+.menu-image-stage[data-stage-surface="bread"] {
+  background: #efe5d5;
+}
+
+.menu-completeness-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.menu-completeness-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fffaf1;
+  box-shadow: 0 14px 34px rgb(31 50 44 / 8%);
+}
+
+.menu-completeness-card[data-visible="no"] {
+  border-color: #a85d49;
+}
+
+.menu-completeness-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.menu-completeness-images figure {
+  margin: 0;
+}
+
+.menu-completeness-image {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eee9e0;
+}
+
+.menu-completeness-image img {
+  object-fit: cover;
+}
+
+.menu-completeness-image.final-rendering span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  color: #723a2d;
+  font-weight: 700;
+  text-align: center;
+}
+
+.menu-completeness-images figcaption {
+  margin-top: 0.4rem;
+  color: #5f6964;
+  font-size: 0.78rem;
+}
+
+.menu-completeness-copy h2 {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.menu-completeness-copy > p:not(.eyebrow) {
+  color: #5f6964;
+}
+
+.menu-completeness-copy dl {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+}
+
+.menu-completeness-copy dl div {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 0.75rem;
+}
+
+.menu-completeness-copy dt {
+  color: #5f6964;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.menu-completeness-copy dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .menu-food-image img {
@@ -1619,6 +1725,16 @@ em {
 }
 
 @media (max-width: 560px) {
+  .menu-completeness-card,
+  .menu-completeness-images {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-completeness-copy dl div {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
   .section {
     padding: 4.5rem 1.25rem;
   }
