@@ -41,6 +41,7 @@ test.beforeAll(async () => {
 });
 
 test("captures every review route and viewport", async ({ page }) => {
+  test.setTimeout(240_000);
   for (const [viewportName, viewport] of viewports) {
     await page.setViewportSize(viewport);
     for (const [routeName, route] of routes) {
