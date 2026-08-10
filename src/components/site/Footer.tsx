@@ -4,52 +4,74 @@ import { hoursDisplay } from "@/content/hours";
 export function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-mark">N</div>
-      <div>
-        <p className="eyebrow">Namak · Dallas</p>
-        <h2>
-          Come hungry.
-          <br />
-          <em>Leave glowing.</em>
-        </h2>
-        <div className="social-links">
-          <a
-            href={site.social.instagram}
-            aria-label="Follow Namak on Instagram"
-          >
-            Instagram ↗
+      <div className="footer-main">
+        <div className="footer-brand">
+          <div className="footer-brand-lockup">
+            <div className="footer-mark" aria-hidden="true">
+              N
+            </div>
+            <p className="footer-label">Namak · Dallas</p>
+          </div>
+          <h2>
+            Come hungry.
+            <br />
+            <em>Leave glowing.</em>
+          </h2>
+          <p className="footer-intro">
+            Modern Indian dining, warm hospitality, and a table made for
+            sharing.
+          </p>
+          <div className="social-links">
+            <a
+              href={site.social.instagram}
+              aria-label="Follow Namak on Instagram"
+            >
+              Instagram ↗
+            </a>
+            <a
+              href={site.social.facebook}
+              aria-label="Follow Namak on Facebook"
+            >
+              Facebook ↗
+            </a>
+          </div>
+        </div>
+        <nav className="footer-explore" aria-label="Footer navigation">
+          <h3>Explore</h3>
+          {navigation.map((x) => (
+            <Link key={x.href} href={x.href}>
+              {x.label}
+            </Link>
+          ))}
+          <Link href="/contact">Contact</Link>
+        </nav>
+        <div className="footer-visit">
+          <h3>Visit</h3>
+          <address>
+            {site.address.street}
+            <br />
+            {site.address.city}, {site.address.region} {site.address.postalCode}
+          </address>
+          <a className="footer-phone" href={site.phoneHref}>
+            {site.phone}
           </a>
-          <a href={site.social.facebook} aria-label="Follow Namak on Facebook">
-            Facebook ↗
-          </a>
+          <div className="footer-hours">
+            {hoursDisplay.map((x) => (
+              <p key={x.days}>
+                <span>{x.days}</span>
+                <span>{x.hours}</span>
+              </p>
+            ))}
+          </div>
         </div>
       </div>
-      <div>
-        <h3>Explore</h3>
-        {navigation.map((x) => (
-          <Link key={x.href} href={x.href}>
-            {x.label}
-          </Link>
-        ))}
-        <Link href="/contact">Contact</Link>
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/accessibility">Accessibility</Link>
-      </div>
-      <div>
-        <h3>Visit</h3>
-        <address>
-          {site.address.street}
-          <br />
-          {site.address.city}, {site.address.region} {site.address.postalCode}
-        </address>
-        <a href={site.phoneHref}>{site.phone}</a>
-        {hoursDisplay.map((x) => (
-          <p key={x.days}>
-            {x.days}
-            <br />
-            {x.hours}
-          </p>
-        ))}
+      <div className="footer-secondary">
+        <p>© {new Date().getFullYear()} Namak Indian Restaurant &amp; Bar</p>
+        <nav aria-label="Legal and utility links">
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/accessibility">Accessibility</Link>
+          <a href="#main">Back to top ↑</a>
+        </nav>
       </div>
     </footer>
   );

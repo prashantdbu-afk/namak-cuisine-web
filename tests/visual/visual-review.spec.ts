@@ -114,6 +114,34 @@ test("captures homepage review sections", async ({ page }) => {
   });
 });
 
+test("captures the refined footer and homepage transition", async ({
+  page,
+}) => {
+  for (const [name, viewport] of [
+    ["desktop", { width: 1440, height: 1000 }],
+    ["tablet", { width: 768, height: 900 }],
+    ["mobile", { width: 390, height: 844 }],
+  ] as const) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.addStyleTag({
+      content:
+        ".site-header, .mobile-actions, .skip-link { display: none !important; }",
+    });
+    await page.locator(".footer").screenshot({
+      path: path.join(outputDirectory, `home-footer--${name}.png`),
+      animations: "disabled",
+    });
+  }
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  await page.locator(".visit").screenshot({
+    path: path.join(outputDirectory, "home-footer--transition-desktop.png"),
+    animations: "disabled",
+  });
+});
+
 test("captures visit map states", async ({ page }) => {
   await page.route("**/api/map/embed", (route) =>
     route.fulfill({
