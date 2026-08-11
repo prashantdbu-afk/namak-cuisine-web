@@ -264,7 +264,7 @@ test("privacy explains deliberate interactive map loading", async ({
 test("visit remains useful without JavaScript", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto("/visit");
+  await page.goto("/visit", { waitUntil: "domcontentloaded" });
   await expect(page.locator("main address")).toContainText(
     "5500 Greenville Ave #600, Dallas, TX 75206",
   );
