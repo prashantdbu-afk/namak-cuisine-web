@@ -440,3 +440,43 @@ test("homepage and footer expose Catering and no public Gather label", async ({
   ).toHaveAttribute("href", "/catering");
   await expect(page.getByText("Gather", { exact: true })).toHaveCount(0);
 });
+
+test("approved venue photography appears without broken images or overflow", async ({
+  page,
+}) => {
+  for (const path of ["/", "/bar", "/about", "/gallery", "/visit"]) {
+    await page.goto(path);
+    await expect(page.locator("html")).not.toHaveClass(/overflow/);
+    const media = page.locator(
+      'img[src*="media%2Fvenue"], img[srcset*="media%2Fvenue"], img[src*="/media/venue/"]',
+    );
+    expect(await media.count()).toBeGreaterThan(0);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth <=
+          document.documentElement.clientWidth,
+      ),
+    ).toBe(true);
+    const sources = await media.evaluateAll((images) =>
+      images.map(
+        (image) =>
+          (image as HTMLImageElement).currentSrc ||
+          (image as HTMLImageElement).src,
+      ),
+    );
+    for (const source of sources)
+      expect((await page.request.get(source)).ok()).toBe(true);
+  }
+});
+
+test("venue review is noindex and includes every supplied photograph", async ({
+  page,
+}) => {
+  await page.goto("/media-review/venue");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  await expect(page.locator(".venue-review-card")).toHaveCount(43);
+});

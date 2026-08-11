@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MenuExperience } from "@/components/menu/MenuExperience";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
-import { barCategoryMedia, barHeroImageId } from "@/content/bar-media";
-import { getImageRecord } from "@/media/manifest";
+import { barCategoryMedia } from "@/content/bar-media";
 import { isStockMediaPreviewAvailable } from "@/config/publication";
+import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
 import {
   barCategories,
   barMenuItems,
@@ -40,11 +40,11 @@ export default function Bar() {
             wine list.
           </p>
         </div>
-        {stockPreview && (
-          <MediaFrame aspectRatio={5 / 3} className="bar-hero-image">
-            <ResponsiveImage media={getImageRecord(barHeroImageId)} />
-          </MediaFrame>
-        )}
+        <MediaFrame aspectRatio={5 / 3} className="bar-hero-image">
+          <ResponsiveImage
+            media={getApprovedVenueImage(venuePlacements.barHero)}
+          />
+        </MediaFrame>
       </section>
       <MenuExperience
         activeMenu="bar"

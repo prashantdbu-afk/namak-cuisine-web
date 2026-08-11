@@ -44,6 +44,14 @@ export type ImageRecord = MediaBase & {
   actualCameraAngle?: string;
   actualLightingStyle?: string;
   complianceReason?: string;
+  venueCategory?: string;
+  venueUses?: string[];
+  venueMediaStatus?: "approved" | "review" | "hold" | "reject";
+  peopleApproval?: "not-applicable" | "approved" | "unknown" | "rejected";
+  sensitiveInformationFound?: boolean;
+  qualityScore?: number;
+  generativeEdit?: boolean;
+  ownerApprovedEdit?: boolean;
 };
 
 export type VideoRecord = MediaBase & {

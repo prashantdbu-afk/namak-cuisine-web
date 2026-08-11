@@ -8,6 +8,7 @@ for (const path of [
   "/media-review",
   "/media-review/plating",
   "/media-review/menu-completeness",
+  "/media-review/venue",
   "/stock-review/bar",
   "/visit",
   "/contact",

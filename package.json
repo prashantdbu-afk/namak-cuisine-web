@@ -25,7 +25,9 @@
     "test:performance": "node scripts/run-lighthouse.mjs",
     "check:assets": "node scripts/check-assets.mjs",
     "prepare:food-media": "node scripts/prepare-food-media.mjs",
-    "prepare:bar-media": "node scripts/prepare-bar-media.mjs"
+    "prepare:bar-media": "node scripts/prepare-bar-media.mjs",
+    "prepare:venue-media": "node scripts/prepare-venue-media.mjs",
+    "review:bar-shelf-edit": "node scripts/edit-bar-shelf-media.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",

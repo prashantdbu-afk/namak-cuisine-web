@@ -1,19 +1,18 @@
 import Link from "next/link";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
-import { barHeroImageId } from "@/content/bar-media";
 import { getImageRecord } from "@/media/manifest";
 import { integrations } from "@/config/integrations";
 import { site } from "@/config/site";
-import { announcement, approvedReviews, gallery } from "@/content/home";
+import { announcement, approvedReviews } from "@/content/home";
 import { hoursDisplay } from "@/content/hours";
 import { foodMenuItems } from "@/content/menu";
 import { RestaurantMap } from "@/components/site/RestaurantMap";
 import { OpenStatus } from "@/components/site/OpenStatus";
-import { isStockMediaPreviewAvailable } from "@/config/publication";
 import { getMapConfiguration } from "@/config/map";
 import { homepageFoodFeatures } from "@/content/menu-media";
 import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
+import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
 
 const featuredDishes = homepageFoodFeatures.map((feature) => {
   const dish = foodMenuItems.find((item) => item.name === feature.name);
@@ -22,7 +21,6 @@ const featuredDishes = homepageFoodFeatures.map((feature) => {
 });
 
 export function HomePage() {
-  const stockPreview = isStockMediaPreviewAvailable();
   return (
     <>
       {announcement.enabled && (
@@ -119,9 +117,11 @@ export function HomePage() {
             Our story
           </Link>
         </div>
-        <div className="media-placeholder media-editorial" aria-hidden="true">
-          <span>Interior &amp; hospitality</span>
-        </div>
+        <MediaFrame aspectRatio={4 / 3} className="media-editorial">
+          <ResponsiveImage
+            media={getApprovedVenueImage(venuePlacements.homepageExperience)}
+          />
+        </MediaFrame>
       </section>
 
       {integrations.features.bar && (
@@ -137,21 +137,11 @@ export function HomePage() {
               Explore the bar
             </Link>
           </div>
-          {stockPreview ? (
-            <MediaFrame aspectRatio={5 / 3} className="home-bar-image">
-              <ResponsiveImage
-                media={getImageRecord(barHeroImageId)}
-                priority={false}
-              />
-            </MediaFrame>
-          ) : (
-            <div
-              className="media-placeholder media-cocktail"
-              aria-hidden="true"
-            >
-              <span>Cocktails after dark</span>
-            </div>
-          )}
+          <MediaFrame aspectRatio={5 / 3} className="home-bar-image">
+            <ResponsiveImage
+              media={getApprovedVenueImage(venuePlacements.homepageBar)}
+            />
+          </MediaFrame>
         </section>
       )}
 
@@ -166,10 +156,12 @@ export function HomePage() {
           </Link>
         </div>
         <div className="gallery-grid">
-          {gallery.map((label, index) => (
-            <figure key={label} className={`gallery-shot shot-${index + 1}`}>
-              <div className="media-placeholder" aria-hidden />
-              <figcaption>{label}</figcaption>
+          {venuePlacements.homepageGallery.map((imageId, index) => (
+            <figure key={imageId} className={`gallery-shot shot-${index + 1}`}>
+              <MediaFrame aspectRatio={index === 1 ? 4 / 5 : 3 / 2}>
+                <ResponsiveImage media={getApprovedVenueImage(imageId)} />
+              </MediaFrame>
+              <figcaption>{getApprovedVenueImage(imageId).alt}</figcaption>
             </figure>
           ))}
         </div>
