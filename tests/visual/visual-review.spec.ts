@@ -137,6 +137,39 @@ test("captures homepage review sections", async ({ page }) => {
   });
 });
 
+test("captures homepage hero fidelity at required viewports", async ({
+  browser,
+}) => {
+  for (const scenario of [
+    { name: "desktop-1440", width: 1440, height: 1000, dpr: 1 },
+    { name: "desktop-1920", width: 1920, height: 1080, dpr: 1 },
+    { name: "desktop-1440-dpr2", width: 1440, height: 1000, dpr: 2 },
+    { name: "mobile-390", width: 390, height: 844, dpr: 1 },
+    { name: "mobile-430", width: 430, height: 932, dpr: 1 },
+  ]) {
+    const context = await browser.newContext({
+      viewport: { width: scenario.width, height: scenario.height },
+      deviceScaleFactor: scenario.dpr,
+    });
+    const heroPage = await context.newPage();
+    await heroPage.goto("/");
+    await heroPage.addStyleTag({
+      content:
+        ".site-header, .mobile-actions, .skip-link { display: none !important; }",
+    });
+    const hero = heroPage.locator(".hero");
+    await waitForImages(hero);
+    await hero.screenshot({
+      path: path.join(
+        outputDirectory,
+        `homepage-hero-after--${scenario.name}.png`,
+      ),
+      animations: "disabled",
+    });
+    await context.close();
+  }
+});
+
 test("captures aligned venue galleries at key breakpoints", async ({
   page,
 }) => {

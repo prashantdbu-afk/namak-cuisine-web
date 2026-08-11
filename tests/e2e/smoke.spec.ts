@@ -51,6 +51,163 @@ test("homepage venue preview uses equal 4:3 cards and dedicated captions", async
   }
 });
 
+test("homepage hero serves placement-sized sources without stretching", async ({
+  browser,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== "desktop",
+    "Runs explicit DPR contexts once.",
+  );
+
+  for (const scenario of [
+    { width: 1440, height: 1000, dpr: 1 },
+    { width: 1440, height: 1000, dpr: 2 },
+    { width: 1920, height: 1080, dpr: 1 },
+  ]) {
+    const context = await browser.newContext({
+      viewport: { width: scenario.width, height: scenario.height },
+      deviceScaleFactor: scenario.dpr,
+    });
+    const heroPage = await context.newPage();
+    await heroPage.addInitScript(() => {
+      (window as Window & { __heroLayoutShift?: number }).__heroLayoutShift = 0;
+      new PerformanceObserver((entries) => {
+        for (const entry of entries.getEntries()) {
+          const shift = entry as PerformanceEntry & {
+            value: number;
+            hadRecentInput: boolean;
+          };
+          if (!shift.hadRecentInput) {
+            (
+              window as Window & { __heroLayoutShift?: number }
+            ).__heroLayoutShift! += shift.value;
+          }
+        }
+      }).observe({ type: "layout-shift", buffered: true });
+    });
+    await heroPage.goto("/");
+
+    const primary = heroPage.locator(".hero-venue-primary");
+    const supports = heroPage.locator(".hero-food-support");
+    await expect(primary.locator("img")).toHaveJSProperty("complete", true);
+    await expect(supports).toHaveCount(2);
+    await expect(supports.nth(0).locator("img")).toHaveJSProperty(
+      "complete",
+      true,
+    );
+    await expect(supports.nth(1).locator("img")).toHaveJSProperty(
+      "complete",
+      true,
+    );
+
+    const delivery = await heroPage
+      .locator(".hero-media-grid")
+      .evaluate((grid) => {
+        const readFrame = (frame: Element) => {
+          const frameBox = frame.getBoundingClientRect();
+          const image = frame.querySelector("img") as HTMLImageElement;
+          const imageBox = image.getBoundingClientRect();
+          const source = new URL(image.currentSrc);
+          return {
+            frameWidth: frameBox.width,
+            frameHeight: frameBox.height,
+            imageWidth: imageBox.width,
+            imageHeight: imageBox.height,
+            requestedWidth: Number(source.searchParams.get("w")),
+            requestedQuality: Number(source.searchParams.get("q")),
+            fit: getComputedStyle(image).objectFit,
+          };
+        };
+        return {
+          gridWidth: grid.getBoundingClientRect().width,
+          primary: readFrame(grid.querySelector(".hero-venue-primary")!),
+          supporting: [...grid.querySelectorAll(".hero-food-support")].map(
+            readFrame,
+          ),
+        };
+      });
+
+    expect(delivery.gridWidth).toBeLessThanOrEqual(861);
+    expect(
+      delivery.primary.frameWidth / delivery.primary.frameHeight,
+    ).toBeCloseTo(16 / 10, 2);
+    expect(delivery.primary.imageWidth).toBeCloseTo(
+      delivery.primary.frameWidth,
+      0,
+    );
+    expect(delivery.primary.imageHeight).toBeCloseTo(
+      delivery.primary.frameHeight,
+      0,
+    );
+    expect(delivery.primary.fit).toBe("cover");
+    expect(delivery.primary.requestedWidth).toBeGreaterThan(210);
+    expect(delivery.primary.requestedWidth).toBeGreaterThanOrEqual(
+      delivery.primary.frameWidth * scenario.dpr * 0.9,
+    );
+    expect(delivery.primary.requestedQuality).toBe(90);
+    for (const support of delivery.supporting) {
+      expect(support.frameWidth / support.frameHeight).toBeCloseTo(5 / 3, 2);
+      expect(support.imageWidth).toBeCloseTo(support.frameWidth, 0);
+      expect(support.imageHeight).toBeCloseTo(support.frameHeight, 0);
+      expect(support.fit).toBe("cover");
+      expect(support.requestedWidth).toBeGreaterThan(210);
+      expect(support.requestedWidth).toBeGreaterThanOrEqual(
+        support.frameWidth * scenario.dpr * 0.9,
+      );
+      expect(support.requestedQuality).toBe(85);
+    }
+    await heroPage.waitForTimeout(500);
+    expect(
+      await heroPage.evaluate(
+        () =>
+          (window as Window & { __heroLayoutShift?: number })
+            .__heroLayoutShift ?? 0,
+      ),
+    ).toBeLessThanOrEqual(0.1);
+    expect(
+      await heroPage.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(0);
+    await context.close();
+  }
+});
+
+test("mobile hero keeps the venue first and food supports readable", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const primary = page.locator(".hero-venue-primary");
+  const supports = page.locator(".hero-food-support");
+  await expect(primary).toBeVisible();
+  await expect(supports).toHaveCount(2);
+  const layout = await page.locator(".hero-media-grid").evaluate((grid) => {
+    const primaryBox = grid
+      .querySelector(".hero-venue-primary")!
+      .getBoundingClientRect();
+    const supportBoxes = [...grid.querySelectorAll(".hero-food-support")].map(
+      (element) => element.getBoundingClientRect(),
+    );
+    return {
+      primaryHeight: primaryBox.height,
+      supportsShareRow:
+        Math.round(supportBoxes[0].top) === Math.round(supportBoxes[1].top),
+    };
+  });
+  expect(layout.primaryHeight).toBeLessThan(844);
+  expect(layout.supportsShareRow).toBe(true);
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(0);
+});
+
 test("gallery grid adapts from three to two to one column without overflow", async ({
   page,
 }) => {

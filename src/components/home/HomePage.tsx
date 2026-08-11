@@ -14,6 +14,7 @@ import { homepageFoodFeatures } from "@/content/menu-media";
 import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
 import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
 import { VenueGalleryCard } from "@/components/gallery/VenueGalleryCard";
+import { homepageHeroMedia } from "@/media/placement-eligibility";
 
 const featuredDishes = homepageFoodFeatures.map((feature) => {
   const dish = foodMenuItems.find((item) => item.name === feature.name);
@@ -45,23 +46,33 @@ export function HomePage() {
             </a>
           </div>
         </div>
-        <div className="hero-media hero-food-mosaic">
-          <MediaFrame aspectRatio={5 / 4} className="hero-food-primary">
+        <div className="hero-media hero-media-grid">
+          <MediaFrame
+            aspectRatio={homepageHeroMedia.primary.aspectRatio}
+            className="hero-venue-primary"
+          >
             <ResponsiveImage
-              media={getImageRecord(homepageFoodFeatures[1].imageId)}
+              media={getApprovedVenueImage(homepageHeroMedia.primary.imageId)}
               priority
+              fetchPriority="high"
+              sizes={homepageHeroMedia.primary.sizes}
+              quality={homepageHeroMedia.primary.quality}
             />
           </MediaFrame>
-          <MediaFrame aspectRatio={1} className="hero-food-secondary">
-            <ResponsiveImage
-              media={getImageRecord(homepageFoodFeatures[0].imageId)}
-            />
-          </MediaFrame>
-          <MediaFrame aspectRatio={1} className="hero-food-tertiary">
-            <ResponsiveImage
-              media={getImageRecord(homepageFoodFeatures[3].imageId)}
-            />
-          </MediaFrame>
+          {homepageHeroMedia.supporting.map((placement) => (
+            <MediaFrame
+              key={placement.imageId}
+              aspectRatio={placement.aspectRatio}
+              className="hero-food-support"
+            >
+              <ResponsiveImage
+                media={placement.media}
+                fetchPriority="auto"
+                sizes={placement.sizes}
+                quality={placement.quality}
+              />
+            </MediaFrame>
+          ))}
         </div>
       </section>
 

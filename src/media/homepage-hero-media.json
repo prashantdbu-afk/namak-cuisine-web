@@ -1,0 +1,31 @@
+{
+  "primary": {
+    "imageId": "venue-dining-wide-02",
+    "role": "heroPrimary",
+    "aspectRatio": 1.6,
+    "sizes": "(max-width: 900px) 100vw, (max-width: 1440px) 55vw, 860px",
+    "quality": 90,
+    "fetchPriority": "high",
+    "maxRenderedWidth": 860
+  },
+  "supporting": [
+    {
+      "imageId": "food-buratta-bomb",
+      "role": "heroSupporting",
+      "aspectRatio": 1.6666666667,
+      "sizes": "(max-width: 600px) 50vw, (max-width: 900px) 50vw, (max-width: 1440px) 27vw, 425px",
+      "quality": 85,
+      "fetchPriority": "auto",
+      "maxRenderedWidth": 425
+    },
+    {
+      "imageId": "food-classic-chicken-tikka",
+      "role": "heroSupporting",
+      "aspectRatio": 1.6666666667,
+      "sizes": "(max-width: 600px) 50vw, (max-width: 900px) 50vw, (max-width: 1440px) 27vw, 425px",
+      "quality": 85,
+      "fetchPriority": "auto",
+      "maxRenderedWidth": 425
+    }
+  ]
+}

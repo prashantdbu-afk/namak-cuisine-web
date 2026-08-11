@@ -21,7 +21,7 @@ export function getApprovedVenueImage(id: string) {
 }
 
 export const venuePlacements = {
-  homepageExperience: "venue-dining-wide-03",
+  homepageExperience: "venue-dining-wide-07",
   homepageBar: "venue-bar-wide-01",
   homepageGallery: [
     "venue-seating-01",

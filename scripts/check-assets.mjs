@@ -6,6 +6,9 @@ const publicDir = join(root, "public");
 const manifest = JSON.parse(
   await readFile(join(root, "src/media/manifest.json"), "utf8"),
 );
+const homepageHeroMedia = JSON.parse(
+  await readFile(join(root, "src/media/homepage-hero-media.json"), "utf8"),
+);
 const raster = new Set([".png", ".jpg", ".jpeg", ".webp", ".avif", ".gif"]);
 const video = new Set([".mp4", ".webm"]);
 const supported = new Set([...raster, ...video, ".svg", ".ico"]);
@@ -85,6 +88,54 @@ if (priorityImages.length > 2)
   failures.push(
     "Only the route-specific homepage and bar LCP images may be prioritized.",
   );
+
+const heroPlacements = [
+  homepageHeroMedia.primary,
+  ...homepageHeroMedia.supporting,
+];
+const primaryPlacements = heroPlacements.filter(
+  (placement) => placement.role === "heroPrimary",
+);
+if (primaryPlacements.length !== 1)
+  failures.push("Homepage hero must have exactly one primary LCP image.");
+
+for (const placement of heroPlacements) {
+  const record = manifest.find((item) => item.id === placement.imageId);
+  if (!record) {
+    failures.push(`${placement.imageId}: homepage hero media is missing`);
+    continue;
+  }
+  if (record.rightsStatus !== "approved" || !record.productionReady)
+    failures.push(
+      `${record.id}: homepage hero media must be approved and ready`,
+    );
+  if (!record.focalPoint)
+    failures.push(`${record.id}: homepage hero media requires a focal point`);
+  if (/210px/.test(placement.sizes) || placement.sizes === record.sizes)
+    failures.push(
+      `${record.id}: homepage hero must not reuse menu-thumbnail sizes`,
+    );
+  if (placement.maxRenderedWidth > record.width)
+    failures.push(`${record.id}: homepage hero source would be enlarged`);
+
+  if (placement.role === "heroPrimary") {
+    if (record.width < 1600 || record.height < 1000)
+      failures.push(`${record.id}: hero primary must be at least 1600x1000`);
+    if (
+      record.venueMediaStatus !== "approved" ||
+      record.sensitiveInformationFound !== false ||
+      !["approved", "not-applicable"].includes(record.peopleApproval)
+    )
+      failures.push(`${record.id}: hero primary venue safety is not approved`);
+    if (placement.quality !== 90 || placement.fetchPriority !== "high")
+      failures.push(`${record.id}: hero primary quality/priority is incorrect`);
+  } else {
+    if (record.width < 900 || record.height < 540)
+      failures.push(`${record.id}: hero support must be at least 900x540`);
+    if (placement.quality !== 85 || placement.fetchPriority === "high")
+      failures.push(`${record.id}: hero support quality/priority is incorrect`);
+  }
+}
 
 if (failures.length) {
   console.error(failures.join("\n"));
