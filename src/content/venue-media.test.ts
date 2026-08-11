@@ -43,6 +43,33 @@ describe("venue media publication policy", () => {
     expect(() => ids.forEach(getApprovedVenueImage)).not.toThrow();
   });
 
+  it("keeps approved venue coverage and dedicated short captions intact", () => {
+    const publicIds = new Set([
+      ...venuePlacements.homepageGallery,
+      ...venueGallerySections.flatMap((section) => section.imageIds),
+    ]);
+
+    expect(venuePlacements.homepageGallery).toHaveLength(3);
+    expect(
+      venueGallerySections.map(({ id, imageIds }) => [id, imageIds.length]),
+    ).toEqual([
+      ["restaurant", 6],
+      ["bar", 4],
+      ["kitchen", 0],
+      ["exterior", 3],
+    ]);
+
+    for (const imageId of publicIds) {
+      const media = getApprovedVenueImage(imageId);
+      expect(media.displayCaption).toBeTruthy();
+      expect(media.displayCaption).not.toBe(media.alt);
+      expect(media.displayCaption?.length).toBeLessThanOrEqual(40);
+      expect(media.alt.length).toBeGreaterThan(
+        media.displayCaption?.length ?? 0,
+      );
+    }
+  });
+
   it("keeps kitchen review frames off public gallery pages", () => {
     expect(
       venueGallerySections.find((section) => section.id === "kitchen")

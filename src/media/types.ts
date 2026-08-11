@@ -28,6 +28,7 @@ export type ImageRecord = MediaBase & {
   source: string;
   aspectRatio: number;
   alt: string;
+  displayCaption?: string;
   decorative: boolean;
   focalPoint?: FocalPoint;
   sizes: string;

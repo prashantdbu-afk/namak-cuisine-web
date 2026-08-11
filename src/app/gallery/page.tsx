@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { InteriorPage } from "@/components/site/InteriorPage";
-import { MediaFrame } from "@/components/media/MediaFrame";
-import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import { VenueGalleryCard } from "@/components/gallery/VenueGalleryCard";
 import { galleryImageIds } from "@/content/menu-media";
-import { getImageRecord } from "@/media/manifest";
-import {
-  getApprovedVenueImage,
-  venueGallerySections,
-} from "@/content/venue-media";
+import { venueGallerySections } from "@/content/venue-media";
+
+const foodGalleryCaptions: Record<(typeof galleryImageIds)[number], string> = {
+  "food-classic-chicken-tikka": "Classic Chicken Tikka",
+  "food-coconut-carrot-soup": "Coconut Carrot Soup",
+  "food-chur-chur-naan": "Chur Chur Naan",
+  "food-fish-moilee": "Fish Moilee",
+  "food-hyderabadi-chicken-dum-biryani": "Hyderabadi Chicken Dum Biryani",
+  "food-papdi-chaat": "Papdi Chaat",
+  "venue-main-outdoor": "Namak after dark",
+  "food-saag-burrata": "Saag Burrata",
+};
 export const metadata: Metadata = {
   title: "Gallery",
   description: "A visual preview of the Namak experience in Dallas.",
@@ -57,24 +63,23 @@ export default function Gallery() {
               the gallery.
             </p>
           ) : (
-            <div className="gallery-page">
-              {section.imageIds.map((imageId, i) => {
-                const media =
-                  section.id === "food"
-                    ? getImageRecord(imageId)
-                    : getApprovedVenueImage(imageId);
-                return (
-                  <figure
-                    key={imageId}
-                    className={`gallery-shot shot-${(i % 3) + 1}`}
-                  >
-                    <MediaFrame aspectRatio={i % 3 === 1 ? 4 / 5 : 3 / 2}>
-                      <ResponsiveImage media={media} />
-                    </MediaFrame>
-                    <figcaption>{media.alt}</figcaption>
-                  </figure>
-                );
-              })}
+            <div
+              className={`gallery-page gallery-count-${Math.min(section.imageIds.length, 3)}`}
+            >
+              {section.imageIds.map((imageId) => (
+                <VenueGalleryCard
+                  key={imageId}
+                  imageId={imageId}
+                  source={section.id === "food" ? "general" : "venue"}
+                  caption={
+                    section.id === "food"
+                      ? foodGalleryCaptions[
+                          imageId as keyof typeof foodGalleryCaptions
+                        ]
+                      : undefined
+                  }
+                />
+              ))}
             </div>
           )}
         </section>

@@ -1,6 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const outputDirectory = path.resolve("visual-review");
 const routes = [
@@ -34,6 +34,23 @@ async function revealPage(page: Page) {
   }
   await page.waitForTimeout(400);
   await page.evaluate(() => window.scrollTo(0, 0));
+}
+
+async function waitForImages(locator: Locator) {
+  await expect
+    .poll(() =>
+      locator
+        .locator("img")
+        .evaluateAll((images) =>
+          images.every(
+            (image) =>
+              image instanceof HTMLImageElement &&
+              image.complete &&
+              image.naturalWidth > 0,
+          ),
+        ),
+    )
+    .toBe(true);
 }
 
 test.beforeAll(async () => {
@@ -116,6 +133,74 @@ test("captures homepage review sections", async ({ page }) => {
   await page.locator(".visit").scrollIntoViewIfNeeded();
   await page.locator(".visit").screenshot({
     path: path.join(outputDirectory, "home-section--visit-mobile.png"),
+    animations: "disabled",
+  });
+});
+
+test("captures aligned venue galleries at key breakpoints", async ({
+  page,
+}) => {
+  for (const [name, viewport] of [
+    ["desktop", { width: 1440, height: 1000 }],
+    ["laptop", { width: 1280, height: 800 }],
+    ["tablet", { width: 768, height: 900 }],
+    ["mobile", { width: 390, height: 844 }],
+  ] as const) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.addStyleTag({
+      content:
+        "header, .mobile-actions, .skip-link { display: none !important; }",
+    });
+    const preview = page.locator(".gallery");
+    await preview.scrollIntoViewIfNeeded();
+    await waitForImages(preview);
+    await preview.screenshot({
+      path: path.join(outputDirectory, `gallery-home-preview--${name}.png`),
+      animations: "disabled",
+    });
+  }
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/gallery");
+  await page.addStyleTag({
+    content:
+      "header, .mobile-actions, .skip-link { display: none !important; }",
+  });
+  for (const id of ["restaurant", "bar", "exterior", "food"]) {
+    const section = page.locator(`#${id}`);
+    await section.scrollIntoViewIfNeeded();
+    await waitForImages(section);
+    await section.screenshot({
+      path: path.join(outputDirectory, `gallery-section--desktop--${id}.png`),
+      animations: "disabled",
+    });
+  }
+
+  await page.goto("/gallery");
+  await page.addStyleTag({
+    content:
+      "header, .mobile-actions, .skip-link { display: none !important; }",
+  });
+  await page.locator("#restaurant .gallery-card").evaluateAll((cards) => {
+    cards.slice(2).forEach((card) => card.remove());
+    cards[0]?.parentElement?.classList.add("gallery-count-2");
+  });
+  await page.locator("#restaurant").screenshot({
+    path: path.join(outputDirectory, "gallery-section--desktop--two-card.png"),
+    animations: "disabled",
+  });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/gallery");
+  await page.addStyleTag({
+    content:
+      "header, .mobile-actions, .skip-link { display: none !important; }",
+  });
+  await revealPage(page);
+  await page.screenshot({
+    path: path.join(outputDirectory, "gallery-complete--mobile.png"),
+    fullPage: true,
     animations: "disabled",
   });
 });

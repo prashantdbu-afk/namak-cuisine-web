@@ -10,6 +10,83 @@ test("homepage presents primary actions", async ({ page }) => {
     page.getByRole("link", { name: /explore menu/i }).first(),
   ).toHaveAttribute("href", "/menu");
 });
+
+test("homepage venue preview uses equal 4:3 cards and dedicated captions", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+
+  const cards = page.locator(".gallery-grid .gallery-card");
+  await expect(cards).toHaveCount(3);
+  const presentation = await cards.evaluateAll((elements) =>
+    elements.map((element) => {
+      const frame = element.querySelector(".gallery-card-media");
+      const image = element.querySelector("img");
+      const caption = element.querySelector("figcaption");
+      const box = element.getBoundingClientRect();
+      const frameBox = frame?.getBoundingClientRect();
+      return {
+        width: box.width,
+        height: box.height,
+        ratio: frameBox ? frameBox.width / frameBox.height : 0,
+        caption: caption?.textContent?.trim(),
+        alt: image?.getAttribute("alt"),
+        fit: image ? getComputedStyle(image).objectFit : "missing",
+      };
+    }),
+  );
+
+  expect(new Set(presentation.map(({ width }) => Math.round(width))).size).toBe(
+    1,
+  );
+  expect(
+    new Set(presentation.map(({ height }) => Math.round(height))).size,
+  ).toBe(1);
+  for (const card of presentation) {
+    expect(card.ratio).toBeCloseTo(4 / 3, 2);
+    expect(card.fit).toBe("cover");
+    expect(card.caption).toBeTruthy();
+    expect(card.caption).not.toBe(card.alt);
+  }
+});
+
+test("gallery grid adapts from three to two to one column without overflow", async ({
+  page,
+}) => {
+  for (const [width, expectedColumns] of [
+    [1440, 3],
+    [768, 2],
+    [390, 1],
+  ] as const) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/gallery");
+    const cards = page.locator("#restaurant .gallery-card");
+    await expect(cards).toHaveCount(6);
+    const layout = await cards.evaluateAll((elements) => {
+      const rows = new Set(
+        elements.map((element) =>
+          Math.round(element.getBoundingClientRect().top),
+        ),
+      );
+      const firstFrame = elements[0]?.querySelector(".gallery-card-media");
+      const firstFrameBox = firstFrame?.getBoundingClientRect();
+      return {
+        columns: Math.round(elements.length / rows.size),
+        ratio: firstFrameBox ? firstFrameBox.width / firstFrameBox.height : 0,
+      };
+    });
+    expect(layout.columns).toBe(expectedColumns);
+    expect(layout.ratio).toBeCloseTo(4 / 3, 2);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(0);
+  }
+});
 test("food menu is searchable, priced, and source-clean", async ({ page }) => {
   await page.goto("/menu");
   await expect(

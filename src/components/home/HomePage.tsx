@@ -13,6 +13,7 @@ import { getMapConfiguration } from "@/config/map";
 import { homepageFoodFeatures } from "@/content/menu-media";
 import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
 import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
+import { VenueGalleryCard } from "@/components/gallery/VenueGalleryCard";
 
 const featuredDishes = homepageFoodFeatures.map((feature) => {
   const dish = foodMenuItems.find((item) => item.name === feature.name);
@@ -156,13 +157,12 @@ export function HomePage() {
           </Link>
         </div>
         <div className="gallery-grid">
-          {venuePlacements.homepageGallery.map((imageId, index) => (
-            <figure key={imageId} className={`gallery-shot shot-${index + 1}`}>
-              <MediaFrame aspectRatio={index === 1 ? 4 / 5 : 3 / 2}>
-                <ResponsiveImage media={getApprovedVenueImage(imageId)} />
-              </MediaFrame>
-              <figcaption>{getApprovedVenueImage(imageId).alt}</figcaption>
-            </figure>
+          {venuePlacements.homepageGallery.map((imageId) => (
+            <VenueGalleryCard
+              key={imageId}
+              imageId={imageId}
+              className="venue-preview-card"
+            />
           ))}
         </div>
       </section>

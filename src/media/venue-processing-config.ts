@@ -60,6 +60,7 @@ export type VenueProcessingRecord = {
   portraitCrop?: CropDefinition;
   squareCrop?: CropDefinition;
   alt: string;
+  displayCaption?: string;
   reviewNotes: string;
   visualAudit: {
     sharpness: "strong" | "adequate" | "soft";
@@ -166,6 +167,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.52, y: 0.55 },
     alt: "Dining room at Namak with green chairs, set tables, pendant lighting, and the bar beyond.",
+    displayCaption: "Dining room and bar",
     reviewNotes:
       "Strong establishing view after restrained crop away from the host stand.",
     visualAudit: audit(
@@ -215,6 +217,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.55, y: 0.5 },
     alt: "Architectural view through the Namak dining room with booth seating and pendant lights.",
+    displayCaption: "Dining room architecture",
     reviewNotes: "Useful vertical architectural detail; crop the service edge.",
     visualAudit: audit(
       "Minor converging verticals.",
@@ -269,6 +272,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.38,
     focalPoint: { x: 0.53, y: 0.55 },
     alt: "Dining room at Namak with green seating, warm pendant lights, and the bar in the background.",
+    displayCaption: "Dining room atmosphere",
     reviewNotes:
       "Primary homepage Experience image; crop minimizes host-stand foreground.",
     visualAudit: audit(
@@ -346,6 +350,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.51, y: 0.48 },
     alt: "Front entrance and Namak signage viewed from the Greenville Avenue parking area.",
+    displayCaption: "Greenville Avenue entrance",
     reviewNotes: "Clear alternate entrance framing.",
     visualAudit: audit(
       "Minor handheld tilt corrected by crop.",
@@ -370,6 +375,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.5, y: 0.55 },
     alt: "Bar at Namak with green counter seating, warm wood shelving, and a white stone counter.",
+    displayCaption: "Bar and counter seating",
     reviewNotes:
       "Primary real-bar replacement for homepage stock; keep television secondary in crop.",
     visualAudit: audit(
@@ -396,6 +402,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.5, y: 0.53 },
     alt: "Full Namak bar with back shelving, draft taps, glassware, and a pale stone counter.",
+    displayCaption: "Full bar view",
     reviewNotes: "Strong real-bar hero option; no shelf augmentation needed.",
     visualAudit: audit(
       "Straight frontal perspective.",
@@ -502,6 +509,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.58, y: 0.6 },
     alt: "Curved upholstered booth and set dining table near the Namak entrance.",
+    displayCaption: "Curved booth seating",
     reviewNotes: "Strong portrait seating detail with natural daylight.",
     visualAudit: audit(
       "Minor vertical convergence.",
@@ -599,6 +607,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.38,
     focalPoint: { x: 0.52, y: 0.56 },
     alt: "Dining room at Namak facing the bar, with green chairs and warm pendant lighting.",
+    displayCaption: "Bar and dining room",
     reviewNotes: "Strong balanced venue overview.",
     visualAudit: audit(
       "Controlled wide perspective.",
@@ -723,6 +732,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.58, y: 0.58 },
     alt: "Daylit Namak dining room with green seating, set tables, and pendant lights.",
+    displayCaption: "Daylit dining room",
     reviewNotes:
       "Strong atmosphere image; crop reduces the window and foreground counter.",
     visualAudit: audit(
@@ -748,6 +758,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.46, y: 0.55 },
     alt: "Namak bar shelving, draft taps, glassware, and stainless service counter.",
+    displayCaption: "Draft taps and bar shelving",
     reviewNotes: "Approved with a crop that excludes the far-right work area.",
     visualAudit: audit(
       "Strong diagonal bar perspective.",
@@ -845,6 +856,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.38,
     focalPoint: { x: 0.5, y: 0.56 },
     alt: "Wide Namak dining room with set tables, green seating, arched panels, and the bar beyond.",
+    displayCaption: "Dining room and arches",
     reviewNotes: "One of the strongest clean dining views.",
     visualAudit: audit(
       "Strong balanced wide perspective.",
@@ -944,6 +956,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.42,
     focalPoint: { x: 0.5, y: 0.55 },
     alt: "Front view of the Namak bar with draft taps, bottle shelving, and a pale counter.",
+    displayCaption: "Bar counter and shelving",
     reviewNotes: "Higher-resolution bar view; television remains secondary.",
     visualAudit: audit(
       "Strong frontal perspective.",
@@ -968,6 +981,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.55, y: 0.47 },
     alt: "Daytime exterior of Namak Indian Restaurant & Bar on Greenville Avenue in Dallas.",
+    displayCaption: "Greenville Avenue storefront",
     reviewNotes:
       "Clear storefront; construction lift at far right should be excluded by crop.",
     visualAudit: audit(
@@ -1019,6 +1033,7 @@ export const venueProcessingConfig: VenueProcessingRecord[] = [
     sharpenSigma: 0.4,
     focalPoint: { x: 0.5, y: 0.47 },
     alt: "Namak storefront and entrance beneath a clear blue Dallas sky.",
+    displayCaption: "Greenville Avenue arrival",
     reviewNotes:
       "Primary Visit exterior; crop excludes the lift at the extreme right.",
     visualAudit: audit(

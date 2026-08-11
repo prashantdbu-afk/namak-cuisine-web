@@ -1682,6 +1682,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Dining room at Namak with green chairs, set tables, pendant lighting, and the bar beyond.",
+    "displayCaption": "Dining room and bar",
     "decorative": false,
     "focalPoint": {
       "x": 0.52,
@@ -1734,6 +1735,7 @@
     "height": 1600,
     "aspectRatio": 0.75,
     "alt": "Architectural view through the Namak dining room with booth seating and pendant lights.",
+    "displayCaption": "Dining room architecture",
     "decorative": false,
     "focalPoint": {
       "x": 0.55,
@@ -1786,6 +1788,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Dining room at Namak with green seating, warm pendant lights, and the bar in the background.",
+    "displayCaption": "Dining room atmosphere",
     "decorative": false,
     "focalPoint": {
       "x": 0.53,
@@ -1870,6 +1873,7 @@
     "height": 1600,
     "aspectRatio": 0.75,
     "alt": "Front entrance and Namak signage viewed from the Greenville Avenue parking area.",
+    "displayCaption": "Greenville Avenue entrance",
     "decorative": false,
     "focalPoint": {
       "x": 0.51,
@@ -1896,6 +1900,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Bar at Namak with green counter seating, warm wood shelving, and a white stone counter.",
+    "displayCaption": "Bar and counter seating",
     "decorative": false,
     "focalPoint": {
       "x": 0.5,
@@ -1922,6 +1927,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Full Namak bar with back shelving, draft taps, glassware, and a pale stone counter.",
+    "displayCaption": "Full bar view",
     "decorative": false,
     "focalPoint": {
       "x": 0.5,
@@ -2026,6 +2032,7 @@
     "height": 1600,
     "aspectRatio": 0.75,
     "alt": "Curved upholstered booth and set dining table near the Namak entrance.",
+    "displayCaption": "Curved booth seating",
     "decorative": false,
     "focalPoint": {
       "x": 0.58,
@@ -2130,6 +2137,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Dining room at Namak facing the bar, with green chairs and warm pendant lighting.",
+    "displayCaption": "Bar and dining room",
     "decorative": false,
     "focalPoint": {
       "x": 0.52,
@@ -2260,6 +2268,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Daylit Namak dining room with green seating, set tables, and pendant lights.",
+    "displayCaption": "Daylit dining room",
     "decorative": false,
     "focalPoint": {
       "x": 0.58,
@@ -2286,6 +2295,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Namak bar shelving, draft taps, glassware, and stainless service counter.",
+    "displayCaption": "Draft taps and bar shelving",
     "decorative": false,
     "focalPoint": {
       "x": 0.46,
@@ -2390,6 +2400,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Wide Namak dining room with set tables, green seating, arched panels, and the bar beyond.",
+    "displayCaption": "Dining room and arches",
     "decorative": false,
     "focalPoint": {
       "x": 0.5,
@@ -2494,6 +2505,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Front view of the Namak bar with draft taps, bottle shelving, and a pale counter.",
+    "displayCaption": "Bar counter and shelving",
     "decorative": false,
     "focalPoint": {
       "x": 0.5,
@@ -2520,6 +2532,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Daytime exterior of Namak Indian Restaurant & Bar on Greenville Avenue in Dallas.",
+    "displayCaption": "Greenville Avenue storefront",
     "decorative": false,
     "focalPoint": {
       "x": 0.55,
@@ -2572,6 +2585,7 @@
     "height": 1200,
     "aspectRatio": 1.3333333333333333,
     "alt": "Namak storefront and entrance beneath a clear blue Dallas sky.",
+    "displayCaption": "Greenville Avenue arrival",
     "decorative": false,
     "focalPoint": {
       "x": 0.5,

@@ -107,6 +107,7 @@ for (const record of venueProcessingConfig) {
     height: finalMeta.height,
     aspectRatio: finalMeta.width / finalMeta.height,
     alt: record.alt,
+    displayCaption: record.displayCaption,
     decorative: false,
     focalPoint: record.focalPoint,
     sizes: "(max-width: 720px) 100vw, (max-width: 1200px) 50vw, 760px",
