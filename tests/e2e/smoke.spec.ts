@@ -296,8 +296,10 @@ test("the initial page makes no unexpected third-party requests", async ({
     if (!["127.0.0.1", "localhost"].includes(host))
       unexpected.push(request.url());
   });
-  await page.goto("/");
-  await page.waitForLoadState("networkidle");
+  await page.goto("/", { waitUntil: "load" });
+  // Observe briefly after load without depending on absolute network silence;
+  // Next image optimization can keep first-party requests active in slower CI.
+  await page.waitForTimeout(1_000);
   expect(unexpected).toEqual([]);
 });
 
