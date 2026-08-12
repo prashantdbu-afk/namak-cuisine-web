@@ -10,7 +10,7 @@ import {
 const root = process.cwd();
 const incoming = path.join(root, "incoming-media/venue");
 const production = path.join(root, "public/media/venue");
-const review = path.join(root, "public/media/review/venue");
+const review = path.join(root, "artifacts/media-review/venue");
 const manifestPath = path.join(root, "src/media/manifest.json");
 const reportPath = path.join(root, "docs/venue-media-processing-report.json");
 const auditPath = path.join(root, "docs/venue-media-audit.md");
@@ -56,9 +56,7 @@ if (JSON.stringify(sources) !== JSON.stringify(configured))
 
 const manifest = JSON.parse(await readFile(manifestPath, "utf8")).filter(
   (record) =>
-    record.kind !== "image" ||
-    (!record.source.startsWith("/media/venue/") &&
-      !record.source.startsWith("/media/review/venue/")),
+    record.kind !== "image" || !record.source.startsWith("/media/venue/"),
 );
 const report = [];
 for (const record of venueProcessingConfig) {
@@ -92,41 +90,44 @@ for (const record of venueProcessingConfig) {
   await writeFile(path.join(review, reviewFile), natural);
   const publicSource = record.productionReady
     ? `/media/venue/${record.imageId}.webp`
-    : `/media/review/venue/${reviewFile}`;
+    : undefined;
   if (record.productionReady)
     await writeFile(path.join(production, `${record.imageId}.webp`), output);
   const finalMeta = await sharp(
     record.productionReady ? output : natural,
   ).metadata();
-  manifest.push({
-    id: record.imageId,
-    kind: "image",
-    provider: "local",
-    source: publicSource,
-    width: finalMeta.width,
-    height: finalMeta.height,
-    aspectRatio: finalMeta.width / finalMeta.height,
-    alt: record.alt,
-    displayCaption: record.displayCaption,
-    decorative: false,
-    focalPoint: record.focalPoint,
-    sizes: "(max-width: 720px) 100vw, (max-width: 1200px) 50vw, 760px",
-    rightsStatus: record.rightsStatus,
-    productionReady: record.productionReady,
-    venueCategory: record.category,
-    venueUses: record.uses,
-    venueMediaStatus: record.status,
-    peopleApproval: record.peopleApproval,
-    sensitiveInformationFound: record.sensitiveInformationFound,
-    qualityScore: record.qualityScore,
-    generativeEdit: record.generativeEdit,
-    ownerApprovedEdit: record.ownerApprovedEdit,
-  });
+  if (record.productionReady)
+    manifest.push({
+      id: record.imageId,
+      kind: "image",
+      provider: "local",
+      source: publicSource,
+      width: finalMeta.width,
+      height: finalMeta.height,
+      aspectRatio: finalMeta.width / finalMeta.height,
+      alt: record.alt,
+      displayCaption: record.displayCaption,
+      decorative: false,
+      focalPoint: record.focalPoint,
+      sizes: "(max-width: 720px) 100vw, (max-width: 1200px) 50vw, 760px",
+      rightsStatus: record.rightsStatus,
+      productionReady: record.productionReady,
+      venueCategory: record.category,
+      venueUses: record.uses,
+      venueMediaStatus: record.status,
+      peopleApproval: record.peopleApproval,
+      sensitiveInformationFound: record.sensitiveInformationFound,
+      qualityScore: record.qualityScore,
+      generativeEdit: record.generativeEdit,
+      ownerApprovedEdit: record.ownerApprovedEdit,
+    });
   report.push({
     imageId: record.imageId,
     sourceFilename: record.sourceFilename,
     sourceDimensions: [sourceMeta.width, sourceMeta.height],
-    output: publicSource,
+    output: record.productionReady
+      ? publicSource
+      : path.relative(root, path.join(review, reviewFile)),
     outputDimensions: [finalMeta.width, finalMeta.height],
     outputBytes: record.productionReady
       ? output.byteLength

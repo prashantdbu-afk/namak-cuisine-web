@@ -60,7 +60,7 @@ describe("owner-approved food media", () => {
     const foodImages = imageMedia.filter((entry) =>
       entry.source.startsWith("/media/menu/"),
     );
-    expect(foodImages).toHaveLength(45);
+    expect(foodImages).toHaveLength(42);
     expect(foodImages.every((entry) => entry.rightsStatus === "approved")).toBe(
       true,
     );

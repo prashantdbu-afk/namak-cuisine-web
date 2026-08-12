@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { MenuExperience } from "@/components/menu/MenuExperience";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
-import { barCategoryMedia } from "@/content/bar-media";
-import { isStockMediaPreviewAvailable } from "@/config/publication";
 import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
 import {
   barCategories,
@@ -19,7 +17,6 @@ export const metadata: Metadata = {
 };
 
 export default function Bar() {
-  const stockPreview = isStockMediaPreviewAvailable();
   const structuredData = createMenuStructuredData(
     "Namak Bar Menu and Wine List",
     barCategories,
@@ -50,7 +47,7 @@ export default function Bar() {
         activeMenu="bar"
         categories={barCategories}
         items={barMenuItems}
-        categoryMedia={stockPreview ? barCategoryMedia : []}
+        categoryMedia={[]}
       />
     </>
   );

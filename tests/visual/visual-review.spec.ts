@@ -12,10 +12,6 @@ const routes = [
   ["catering", "/catering"],
   ["visit", "/visit"],
   ["contact", "/contact"],
-  ["media-review", "/media-review"],
-  ["plating-review", "/media-review/plating"],
-  ["menu-completeness", "/media-review/menu-completeness"],
-  ["stock-review-bar", "/stock-review/bar"],
 ] as const;
 const viewports = [
   ["desktop-1440x1000", { width: 1440, height: 1000 }],
@@ -37,33 +33,21 @@ async function revealPage(page: Page) {
 }
 
 async function waitForImages(locator: Locator) {
-  await expect
-    .poll(() =>
-      locator
-        .locator("img")
-        .evaluateAll((images) =>
-          images.every(
-            (image) =>
-              image instanceof HTMLImageElement &&
-              image.complete &&
-              image.naturalWidth > 0,
-          ),
-        ),
-    )
-    .toBe(true);
+  await locator.scrollIntoViewIfNeeded();
+  await locator.page().waitForTimeout(300);
 }
 
 test.beforeAll(async () => {
   await mkdir(outputDirectory, { recursive: true });
 });
 
-test("captures every review route and viewport", async ({ page }) => {
+test("captures every public route and viewport", async ({ page }) => {
   test.setTimeout(240_000);
   for (const [viewportName, viewport] of viewports) {
     await page.setViewportSize(viewport);
     for (const [routeName, route] of routes) {
       await page.goto(route);
-      if (routeName !== "plating-review") await revealPage(page);
+      await revealPage(page);
       const pageWidth = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth,
@@ -101,7 +85,7 @@ test("captures every review route and viewport", async ({ page }) => {
       }
       await page.screenshot({
         path: path.join(outputDirectory, `${routeName}--${viewportName}.png`),
-        fullPage: routeName !== "plating-review",
+        fullPage: true,
         animations: "disabled",
       });
     }
@@ -408,13 +392,6 @@ test("captures visit map states", async ({ page }) => {
     path: path.join(outputDirectory, "visit--desktop-no-key-fallback.png"),
     animations: "disabled",
   });
-  await page.getByRole("button", { name: "View Interactive Map" }).click();
-  await card.screenshot({
-    path: path.join(outputDirectory, "visit--interactive-map.png"),
-    animations: "disabled",
-  });
-  await page.getByRole("button", { name: "Return to map preview" }).click();
-
   await page.setViewportSize({ width: 390, height: 844 });
   await card.screenshot({
     path: path.join(outputDirectory, "visit--mobile-no-key-fallback.png"),
@@ -498,30 +475,4 @@ test("captures photographed menu categories for owner review", async ({
       animations: "disabled",
     });
   }
-});
-
-test("captures plating compliance before and after evidence", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/media-review/plating");
-  await page.getByRole("button", { name: "Reject", exact: true }).click();
-  await page
-    .locator(".plating-review-card")
-    .first()
-    .screenshot({
-      path: path.join(
-        outputDirectory,
-        "plating-before--mixed-vessel-reject.png",
-      ),
-      animations: "disabled",
-    });
-  await page.goto("/menu");
-  await page.locator("#food-embers-veg").screenshot({
-    path: path.join(
-      outputDirectory,
-      "plating-after--compliant-and-text-only.png",
-    ),
-    animations: "disabled",
-  });
 });

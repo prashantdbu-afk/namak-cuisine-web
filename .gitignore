@@ -7,6 +7,7 @@ test-results
 coverage
 .lighthouseci
 visual-review
+artifacts/
 .pnpm-store
 *.tsbuildinfo
 .DS_Store

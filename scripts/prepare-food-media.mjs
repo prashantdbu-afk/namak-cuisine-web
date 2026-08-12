@@ -10,7 +10,7 @@ import {
 const root = process.cwd();
 const incoming = path.join(root, "incoming-media");
 const output = path.join(root, "public/media/menu");
-const reviewOutput = path.join(root, "public/media/review/menu");
+const reviewOutput = path.join(root, "artifacts/media-review/menu");
 const comparisonOutput = path.join(root, "docs/menu-image-comparisons");
 const manifestPath = path.join(root, "src/media/manifest.json");
 const reportPath = path.join(root, "docs/food-media-processing-report.json");
@@ -131,7 +131,10 @@ for (const record of foodProcessingConfig) {
     .webp({ quality: record.outputQuality, smartSubsample: true })
     .toBuffer();
 
-  const outputPath = path.join(output, `${record.imageId}.webp`);
+  const productionReady = record.status === "approved";
+  const outputPath = productionReady
+    ? path.join(output, `${record.imageId}.webp`)
+    : path.join(reviewOutput, `${record.imageId}-prepared.webp`);
   await writeFile(outputPath, enhancedBuffer);
   const finalMetadata = await sharp(enhancedBuffer).metadata();
   const outputBytes = (await stat(outputPath)).size;
@@ -209,7 +212,6 @@ for (const record of foodProcessingConfig) {
 
   const width = finalMetadata.width ?? 0;
   const height = finalMetadata.height ?? 0;
-  const productionReady = record.status === "approved";
   prepared.push({
     imageId: record.imageId,
     itemId: record.itemId,
@@ -238,34 +240,35 @@ for (const record of foodProcessingConfig) {
     generativeAlteration: false,
     metadataRetained: false,
   });
-  foodManifest.push({
-    id: record.imageId,
-    kind: "image",
-    provider: "local",
-    source: `/media/menu/${record.imageId}.webp`,
-    width,
-    height,
-    aspectRatio: width / height,
-    alt: productionReady ? record.alt : "",
-    decorative: !productionReady,
-    focalPoint: record.menuFocalPoint,
-    sizes: record.uses.includes("homepage-hero")
-      ? "(max-width: 760px) 100vw, 55vw"
-      : "(max-width: 359px) 100vw, (max-width: 760px) 132px, 210px",
-    priority: record.uses.includes("homepage-hero") || undefined,
-    rightsStatus: "approved",
-    productionReady,
-    foodStyleFamily: record.styleFamily,
-    foodMediaStatus: record.status,
-    targetPlateSystem: record.targetPlateSystem,
-    visualCompliance: record.visualCompliance,
-    menuEligible: record.menuEligible,
-    actualVisiblePlate: record.actualVisiblePlate,
-    actualBackground: record.actualBackground,
-    actualCameraAngle: record.actualCameraAngle,
-    actualLightingStyle: record.actualLightingStyle,
-    complianceReason: record.complianceReason,
-  });
+  if (productionReady)
+    foodManifest.push({
+      id: record.imageId,
+      kind: "image",
+      provider: "local",
+      source: `/media/menu/${record.imageId}.webp`,
+      width,
+      height,
+      aspectRatio: width / height,
+      alt: productionReady ? record.alt : "",
+      decorative: !productionReady,
+      focalPoint: record.menuFocalPoint,
+      sizes: record.uses.includes("homepage-hero")
+        ? "(max-width: 760px) 100vw, 55vw"
+        : "(max-width: 359px) 100vw, (max-width: 760px) 132px, 210px",
+      priority: record.uses.includes("homepage-hero") || undefined,
+      rightsStatus: "approved",
+      productionReady,
+      foodStyleFamily: record.styleFamily,
+      foodMediaStatus: record.status,
+      targetPlateSystem: record.targetPlateSystem,
+      visualCompliance: record.visualCompliance,
+      menuEligible: record.menuEligible,
+      actualVisiblePlate: record.actualVisiblePlate,
+      actualBackground: record.actualBackground,
+      actualCameraAngle: record.actualCameraAngle,
+      actualLightingStyle: record.actualLightingStyle,
+      complianceReason: record.complianceReason,
+    });
 }
 
 const publicRecords = prepared.filter(

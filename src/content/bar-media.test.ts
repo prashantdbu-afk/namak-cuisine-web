@@ -26,19 +26,11 @@ describe("licensed editorial bar media", () => {
     }
   });
 
-  it("self-hosts approved selected images without mapping them to named products", () => {
+  it("keeps selected review imagery out of the production manifest", () => {
     const records = imageMedia.filter((record) =>
       record.id.startsWith("bar-stock-"),
     );
-    expect(records).toHaveLength(12);
-    expect(
-      records.every(
-        (record) =>
-          record.source.startsWith("/media/bar/") &&
-          record.rightsStatus === "approved" &&
-          record.productionReady === false,
-      ),
-    ).toBe(true);
+    expect(records).toHaveLength(0);
     expect(barCategoryMedia).toHaveLength(11);
     const brandedNames = barMenuItems.map((item) => item.name.toLowerCase());
     expect(

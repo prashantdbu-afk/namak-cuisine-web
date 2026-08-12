@@ -9,7 +9,7 @@ import {
 
 const root = process.cwd();
 const incoming = path.join(root, "incoming-media/stock-bar");
-const output = path.join(root, "public/media/bar");
+const output = path.join(root, "artifacts/media-review/bar");
 const manifestPath = path.join(root, "src/media/manifest.json");
 const sourceNames = {
   "bar-stock-hero": "bar-hero-source.jpeg",
@@ -85,7 +85,7 @@ for (const candidate of selectedBarStock) {
     id: presentation.mediaId,
     kind: "image",
     provider: "local",
-    source: `/media/bar/${presentation.output}`,
+    source: path.relative(root, target),
     width: prepared.width,
     height: prepared.height,
     aspectRatio: prepared.width / prepared.height,
@@ -104,10 +104,7 @@ const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 const retained = manifest.filter(
   (record) => !record.id.startsWith("bar-stock-"),
 );
-await writeFile(
-  manifestPath,
-  `${JSON.stringify([...retained, ...records], null, 2)}\n`,
-);
+await writeFile(manifestPath, `${JSON.stringify(retained, null, 2)}\n`);
 await writeFile(
   path.join(root, "docs/bar-stock-processing-report.json"),
   `${JSON.stringify(
@@ -116,7 +113,7 @@ await writeFile(
       records: await Promise.all(
         records.map(async (record) => ({
           ...record,
-          bytes: (await stat(path.join(root, "public", record.source))).size,
+          bytes: (await stat(path.join(root, record.source))).size,
         })),
       ),
     },

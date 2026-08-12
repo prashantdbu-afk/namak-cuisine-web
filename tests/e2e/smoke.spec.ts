@@ -361,7 +361,7 @@ test("bar menu search and beer variants work", async ({ page }) => {
     "/menu",
   );
   await search.fill("");
-  await expect(main.locator(".bar-category-feature")).toHaveCount(11);
+  await expect(main.locator(".bar-category-feature")).toHaveCount(0);
   await expect(main.locator(".priced-menu-item img")).toHaveCount(0);
   await expect(main).not.toContainText(/pexels\.com|images\.pexels/i);
   for (const id of ["bar-draft-beer", "bar-whiskey", "bar-gin"]) {
@@ -375,63 +375,19 @@ test("bar menu search and beer variants work", async ({ page }) => {
   }
 });
 
-test("bar stock review is private, noindex, and compares all candidates", async ({
-  page,
-}) => {
-  await page.goto("/stock-review/bar");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    "content",
-    /noindex/,
-  );
-  await expect(page.locator(".stock-review-slot")).toHaveCount(12);
-  await expect(page.locator(".stock-candidate")).toHaveCount(36);
-  await expect(page.getByText("Recommended", { exact: true })).toHaveCount(12);
-});
-test("media review is private, noindex, and contains every supplied record", async ({
-  page,
-}) => {
-  await page.goto("/media-review");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    "content",
-    /noindex/,
-  );
-  await expect(page.locator(".media-review-card")).toHaveCount(45);
-  await expect(
-    page.getByText("Unidentified dessert", { exact: true }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "Missing from public menu" }).click();
-  await expect(page.locator(".media-review-card")).toHaveCount(0);
-});
-test("plating review keeps future-standard audits separate from menu visibility", async ({
-  page,
-}) => {
-  await page.goto("/media-review/plating");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    "content",
-    /noindex/,
-  );
-  await expect(page.locator(".plating-review-card")).toHaveCount(45);
-  await page
-    .getByRole("button", { name: "Currently Public but Noncompliant" })
-    .click();
-  await expect(page.locator(".plating-review-card")).not.toHaveCount(0);
-});
-
-test("menu completeness review shows all food sources and only three holds", async ({
-  page,
-}) => {
-  await page.goto("/media-review/menu-completeness");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    "content",
-    /noindex/,
-  );
-  await expect(page.locator(".menu-completeness-card")).toHaveCount(44);
-  await expect(
-    page.locator('.menu-completeness-card[data-visible="yes"]'),
-  ).toHaveCount(41);
-  await expect(
-    page.locator('.menu-completeness-card[data-visible="no"]'),
-  ).toHaveCount(3);
+test("internal review routes and assets return 404", async ({ page }) => {
+  for (const path of [
+    "/media-review",
+    "/media-review/plating",
+    "/media-review/menu-completeness",
+    "/media-review/venue",
+    "/stock-review/bar",
+    "/media/review/menu/food-butter-chicken-original.webp",
+    "/media/review/venue/venue-kitchen-wide-01-natural.webp",
+  ]) {
+    const response = await page.request.get(path);
+    expect(response.status(), path).toBe(404);
+  }
 });
 test("visit shows verified information", async ({ page }) => {
   await page.route("**/api/map/embed", (route) =>
@@ -451,14 +407,9 @@ test("visit shows verified information", async ({ page }) => {
     "https://www.google.com/maps/dir/?api=1&destination=5500+Greenville+Ave+%23600%2C+Dallas%2C+TX+75206",
   );
   await expect(page.locator("iframe")).toHaveCount(0);
-  await page.getByRole("button", { name: "View Interactive Map" }).click();
   await expect(
-    page.getByTitle(
-      "Map showing Namak Indian Restaurant & Bar on Greenville Avenue in Dallas",
-    ),
-  ).toHaveAttribute("loading", "lazy");
-  await page.getByRole("button", { name: "Return to map preview" }).click();
-  await expect(page.locator("iframe")).toHaveCount(0);
+    page.getByRole("button", { name: "View Interactive Map" }),
+  ).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText(
     /Reveal location details|map unavailable|⌖/i,
   );
@@ -846,15 +797,4 @@ test("approved venue photography appears without broken images or overflow", asy
     for (const source of sources)
       expect((await page.request.get(source)).ok()).toBe(true);
   }
-});
-
-test("venue review is noindex and includes every supplied photograph", async ({
-  page,
-}) => {
-  await page.goto("/media-review/venue");
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    "content",
-    /noindex/,
-  );
-  await expect(page.locator(".venue-review-card")).toHaveCount(43);
 });

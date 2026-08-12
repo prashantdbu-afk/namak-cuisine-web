@@ -14,6 +14,11 @@ const video = new Set([".mp4", ".webm"]);
 const supported = new Set([...raster, ...video, ".svg", ".ico"]);
 const failures = [];
 
+try {
+  await stat(join(publicDir, "media/review"));
+  failures.push("public/media/review must not exist in a production bundle");
+} catch {}
+
 async function walk(directory) {
   const found = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -70,16 +75,20 @@ if (
     "Prepared food media must not use third-party URLs or CDN paths.",
   );
 
-if (
-  barRecords.length !== 12 ||
-  barRecords.some(
-    (record) =>
-      /^https?:/i.test(record.source) || record.rightsStatus !== "approved",
-  )
-)
+if (barRecords.length > 0)
   failures.push(
-    "Selected bar stock must contain the hero and eleven approved, self-hosted category records.",
+    "Review-only bar category assets must not ship in public/media.",
   );
+
+for (const record of manifest) {
+  if (
+    record.kind === "image" &&
+    record.provider === "local" &&
+    record.source?.startsWith("/media/") &&
+    !record.productionReady
+  )
+    failures.push(`${record.id}: non-production media must not ship publicly`);
+}
 
 const priorityImages = manifest.filter(
   (record) => record.kind === "image" && record.priority,
