@@ -2976,9 +2976,30 @@ em {
   font-size: clamp(2.3rem, 4vw, 4.4rem);
 }
 
-.catering-final-cta p:last-child {
+.catering-final-cta > div > p:not(.eyebrow) {
   max-width: 620px;
   color: var(--text-muted);
+}
+
+.catering-call-checklist {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  color: var(--primary-dark);
+  font-weight: 650;
+  list-style: none;
+}
+
+.catering-call-checklist li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.catering-call-checklist li::before {
+  color: var(--accent-dark);
+  content: "✓";
 }
 
 .home-catering {

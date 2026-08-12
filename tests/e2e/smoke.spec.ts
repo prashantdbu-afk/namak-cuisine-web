@@ -581,33 +581,37 @@ test("catering navigation, route, copy, and media are public and source-clean", 
   expect(redirect.headers().location).toBe("/catering");
 });
 
-test("catering form uses exact menu data and safe disabled mode", async ({
+test("catering launch page hides the future form and uses phone actions", async ({
   page,
 }) => {
   await page.goto("/catering");
-  const form = page.locator(".catering-inquiry-form");
-  await expect(form.getByLabel("Full Name")).toBeVisible();
-  await expect(form.getByLabel("Event Category")).toBeVisible();
+  await expect(page.locator("form")).toHaveCount(0);
+  await expect(page.locator(".catering-inquiry-form")).toHaveCount(0);
+  await expect(page.locator(".catering-menu-selector")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /submit|send/i })).toHaveCount(
+    0,
+  );
+  await expect(page.getByText("Start a Catering Inquiry")).toHaveCount(0);
   await expect(
-    form.getByText("Vegetarian", { exact: true }).first(),
-  ).toBeVisible();
-  await expect(
-    form.getByText("Non-Vegetarian", { exact: true }).first(),
-  ).toBeVisible();
-  await expect(form.getByText("Mixed", { exact: true }).first()).toBeVisible();
-  await expect(
-    form.getByText("Bharwan Paneer Tikka", { exact: true }),
-  ).toBeVisible();
-  await expect(form).not.toContainText(/Macallan|Taj Mahal|\$\d/);
-  await expect(
-    form.getByText("Online inquiries are being prepared."),
-  ).toBeVisible();
-  await expect(
-    form.getByRole("button", { name: "Send Catering Inquiry" }),
+    page.getByText("Online inquiries are being prepared."),
   ).toHaveCount(0);
   await expect(
-    form.getByRole("link", { name: "Call 214-730-0047", exact: true }),
+    page.getByRole("link", { name: "Call Our Team" }),
+  ).toHaveAttribute("href", "tel:+12147300047");
+  await expect(
+    page.getByRole("link", { name: "View the Menu" }),
+  ).toHaveAttribute("href", "/menu");
+  await expect(
+    page.getByRole("heading", { name: "Let’s talk about your gathering." }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Call 214-730-0047" }),
+  ).toHaveAttribute("href", "tel:+12147300047");
+  await expect(page.locator(".catering-process li")).toHaveText([
+    /Call and tell us about your event/,
+    /Share your date, guest count, location, and menu preferences/,
+    /Our team discusses availability, menu options, service details, and catering pricing with you/,
+  ]);
 });
 
 test("catering is usable on mobile without horizontal overflow", async ({
@@ -615,9 +619,7 @@ test("catering is usable on mobile without horizontal overflow", async ({
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/catering");
-  const eventSelect = page.getByLabel("Event Category");
-  await eventSelect.selectOption("pre-wedding");
-  await expect(eventSelect).toHaveValue("pre-wedding");
+  await expect(page.locator(".catering-form-section")).toHaveCount(0);
   const widths = await page.evaluate(() => ({
     client: document.documentElement.clientWidth,
     scroll: document.documentElement.scrollWidth,
@@ -644,11 +646,67 @@ test("catering is usable on mobile without horizontal overflow", async ({
       ),
   );
   expect(undersizedTargets).toEqual([]);
-  for (const control of await page
-    .locator(".meal-preference-grid label, .catering-menu-selector label")
-    .all()) {
-    const box = await control.boundingBox();
-    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+});
+
+test("gallery launch copy and public categories exclude empty Kitchen", async ({
+  page,
+}) => {
+  await page.goto("/gallery");
+  await expect(page).toHaveTitle(
+    "Restaurant Gallery | Namak Indian Restaurant & Bar Dallas",
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://namakcuisine.com/gallery",
+  );
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Come for the flavor. Stay for the warmth.",
+    }),
+  ).toBeVisible();
+  await expect(page.locator(".gallery-filters a")).toHaveText([
+    "Restaurant",
+    "Bar",
+    "Exterior",
+    "Food",
+  ]);
+  for (const id of ["restaurant", "bar", "exterior", "food"])
+    await expect(page.locator(`#${id}`)).toBeVisible();
+  await expect(page.locator("#kitchen")).toHaveCount(0);
+  await expect(
+    page.getByText(/photography in review|being reviewed/i),
+  ).toHaveCount(0);
+});
+
+test("launch routes contain no customer-facing development language", async ({
+  page,
+}) => {
+  const publicRoutes = [
+    "/",
+    "/menu",
+    "/bar",
+    "/about",
+    "/catering",
+    "/gallery",
+    "/visit",
+    "/contact",
+    "/privacy",
+    "/accessibility",
+  ];
+  const developmentLanguage =
+    /photography in review|being reviewed|owner approval|pending approval|review-only|production-ready|configuration required|online inquiries are being prepared|coming soon|Phase 1/i;
+
+  for (const route of publicRoutes) {
+    await page.goto(route);
+    await expect(page.locator("body")).not.toContainText(developmentLanguage);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth <=
+          document.documentElement.clientWidth,
+      ),
+    ).toBe(true);
   }
 });
 

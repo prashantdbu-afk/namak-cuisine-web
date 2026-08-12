@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
-import { CateringInquiryForm } from "@/components/catering/CateringInquiryForm";
 import { RevealOnScroll } from "@/components/catering/RevealOnScroll";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
@@ -10,8 +9,7 @@ import {
   cateringMediaIds,
   cateringMealOptions,
 } from "@/content/catering";
-import { site } from "@/config/site";
-import { getCateringFormConfiguration } from "@/lib/catering/submit";
+import { features, site } from "@/config/site";
 import { getImageRecord } from "@/media/manifest";
 
 export const metadata: Metadata = {
@@ -21,11 +19,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://namakcuisine.com/catering" },
 };
 
-export default async function CateringPage({
+async function FutureCateringInquiry({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  if (!features.cateringInquiryForm) return null;
+
+  const [{ CateringInquiryForm }, { getCateringFormConfiguration }] =
+    await Promise.all([
+      import("@/components/catering/CateringInquiryForm"),
+      import("@/lib/catering/submit"),
+    ]);
   const query = await searchParams;
   const preview =
     process.env.VERCEL_ENV !== "production" &&
@@ -33,6 +38,34 @@ export default async function CateringPage({
       ? query["form-preview"]
       : undefined;
   const form = getCateringFormConfiguration();
+
+  return (
+    <section
+      className="catering-form-section section"
+      id="catering-inquiry"
+      aria-labelledby="inquiry-title"
+    >
+      <CateringCelebrationMotif className="motif-form" />
+      <div className="catering-form-heading">
+        <p className="eyebrow">Catering inquiry</p>
+        <h2 id="inquiry-title">Tell us about your event.</h2>
+      </div>
+      <RevealOnScroll className="catering-form-card">
+        <CateringInquiryForm
+          mode={form.mode}
+          externalUrl={form.externalUrl}
+          previewState={preview}
+        />
+      </RevealOnScroll>
+    </section>
+  );
+}
+
+export default function CateringPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -57,16 +90,16 @@ export default async function CateringPage({
           <h1>Bring Namak to your gathering.</h1>
           <p className="lead">
             From office lunches and milestone celebrations to weddings, cultural
-            functions, and family gatherings, share a few details and our team
-            will help you explore the menu experience you have in mind.
+            functions, and family gatherings, call our team to share a few
+            details and explore the menu experience you have in mind.
           </p>
           <div className="button-row">
-            <a className="button" href="#catering-inquiry">
-              Start a Catering Inquiry
-            </a>
-            <a className="button button-quiet" href={site.phoneHref}>
+            <a className="button" href={site.phoneHref}>
               Call Our Team
             </a>
+            <Link className="button button-quiet" href="/menu">
+              View the Menu
+            </Link>
           </div>
           <p className="catering-support-line">
             Vegetarian, non-vegetarian, and mixed menu preferences welcome.
@@ -123,8 +156,8 @@ export default async function CateringPage({
           <h2 id="preference-title">A menu shaped around your event.</h2>
           <p>
             Tell us whether you are interested in a vegetarian, non-vegetarian,
-            or mixed menu. You may also select a few dishes from the current
-            Namak menu to help our team understand your preferences.
+            or mixed menu, along with any dishes or menu ideas you would like to
+            discuss with our team.
           </p>
         </div>
         <div className="catering-preference-grid">
@@ -135,7 +168,7 @@ export default async function CateringPage({
                   {index === 0 ? "◇" : index === 1 ? "△" : "○"}
                 </span>
                 <h3>{option.label}</h3>
-                <p>Choose this preference in the inquiry form below.</p>
+                <p>Share this preference when you call our team.</p>
               </article>
             </RevealOnScroll>
           ))}
@@ -153,61 +186,51 @@ export default async function CateringPage({
         <ol>
           <li>
             <span>01</span>
-            <h3>Tell us about the event.</h3>
+            <h3>Call and tell us about your event.</h3>
           </li>
           <li>
             <span>02</span>
-            <h3>Share your guest count and menu preferences.</h3>
+            <h3>
+              Share your date, guest count, location, and menu preferences.
+            </h3>
           </li>
           <li>
             <span>03</span>
             <h3>
-              The Namak team contacts you to discuss options, availability,
-              service details, and catering pricing.
+              Our team discusses availability, menu options, service details,
+              and catering pricing with you.
             </h3>
           </li>
         </ol>
       </section>
 
-      <section
-        className="catering-form-section section"
-        id="catering-inquiry"
-        aria-labelledby="inquiry-title"
-      >
-        <CateringCelebrationMotif className="motif-form" />
-        <div className="catering-form-heading">
-          <p className="eyebrow">Catering inquiry</p>
-          <h2 id="inquiry-title">Tell us about your event.</h2>
-          <p>
-            Share a few details so our team can understand the occasion, guest
-            count, and menu preferences.
-          </p>
-        </div>
-        <RevealOnScroll className="catering-form-card">
-          <CateringInquiryForm
-            mode={form.mode}
-            externalUrl={form.externalUrl}
-            previewState={preview}
-          />
-        </RevealOnScroll>
-      </section>
+      <FutureCateringInquiry searchParams={searchParams} />
 
-      <section className="catering-final-cta">
+      <section className="catering-final-cta" id="plan-your-event">
         <CateringCelebrationMotif />
         <div>
-          <p className="eyebrow">Prefer a conversation?</p>
-          <h2>Call our team directly.</h2>
+          <p className="eyebrow">Plan Your Event</p>
+          <h2>Let’s talk about your gathering.</h2>
           <p>
-            We’ll be glad to hear about your plans and help you understand the
-            next step.
+            Call our team and share your event date, estimated guest count, food
+            preference, and the type of occasion you are planning. We will
+            discuss menu ideas, availability, service details, and catering
+            pricing with you directly.
           </p>
+          <ul className="catering-call-checklist">
+            <li>Event date</li>
+            <li>Estimated number of guests</li>
+            <li>Vegetarian, non-vegetarian, or mixed preference</li>
+            <li>Dishes or menu ideas you are interested in</li>
+            <li>Event location or ZIP code</li>
+          </ul>
         </div>
         <div className="button-row">
           <a className="button button-light" href={site.phoneHref}>
             Call {site.phone}
           </a>
           <Link className="text-link" href="/menu">
-            View the current menu <span aria-hidden="true">→</span>
+            Explore the Menu <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>

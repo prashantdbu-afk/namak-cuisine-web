@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { InteriorPage } from "@/components/site/InteriorPage";
 import { VenueGalleryCard } from "@/components/gallery/VenueGalleryCard";
 import { galleryImageIds } from "@/content/menu-media";
-import { venueGallerySections } from "@/content/venue-media";
+import { publicGallerySections } from "@/content/venue-media";
 
 const foodGalleryCaptions: Record<(typeof galleryImageIds)[number], string> = {
   "food-classic-chicken-tikka": "Classic Chicken Tikka",
@@ -15,36 +15,33 @@ const foodGalleryCaptions: Record<(typeof galleryImageIds)[number], string> = {
   "food-saag-burrata": "Saag Burrata",
 };
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "A visual preview of the Namak experience in Dallas.",
-  alternates: { canonical: "/gallery" },
+  title: {
+    absolute: "Restaurant Gallery | Namak Indian Restaurant & Bar Dallas",
+  },
+  description:
+    "Explore the dining room, bar, food, exterior, and welcoming atmosphere at Namak Indian Restaurant & Bar on Greenville Avenue in Dallas.",
+  alternates: { canonical: "https://namakcuisine.com/gallery" },
 };
 export default function Gallery() {
+  const gallerySections = [
+    ...publicGallerySections,
+    { id: "food", label: "Food", imageIds: galleryImageIds },
+  ];
+
   return (
     <InteriorPage
-      eyebrow="The gallery"
-      title="Atmosphere, in fragments."
-      intro="Light, color, fire, and the quiet details that shape an evening at Namak."
+      eyebrow="Inside Namak"
+      title="Come for the flavor. Stay for the warmth."
+      intro="Step inside Namak—from the dining room and bar to the dishes and details that make every visit memorable."
     >
       <nav className="gallery-filters" aria-label="Gallery sections">
-        {[
-          ...venueGallerySections,
-          { id: "food", label: "Food", imageIds: galleryImageIds },
-        ].map((section) => (
-          <a
-            key={section.id}
-            href={`#${section.id}`}
-            aria-disabled={section.imageIds.length === 0 || undefined}
-          >
+        {gallerySections.map((section) => (
+          <a key={section.id} href={`#${section.id}`}>
             {section.label}
-            {section.imageIds.length === 0 ? " · photography in review" : ""}
           </a>
         ))}
       </nav>
-      {[
-        ...venueGallerySections,
-        { id: "food", label: "Food", imageIds: galleryImageIds },
-      ].map((section) => (
+      {gallerySections.map((section) => (
         <section
           className="gallery-section section"
           id={section.id}
@@ -56,32 +53,24 @@ export default function Gallery() {
               <h2>{section.label}</h2>
             </div>
           </div>
-          {section.imageIds.length === 0 ? (
-            <p className="gallery-review-note">
-              Kitchen photography is being reviewed. We will publish it only
-              when it meets the same quality and privacy standard as the rest of
-              the gallery.
-            </p>
-          ) : (
-            <div
-              className={`gallery-page gallery-count-${Math.min(section.imageIds.length, 3)}`}
-            >
-              {section.imageIds.map((imageId) => (
-                <VenueGalleryCard
-                  key={imageId}
-                  imageId={imageId}
-                  source={section.id === "food" ? "general" : "venue"}
-                  caption={
-                    section.id === "food"
-                      ? foodGalleryCaptions[
-                          imageId as keyof typeof foodGalleryCaptions
-                        ]
-                      : undefined
-                  }
-                />
-              ))}
-            </div>
-          )}
+          <div
+            className={`gallery-page gallery-count-${Math.min(section.imageIds.length, 3)}`}
+          >
+            {section.imageIds.map((imageId) => (
+              <VenueGalleryCard
+                key={imageId}
+                imageId={imageId}
+                source={section.id === "food" ? "general" : "venue"}
+                caption={
+                  section.id === "food"
+                    ? foodGalleryCaptions[
+                        imageId as keyof typeof foodGalleryCaptions
+                      ]
+                    : undefined
+                }
+              />
+            ))}
+          </div>
         </section>
       ))}
     </InteriorPage>

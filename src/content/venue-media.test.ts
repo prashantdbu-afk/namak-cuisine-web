@@ -7,6 +7,8 @@ import {
   homepageVenueImageIds,
   homepageVenuePlacements,
   isVenueMediaPubliclyEligible,
+  publicGallerySections,
+  selectPublicGallerySections,
   venueGallerySections,
   venuePlacements,
   wideDiningOverviewIds,
@@ -101,5 +103,18 @@ describe("venue media publication policy", () => {
           record.category.startsWith("kitchen") && record.productionReady,
       ),
     ).toHaveLength(0);
+    expect(publicGallerySections.map((section) => section.id)).toEqual([
+      "restaurant",
+      "bar",
+      "exterior",
+    ]);
+  });
+
+  it("automatically publishes a gallery category after media is approved", () => {
+    expect(
+      selectPublicGallerySections([
+        { id: "kitchen", label: "Kitchen", imageIds: ["approved-image"] },
+      ]),
+    ).toHaveLength(1);
   });
 });

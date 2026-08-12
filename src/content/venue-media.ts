@@ -112,3 +112,18 @@ export const venueGallerySections = [
     ],
   },
 ] as const;
+
+type GallerySection = {
+  readonly id: string;
+  readonly label: string;
+  readonly imageIds: readonly string[];
+};
+
+export function selectPublicGallerySections<Section extends GallerySection>(
+  sections: readonly Section[],
+) {
+  return sections.filter((section) => section.imageIds.length > 0);
+}
+
+export const publicGallerySections =
+  selectPublicGallerySections(venueGallerySections);

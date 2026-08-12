@@ -21,6 +21,10 @@ export const site = {
   },
 } as const;
 
+export const features = {
+  cateringInquiryForm: false,
+} as const;
+
 const allNavigation = [
   { href: "/menu", label: "Menu" },
   { href: "/bar", label: "Bar" },
