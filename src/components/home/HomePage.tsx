@@ -12,7 +12,10 @@ import { OpenStatus } from "@/components/site/OpenStatus";
 import { getMapConfiguration } from "@/config/map";
 import { homepageFoodFeatures } from "@/content/menu-media";
 import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
-import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
+import {
+  getApprovedVenueImage,
+  homepageVenuePlacements,
+} from "@/content/venue-media";
 import { VenueGalleryCard } from "@/components/gallery/VenueGalleryCard";
 import { homepageHeroMedia } from "@/media/placement-eligibility";
 
@@ -118,20 +121,21 @@ export function HomePage() {
 
       <section className="experience section">
         <div className="experience-copy">
-          <p className="eyebrow">The Namak experience</p>
-          <h2>Contemporary Indian hospitality, grounded in warmth.</h2>
+          <p className="eyebrow">Our Story</p>
+          <h2>Indian roots. A modern Dallas table.</h2>
           <p className="lead">
-            Come for a generous meal and settle into the evening. Our dining
-            room brings together expressive cooking, considered service, and the
-            ease of sharing a table.
+            At Namak, tandoor fire, layered spices, shareable dishes,
+            distinctive drinks, and warm hospitality come together on Greenville
+            Avenue. We honor the depth of Indian cooking while creating an
+            experience that feels fresh, welcoming, and made for today.
           </p>
           <Link className="button button-quiet" href="/about">
-            Our story
+            Discover Our Story
           </Link>
         </div>
         <MediaFrame aspectRatio={4 / 3} className="media-editorial">
           <ResponsiveImage
-            media={getApprovedVenueImage(venuePlacements.homepageExperience)}
+            media={getApprovedVenueImage(homepageVenuePlacements.experience)}
           />
         </MediaFrame>
       </section>
@@ -151,7 +155,7 @@ export function HomePage() {
           </div>
           <MediaFrame aspectRatio={5 / 3} className="home-bar-image">
             <ResponsiveImage
-              media={getApprovedVenueImage(venuePlacements.homepageBar)}
+              media={getApprovedVenueImage(homepageVenuePlacements.bar)}
             />
           </MediaFrame>
         </section>
@@ -168,7 +172,7 @@ export function HomePage() {
           </Link>
         </div>
         <div className="gallery-grid">
-          {venuePlacements.homepageGallery.map((imageId) => (
+          {homepageVenuePlacements.gallery.map((imageId) => (
             <VenueGalleryCard
               key={imageId}
               imageId={imageId}

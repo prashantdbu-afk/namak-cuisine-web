@@ -1,32 +1,62 @@
 import type { Metadata } from "next";
-import { InteriorPage } from "@/components/site/InteriorPage";
-import { about } from "@/content/about";
-import { MediaFrame } from "@/components/media/MediaFrame";
-import { ResponsiveImage } from "@/components/media/ResponsiveImage";
-import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
+import { AboutHero } from "@/components/about/AboutHero";
+import { StoryCTA } from "@/components/about/StoryCTA";
+import { StorySection } from "@/components/about/StorySection";
+import { site } from "@/config/site";
+import { aboutClosing, aboutHero, aboutSections } from "@/content/about";
+
 export const metadata: Metadata = {
-  title: "Our Story",
+  title: { absolute: "Our Story | Modern Indian Restaurant in Dallas | Namak" },
   description:
-    "Learn about the point of view behind Namak Indian Restaurant & Bar.",
-  alternates: { canonical: "/about" },
+    "Discover Namak on Greenville Avenue in Dallas, where Indian flavors, tandoor cooking, curries, biryani, distinctive drinks, warm hospitality, and catering come together.",
+  alternates: { canonical: "https://namakcuisine.com/about" },
 };
-export default function About() {
+
+export default function AboutPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: site.domain,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Our Story",
+            item: `${site.domain}/about`,
+          },
+        ],
+      },
+      {
+        "@type": "AboutPage",
+        name: "Our Story",
+        url: `${site.domain}/about`,
+        description: metadata.description,
+      },
+    ],
+  };
+
   return (
-    <InteriorPage
-      eyebrow={about.eyebrow}
-      title={about.title}
-      intro={about.body}
-    >
-      <section className="venue-story section" aria-label="Inside Namak">
-        {venuePlacements.about.map((imageId, index) => (
-          <figure key={imageId}>
-            <MediaFrame aspectRatio={index === 0 ? 3 / 2 : 4 / 3}>
-              <ResponsiveImage media={getApprovedVenueImage(imageId)} />
-            </MediaFrame>
-            <figcaption>{getApprovedVenueImage(imageId).alt}</figcaption>
-          </figure>
+    <div className="about-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <AboutHero content={aboutHero} />
+      <div className="about-story">
+        {aboutSections.map((section) => (
+          <StorySection key={section.id} section={section} />
         ))}
-      </section>
-    </InteriorPage>
+      </div>
+      <StoryCTA content={aboutClosing} />
+    </div>
   );
 }

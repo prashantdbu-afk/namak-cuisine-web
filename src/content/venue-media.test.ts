@@ -2,10 +2,14 @@ import { describe, expect, it } from "vitest";
 import { imageMedia } from "@/media/manifest";
 import { venueProcessingConfig } from "@/media/venue-processing-config";
 import {
+  aboutVenueImageIds,
   getApprovedVenueImage,
+  homepageVenueImageIds,
+  homepageVenuePlacements,
   isVenueMediaPubliclyEligible,
   venueGallerySections,
   venuePlacements,
+  wideDiningOverviewIds,
 } from "./venue-media";
 
 describe("venue media publication policy", () => {
@@ -41,6 +45,22 @@ describe("venue media publication policy", () => {
       ...venueGallerySections.flatMap((section) => section.imageIds),
     ];
     expect(() => ids.forEach(getApprovedVenueImage)).not.toThrow();
+  });
+
+  it("keeps homepage subjects unique and distinct from Our Story", () => {
+    const aboutIds = new Set<string>(aboutVenueImageIds);
+    expect(new Set(homepageVenueImageIds).size).toBe(
+      homepageVenueImageIds.length,
+    );
+    expect(homepageVenueImageIds.filter((id) => aboutIds.has(id))).toEqual([]);
+    expect(
+      homepageVenuePlacements.gallery.filter((id) =>
+        wideDiningOverviewIds.has(id),
+      ),
+    ).toHaveLength(0);
+    expect(wideDiningOverviewIds.has(homepageVenuePlacements.experience)).toBe(
+      false,
+    );
   });
 
   it("keeps approved venue coverage and dedicated short captions intact", () => {

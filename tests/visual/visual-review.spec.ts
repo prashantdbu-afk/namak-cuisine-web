@@ -137,6 +137,72 @@ test("captures homepage review sections", async ({ page }) => {
   });
 });
 
+test("captures homepage venue progression and Our Story deliverables", async ({
+  page,
+}) => {
+  for (const [viewportName, viewport] of [
+    ["desktop", { width: 1440, height: 1000 }],
+    ["mobile", { width: 390, height: 844 }],
+  ] as const) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.addStyleTag({
+      content:
+        ".site-header, .mobile-actions, .skip-link { display: none !important; }",
+    });
+    await revealPage(page);
+    for (const [name, selector] of [
+      ["hero", ".hero"],
+      ["experience", ".experience"],
+      ["bar", ".bar"],
+      ["gallery", ".gallery"],
+    ] as const) {
+      const section = page.locator(selector);
+      await waitForImages(section);
+      await section.screenshot({
+        path: path.join(
+          outputDirectory,
+          `homepage-placement-after--${name}--${viewportName}.png`,
+        ),
+        animations: "disabled",
+      });
+    }
+
+    await page.goto("/about");
+    await page.addStyleTag({
+      content:
+        ".site-header, .mobile-actions, .skip-link { display: none !important; }",
+    });
+    await revealPage(page);
+    await page.screenshot({
+      path: path.join(
+        outputDirectory,
+        `our-story-after--complete--${viewportName}.png`,
+      ),
+      fullPage: true,
+      animations: "disabled",
+    });
+    for (const [name, selector] of [
+      ["hero", ".about-hero"],
+      ["passion", "#passion"],
+      ["hospitality", "#hospitality"],
+      ["dallas", "#dallas"],
+      ["catering", "#catering"],
+      ["cta", ".story-cta"],
+    ] as const) {
+      const section = page.locator(selector);
+      await waitForImages(section);
+      await section.screenshot({
+        path: path.join(
+          outputDirectory,
+          `our-story-after--${name}--${viewportName}.png`,
+        ),
+        animations: "disabled",
+      });
+    }
+  }
+});
+
 test("captures homepage hero fidelity at required viewports", async ({
   browser,
 }) => {

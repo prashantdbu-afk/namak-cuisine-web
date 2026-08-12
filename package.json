@@ -27,7 +27,8 @@
     "prepare:food-media": "node scripts/prepare-food-media.mjs",
     "prepare:bar-media": "node scripts/prepare-bar-media.mjs",
     "prepare:venue-media": "node scripts/prepare-venue-media.mjs",
-    "review:bar-shelf-edit": "node scripts/edit-bar-shelf-media.mjs"
+    "review:bar-shelf-edit": "node scripts/edit-bar-shelf-media.mjs",
+    "review:venue-placements": "node scripts/create-venue-placement-contact-sheet.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",

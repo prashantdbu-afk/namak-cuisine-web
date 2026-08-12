@@ -9,6 +9,7 @@ for (const path of [
   "/",
   "/menu",
   "/bar",
+  "/about",
   "/media-review",
   "/media-review/plating",
   "/media-review/menu-completeness",

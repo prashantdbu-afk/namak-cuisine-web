@@ -677,6 +677,93 @@ test("homepage and footer expose Catering and no public Gather label", async ({
   await expect(page.getByText("Gather", { exact: true })).toHaveCount(0);
 });
 
+test("Our Story has complete SEO, narrative, media, and internal links", async ({
+  page,
+}) => {
+  await page.goto("/about");
+
+  await expect(page).toHaveTitle(
+    "Our Story | Modern Indian Restaurant in Dallas | Namak",
+  );
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    "Discover Namak on Greenville Avenue in Dallas, where Indian flavors, tandoor cooking, curries, biryani, distinctive drinks, warm hospitality, and catering come together.",
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://namakcuisine.com/about",
+  );
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+  await expect(page.locator(".story-section")).toHaveCount(4);
+  for (const href of ["/menu", "/bar", "/catering", "/visit"]) {
+    await expect(
+      page.locator(`.about-page a[href="${href}"]`).first(),
+    ).toBeVisible();
+  }
+
+  const captions = await page
+    .locator(".story-media figcaption")
+    .allTextContents();
+  const alts = await page
+    .locator(".story-media img")
+    .evaluateAll((images) => images.map((image) => image.getAttribute("alt")));
+  expect(captions).toHaveLength(5);
+  expect(captions.every((caption) => caption.split(/\s+/).length <= 6)).toBe(
+    true,
+  );
+  expect(captions.some((caption) => alts.includes(caption))).toBe(false);
+  await expect(page.getByText("OWNER_REVIEW_REQUIRED")).toHaveCount(0);
+  await expect(
+    page.getByText(/family-owned|award-winning|authentic/i),
+  ).toHaveCount(0);
+
+  const structuredData = await page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((scripts) =>
+      scripts.map((script) => JSON.parse(script.textContent!)),
+    );
+  expect(
+    structuredData.some((entry) =>
+      entry["@graph"]?.some(
+        (node: { "@type"?: string }) => node["@type"] === "BreadcrumbList",
+      ),
+    ),
+  ).toBe(true);
+  expect(
+    structuredData.some((entry) =>
+      entry["@graph"]?.some(
+        (node: { "@type"?: string }) => node["@type"] === "AboutPage",
+      ),
+    ),
+  ).toBe(true);
+});
+
+test("Our Story remains readable and tap-friendly on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/about");
+  for (const section of await page.locator(".about-page section").all()) {
+    await section.scrollIntoViewIfNeeded();
+  }
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
+  for (const image of await page.locator(".about-page img").all()) {
+    await expect(image).toHaveJSProperty("complete", true);
+  }
+  for (const link of await page
+    .locator(".about-page .button, .about-page .text-link")
+    .all()) {
+    const box = await link.boundingBox();
+    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  }
+});
+
 test("approved venue photography appears without broken images or overflow", async ({
   page,
 }) => {
