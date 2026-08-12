@@ -754,7 +754,19 @@ test("Our Story remains readable and tap-friendly on mobile", async ({
     ),
   ).toBe(true);
   for (const image of await page.locator(".about-page img").all()) {
-    await expect(image).toHaveJSProperty("complete", true);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(
+        () =>
+          image.evaluate(
+            (element) =>
+              element instanceof HTMLImageElement &&
+              element.complete &&
+              element.naturalWidth > 0,
+          ),
+        { timeout: 15_000 },
+      )
+      .toBe(true);
   }
   for (const link of await page
     .locator(".about-page .button, .about-page .text-link")
