@@ -4,7 +4,12 @@
       "startServerCommand": "VERCEL_ENV=production pnpm build && VERCEL_ENV=production pnpm start",
       "startServerReadyPattern": "Ready",
       "startServerReadyTimeout": 30000,
-      "url": ["http://127.0.0.1:3000/"],
+      "url": [
+        "http://127.0.0.1:3000/",
+        "http://127.0.0.1:3000/menu",
+        "http://127.0.0.1:3000/gallery",
+        "http://127.0.0.1:3000/catering"
+      ],
       "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
@@ -14,7 +19,7 @@
       "assertions": {
         "categories:performance": ["error", { "minScore": 0.9 }],
         "categories:accessibility": ["error", { "minScore": 0.95 }],
-        "categories:best-practices": ["error", { "minScore": 0.9 }],
+        "categories:best-practices": ["error", { "minScore": 0.95 }],
         "categories:seo": ["error", { "minScore": 0.95 }],
         "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
       }

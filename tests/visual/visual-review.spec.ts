@@ -14,8 +14,10 @@ const routes = [
   ["contact", "/contact"],
 ] as const;
 const viewports = [
+  ["wide-desktop-1920x1080", { width: 1920, height: 1080 }],
   ["desktop-1440x1000", { width: 1440, height: 1000 }],
-  ["laptop-1280x800", { width: 1280, height: 800 }],
+  ["tablet-1024x768", { width: 1024, height: 768 }],
+  ["tablet-768x1024", { width: 768, height: 1024 }],
   ["mobile-390x844", { width: 390, height: 844 }],
   ["large-mobile-430x932", { width: 430, height: 932 }],
 ] as const;
@@ -43,11 +45,27 @@ test.beforeAll(async () => {
 
 test("captures every public route and viewport", async ({ page }) => {
   test.setTimeout(240_000);
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
   for (const [viewportName, viewport] of viewports) {
     await page.setViewportSize(viewport);
     for (const [routeName, route] of routes) {
       await page.goto(route);
       await revealPage(page);
+      expect(pageErrors, `${routeName} JavaScript errors`).toEqual([]);
+      const brokenImages = await page
+        .locator("img")
+        .evaluateAll((images) =>
+          images
+            .filter(
+              (image) =>
+                image instanceof HTMLImageElement &&
+                image.complete &&
+                image.naturalWidth === 0,
+            )
+            .map((image) => image.getAttribute("src") ?? "unknown image"),
+        );
+      expect(brokenImages, `${routeName} broken images`).toEqual([]);
       const pageWidth = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth,

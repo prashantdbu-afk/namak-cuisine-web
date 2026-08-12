@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(isRouteIndexable)
     .map((route) => ({
       url: `${site.domain}${route === "/" ? "" : route}`,
-      lastModified: new Date(),
       changeFrequency: route === "/" ? "weekly" : "monthly",
       priority: route === "/" ? 1 : 0.7,
     }));
