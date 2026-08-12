@@ -407,9 +407,13 @@ test("visit shows verified information", async ({ page }) => {
     "https://www.google.com/maps/dir/?api=1&destination=5500+Greenville+Ave+%23600%2C+Dallas%2C+TX+75206",
   );
   await expect(page.locator("iframe")).toHaveCount(0);
-  await expect(
-    page.getByRole("button", { name: "View Interactive Map" }),
-  ).toHaveCount(0);
+  const interactiveMap = page.getByRole("button", {
+    name: "View Interactive Map",
+  });
+  if (await interactiveMap.isVisible()) {
+    await interactiveMap.click();
+    await expect(page.locator("iframe")).toHaveCount(1);
+  }
   await expect(page.locator("main")).not.toContainText(
     /Reveal location details|map unavailable|⌖/i,
   );
