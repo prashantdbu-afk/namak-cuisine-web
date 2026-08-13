@@ -23,6 +23,7 @@
     "test:a11y": "playwright test --config=playwright.a11y.config.ts",
     "test:visual": "playwright test --config=playwright.visual.config.ts",
     "test:performance": "node scripts/run-lighthouse.mjs",
+    "report:analytics": "node scripts/generate-analytics-report.mjs weekly",
     "check:assets": "node scripts/check-assets.mjs",
     "prepare:food-media": "node scripts/prepare-food-media.mjs",
     "prepare:bar-media": "node scripts/prepare-bar-media.mjs",
@@ -31,8 +32,10 @@
     "review:venue-placements": "node scripts/create-venue-placement-contact-sheet.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "16.3.0",
     "@tailwindcss/postcss": "4.3.3",
     "next": "16.3.0",
+    "postgres": "3.4.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "sharp": "0.35.3",
