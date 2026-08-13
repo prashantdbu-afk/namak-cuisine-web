@@ -45,9 +45,30 @@ Query strings and form/PII fields must be removed before input is supplied.
 7. Add that role's pooled connection string to GitHub Actions as repository
    secret `ANALYTICS_REPORT_DATABASE_URL`. Do not copy the website's
    write-capable `DATABASE_URL` into GitHub.
-8. Connect the report query/export step to produce `ANALYTICS_REPORT_INPUT`.
-   The workflow safely emits a no-data report until that read-only query/export
-   connection is installed.
+8. GitHub Actions queries Neon directly with this read-only secret. The optional
+   `ANALYTICS_REPORT_INPUT` JSON fixture remains available only for local tests.
+
+## Report periods
+
+- Daily: rolling 24 hours ending when the report runs.
+- Weekly: rolling 7 days ending when the report runs.
+- Monthly: rolling 30 days ending when the report runs.
+- Each report also queries the immediately preceding period of equal length for
+  deterministic comparisons. Day names and restaurant-facing day groupings use
+  `America/Chicago`; timestamps in JSON remain ISO 8601 UTC.
+
+The workflow performs two parameterized, read-only queries: one `SELECT` reads
+the current and preceding comparison window, and one `SELECT DISTINCT` finds
+visitor IDs seen before the current window for returning-visitor percentage.
+No website write-capable credential is used. Database failures stop the job
+with a generic message and never print the connection string.
+
+For a local fixture report without Neon access:
+
+```bash
+ANALYTICS_REPORT_INPUT=data/analytics-report-fixture.example.json \
+  node scripts/generate-analytics-report.mjs daily
+```
 
 The browser creates a random UUID stored in first-party local storage and a
 random per-tab session UUID in session storage. The endpoint accepts only the

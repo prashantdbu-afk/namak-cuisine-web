@@ -34,6 +34,8 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Verify report calculations and read-only query safety
+        run: node --test scripts/lib/analytics-growth-report.test.mjs
       - name: Generate report outputs
         run: node scripts/generate-analytics-report.mjs "$REPORT_CADENCE"
       - name: Upload daily report
