@@ -12,6 +12,7 @@ import {
 } from "@/content/menu";
 import { MenuExperience } from "./MenuExperience";
 import { publicMenuMediaPlacements } from "@/content/menu-media";
+import { barCategoryMedia } from "@/content/bar-media";
 
 describe("physical menu data", () => {
   it("uses exact public names, printed categories, and integer-cent prices", () => {
@@ -124,16 +125,24 @@ describe("physical menu data", () => {
     );
   });
 
-  it("keeps review-only bar category imagery out of production rendering", () => {
+  it("renders one approved category image per mapped bar section and none per product", () => {
     const { container } = render(
       <MenuExperience
         activeMenu="bar"
         categories={barCategories}
         items={barMenuItems}
-        categoryMedia={[]}
+        categoryMedia={barCategoryMedia}
       />,
     );
-    expect(container.querySelectorAll(".bar-category-feature")).toHaveLength(0);
+    expect(container.querySelectorAll(".bar-category-feature")).toHaveLength(
+      11,
+    );
+    for (const { categoryId, imageId } of barCategoryMedia) {
+      const section = container.querySelector(`#${categoryId}`);
+      expect(
+        section?.querySelector(`[data-category-image-id="${imageId}"] img`),
+      ).toBeTruthy();
+    }
     expect(container.querySelectorAll(".priced-menu-item img")).toHaveLength(0);
     expect(container.textContent).not.toMatch(/pexels\.com|images\.pexels/i);
   });

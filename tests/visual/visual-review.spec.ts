@@ -139,6 +139,39 @@ test("captures homepage review sections", async ({ page }) => {
   });
 });
 
+test("captures restored bar category imagery", async ({ page }) => {
+  test.setTimeout(120_000);
+  for (const [viewportName, viewport] of [
+    ["desktop-1920", { width: 1920, height: 1080 }],
+    ["desktop-1440", { width: 1440, height: 1000 }],
+    ["mobile-390", { width: 390, height: 844 }],
+    ["mobile-430", { width: 430, height: 932 }],
+  ] as const) {
+    await page.setViewportSize(viewport);
+    await page.goto("/bar");
+    await revealPage(page);
+    for (const id of [
+      "bar-draft-beer",
+      "bar-whiskey",
+      "bar-gin",
+      "bar-tequila",
+      "bar-rum",
+      "bar-white",
+      "bar-red",
+    ]) {
+      const section = page.locator(`#${id}`);
+      await waitForImages(section);
+      await section.screenshot({
+        path: path.join(
+          outputDirectory,
+          `bar-restored--${id}--${viewportName}.png`,
+        ),
+        animations: "disabled",
+      });
+    }
+  }
+});
+
 test("captures homepage venue progression and Our Story deliverables", async ({
   page,
 }) => {

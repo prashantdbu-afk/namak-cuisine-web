@@ -119,11 +119,16 @@ export function MenuExperience({
             {categoryMedia
               .filter((feature) => feature.categoryId === category.id)
               .map((feature) => (
-                <figure className="bar-category-feature" key={feature.imageId}>
+                <figure
+                  className="bar-category-feature"
+                  data-category-image-id={feature.imageId}
+                  key={feature.imageId}
+                >
                   <MediaFrame aspectRatio={5 / 3}>
                     <ResponsiveImage
                       media={getImageRecord(feature.imageId)}
                       priority={false}
+                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 62vw, 760px"
                     />
                   </MediaFrame>
                   <figcaption className="visually-hidden">

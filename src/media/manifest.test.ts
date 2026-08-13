@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { imageMedia, mediaManifest } from "./manifest";
+import { getImageRecord, mediaManifest } from "./manifest";
 import { resolveImage } from "./resolve-media";
 
 describe("media manifest", () => {
@@ -12,6 +12,8 @@ describe("media manifest", () => {
     ).toBe(true);
   });
   it("resolves provider details behind one boundary", () => {
-    expect(resolveImage(imageMedia[0])).toBe("/media/hero-poster.svg");
+    expect(resolveImage(getImageRecord("hero-poster"))).toBe(
+      "/media/hero-poster.svg",
+    );
   });
 });

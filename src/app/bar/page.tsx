@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MenuExperience } from "@/components/menu/MenuExperience";
 import { MediaFrame } from "@/components/media/MediaFrame";
 import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import { barCategoryMedia } from "@/content/bar-media";
 import { getApprovedVenueImage, venuePlacements } from "@/content/venue-media";
 import {
   barCategories,
@@ -47,7 +48,7 @@ export default function Bar() {
         activeMenu="bar"
         categories={barCategories}
         items={barMenuItems}
-        categoryMedia={[]}
+        categoryMedia={barCategoryMedia}
       />
     </>
   );

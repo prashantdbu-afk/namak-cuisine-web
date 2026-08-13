@@ -66,6 +66,19 @@ const barRecords = manifest.filter(
   (record) =>
     record.kind === "image" && record.source?.startsWith("/media/bar/"),
 );
+const approvedBarCategoryIds = new Set([
+  "bar-stock-draft-beer",
+  "bar-stock-beer",
+  "bar-stock-whiskey",
+  "bar-stock-gin",
+  "bar-stock-vodka",
+  "bar-stock-tequila",
+  "bar-stock-rum",
+  "bar-stock-aperitivo-liquor",
+  "bar-stock-white-wine",
+  "bar-stock-red-wine",
+  "bar-stock-sparkling-wine",
+]);
 if (
   foodRecords.some((record) =>
     /doordash|grubhub|toast|ubereats|cdn/i.test(record.source),
@@ -75,9 +88,12 @@ if (
     "Prepared food media must not use third-party URLs or CDN paths.",
   );
 
-if (barRecords.length > 0)
+if (
+  barRecords.length !== approvedBarCategoryIds.size ||
+  barRecords.some((record) => !approvedBarCategoryIds.has(record.id))
+)
   failures.push(
-    "Review-only bar category assets must not ship in public/media.",
+    "Only the eleven approved bar category assets may ship in public/media/bar.",
   );
 
 for (const record of manifest) {

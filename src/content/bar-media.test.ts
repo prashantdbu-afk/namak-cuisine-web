@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { barCategoryMedia } from "./bar-media";
 import { barStockCandidates, selectedBarStock } from "@/media/bar-stock";
-import { barMenuItems } from "./menu";
-import { imageMedia } from "@/media/manifest";
+import { barCategories, barMenuItems } from "./menu";
+import { getImageRecord, imageMedia } from "@/media/manifest";
 
 describe("licensed editorial bar media", () => {
   it("defines the hero and eleven reviewed category slots with two alternates each", () => {
@@ -26,12 +26,26 @@ describe("licensed editorial bar media", () => {
     }
   });
 
-  it("keeps selected review imagery out of the production manifest", () => {
+  it("keeps all approved category imagery in the production manifest", () => {
     const records = imageMedia.filter((record) =>
       record.id.startsWith("bar-stock-"),
     );
-    expect(records).toHaveLength(0);
+    expect(records).toHaveLength(11);
     expect(barCategoryMedia).toHaveLength(11);
+    expect(new Set(barCategoryMedia.map(({ imageId }) => imageId)).size).toBe(
+      11,
+    );
+    expect(
+      barCategoryMedia.every(({ categoryId }) =>
+        barCategories.some(({ id }) => id === categoryId),
+      ),
+    ).toBe(true);
+    expect(
+      barCategoryMedia.every(({ imageId }) => {
+        const record = getImageRecord(imageId);
+        return record.productionReady && record.rightsStatus === "approved";
+      }),
+    ).toBe(true);
     const brandedNames = barMenuItems.map((item) => item.name.toLowerCase());
     expect(
       records.some((record) =>

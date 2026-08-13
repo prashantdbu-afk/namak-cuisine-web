@@ -361,9 +361,33 @@ test("bar menu search and beer variants work", async ({ page }) => {
     "/menu",
   );
   await search.fill("");
-  await expect(main.locator(".bar-category-feature")).toHaveCount(0);
+  await expect(main.locator(".bar-category-feature")).toHaveCount(11);
   await expect(main.locator(".priced-menu-item img")).toHaveCount(0);
   await expect(main).not.toContainText(/pexels\.com|images\.pexels/i);
+  for (const id of [
+    "bar-draft-beer",
+    "bar-indian-beers",
+    "bar-whiskey",
+    "bar-gin",
+    "bar-vodka",
+    "bar-tequila",
+    "bar-rum",
+    "bar-aperitivo-amaro",
+    "bar-bubbles",
+    "bar-white",
+    "bar-red",
+  ]) {
+    const categoryImage = page.locator(`#${id} .bar-category-feature img`);
+    await expect(categoryImage).toHaveCount(1);
+    await categoryImage.scrollIntoViewIfNeeded();
+    await expect(categoryImage).toBeVisible();
+    await expect(categoryImage).toHaveJSProperty("complete", true);
+    expect(
+      await categoryImage.evaluate((image) =>
+        image instanceof HTMLImageElement ? image.naturalWidth : 0,
+      ),
+    ).toBeGreaterThan(0);
+  }
   for (const id of ["bar-draft-beer", "bar-whiskey", "bar-gin"]) {
     await expect(page.locator(`#${id} .eyebrow`)).toHaveText("NAMAK BAR MENU");
   }
