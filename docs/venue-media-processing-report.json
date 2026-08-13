@@ -1,0 +1,866 @@
+{
+  "generatedAt": "2026-08-11T21:18:51.013Z",
+  "count": 43,
+  "report": [
+    {
+      "imageId": "venue-dining-wide-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29 (1).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-dining-wide-01-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 76634,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.96,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "6cf80f9a77b220f4d3f6e325d414529e1a4c49463afd5adaa735081ddd15ff0f",
+      "outputSha256": "4fc271013d2c08ad6190066de6fb51d7c35470af5d842b126fba47c1a3cf3049",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29 (2).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-02.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 227168,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "deb6deee667c719fdf8013e345999bca9359edafafd96ffacf819a6f91862d55",
+      "outputSha256": "c564adda70c462da719e574e31506a838541af8a27b70d8edeb0576891824374",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-portrait-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29 (3).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-dining-portrait-01-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 114040,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "f36b11808919bc26861b55f691a2581e240c040aed1dc1f0c38ca19e55d1f90f",
+      "outputSha256": "60e1019903b76f7524f1f9417cf840a24764eaf57263a30bf01eb3a067b54f3c",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-architecture-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29 (4).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-architecture-01.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 184016,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1.01,
+        "saturation": 0.96,
+        "contrast": 1.01,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "cffaf05a728c2e577ee682bb775896a35b6ebc8f4aafa540b89df9d917bae4f3",
+      "outputSha256": "437ad31aee335a9366b759ff8db284d8a46a42c474d4a4bc6152eaca389a6368",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-entrance-interior-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29 (5).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-entrance-interior-01.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 200114,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1.01,
+        "saturation": 0.96,
+        "contrast": 1.01,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "969ce48d69f9540b60aa23dc6b308066b24161604f392ec49cf5b1c74c4bf2bd",
+      "outputSha256": "c63e6f1dddd0c9906fef7da47b4e4be5074be01ccf5856f771afaacb96048a4c",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.29.jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-03.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 215810,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "7ef0086313a5b6e257026b6693dca2fb0ed4b9b09ca0dc1c179e6b423d7019ac",
+      "outputSha256": "c9f63cf3d617f26e2bc674a8f6da29e0b2adcb06de3565ffd94f8ef04ce1f01b",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-service-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (1).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-bar-service-01-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 118732,
+      "status": "hold",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "6a8302a1411a73cf67bf164f92ed753eccee9cf315c6e561e30d936812db7474",
+      "outputSha256": "bb1bded4013eb07d56f8d643901a83906fda6fa3ce130095954dbb57b868084e",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-entrance-exterior-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (10).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-entrance-exterior-01.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 126596,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "2b6fa1536798c3dfffdf7363b86616bcf78f3c87ddbf7c74abbf55c014a7081a",
+      "outputSha256": "bb90553f831517df0571f9a9388d84df2f916bd74a4c35d8e815662bd5e30550",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-entrance-exterior-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (11).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-entrance-exterior-02.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 151320,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "8a6aeeba6d8a8df8667c1bbbdc0db57ceda775262ea7355833a0a8001e754d50",
+      "outputSha256": "2789c060cc8cbcd399ebc01be912d599434c90761ac400a988bccdcb60f16254",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-wide-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (2).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-bar-wide-01.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 246332,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "7b68c0b02f07fe673c38b6253378becc7b3a88649da2982137581eed4143d579",
+      "outputSha256": "5af0a2d3b47815b3133f3928a62fc242c35c5a541c479b9690aa37daa5b2468e",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-wide-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (3).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-bar-wide-02.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 173216,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "fc91a28b5848fbce485fdf56a16a9b801c503c779a8336474795961446d5818e",
+      "outputSha256": "38bd7c7c78bb764bc8e80a466b030df593e41c2204b4f0ef7ef701981c001806",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-shelves-01-natural",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (4).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-bar-shelves-01-natural-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 90916,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "e4014e62f4122d89a1e5b043fc79e7b4b951859b1242f3ea77be33bedd401e78",
+      "outputSha256": "e2d9965914cc7951b149e3c5c18a86dcd78d2d703d890503bf719221651d5f04",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-shelves-02-natural",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (5).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-bar-shelves-02-natural-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 96988,
+      "status": "hold",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "88e5b15b240b09560fcee83b452a2c7ea8c96551ff5b380fb74cd9a609db3e9b",
+      "outputSha256": "ff1a21350a0d51f6ef4b3cc983aff011f8a07c99ff19a375a5eaedbe4df870a3",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-service-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (6).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-bar-service-02-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 129778,
+      "status": "hold",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "ff115d4e6b13a1260806956ef0a0c1275eaaa53604eb89ee448223168d5cefab",
+      "outputSha256": "0af0cc1c12070ede08af851723216a99eadfc1106b7c643afd619a894069f805",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-seating-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (7).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-seating-01.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 198632,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1.01,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "b31abdb6d85e2a718377c8c9c29941c7d8e0a7dc77e498b83338466a796541d7",
+      "outputSha256": "dae89475d696bf792e60bd829c07bba1411647344bb5a112c7d7c0f61f05b348",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-04",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (8).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-04.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 207606,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "fa8cb94b454bb17af83e7855b58904a9d5759a60d41021aeb6fb7a4b31327436",
+      "outputSha256": "42f6b6e72104ea5272da598c41ac0321e9a6c6adc6ec8fe4ed00e6fd469124d0",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-05",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30 (9).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-05.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 211530,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "0f8c1487415273fc213aacef87e147d544e7c86dce67b2c9238431c1cb6953c8",
+      "outputSha256": "5aabac418d156165e4aa7d79340c92ffa2a793ccd9df3db2cb715ffef85475f0",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-service-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.30.jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-dining-service-01-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 75062,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "54d7f50ba2f951f5ae17de0cee65ed7381e4d9d3e2d53c14ae3d21beea612980",
+      "outputSha256": "d6424ca6a1765d38aa37507561a4fc9a9a5e2e988a58502f327e1b956d6a83bf",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-bar-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (1).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-bar-01.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 252246,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "da8671112e32f013dd7b19fad1e5447c745577c6a267b954b5cd6c0a5b0ae37c",
+      "outputSha256": "a302c3bb526957f2cd16d32d6242382f40ea3157458bd8e4912f5f0ba60247e3",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-architecture-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (10).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-architecture-02.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 191102,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "28c12a7845d0258b465890ed91b1847e7a7d33929577eed7d9701479d1fd9e5a",
+      "outputSha256": "5e01711794aec3b30fce1e78b7dce1fd2a06eedf7eb758683ccf5259ae2db680",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-service-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (2).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-bar-service-03-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 78468,
+      "status": "hold",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "df4c51cc1c19a60b548fbe3dfb6a5e3dbccd010e9641dd2cc213ba0b8adcbe08",
+      "outputSha256": "a1f7c9153789d8813eb298aff25dfa34c68a6fb1fb44b86eb86534aa5e630bee",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-window-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (3).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-window-01.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 197580,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "1e8602942bd9c779b7978081cc99dd6aef0d2749f09be6364aa8913fd3476fb4",
+      "outputSha256": "891d02b21dec7c94884527496891ec8d135c37c01efdbdc1cfb8b3fd90cb848e",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-06",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (4).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-06.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 234310,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "6d72b101dd447a740ef6f5edc7dc8ece8a21b284e46e98e5a752a7167f0c1da6",
+      "outputSha256": "03c329226cee53d82a9caab3c40103ca97fb1d02f9bf33ec5fb8874881a014f4",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-window-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (5).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-window-02.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 228964,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.99,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "78d755da542922e43bf308508108c174792e601e2c1af2cb504f20129c73fe69",
+      "outputSha256": "b6ba205445817776774d3021dcd2a10031609f607254100da485fa17c35d46ae",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-wide-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (6).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-bar-wide-03.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 278456,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "57d169537e50741e5b1209bd98cf61c9b7a268337108ae07eb1a418ad5d2aecd",
+      "outputSha256": "10523a51063c198fb4e736c8bef46234098606e8c7cebf2789b32e5a3768286c",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-detail-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (7).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-bar-detail-01-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 114820,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "68dfcb817253e3f19d9765f370450a1ea163536abcdf62212448b3d45d15db9c",
+      "outputSha256": "88c305332b02c340d26cfe188a35bbf1685f6be21425766f8ec471510cbce3bf",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-seating-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (8).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-seating-02.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 223840,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "f4f32a8c91fecd8da242981cca0af4f570b13a4c31475ed991755662e951b726",
+      "outputSha256": "c5155f4840d1f37a80410e796654688a6e01bd1ee2de992a69f96d3dbd582341",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-seating-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31 (9).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-seating-03.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 159356,
+      "status": "approved",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "84e58e8acffe435ff850ea6b8ca30d8e6c8332451cb7631c7a683b27939e4e7c",
+      "outputSha256": "7a2c5894b3c27936a8d62d7823e30ad4f686ace725758fcce9780a9b2603cc93",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-dining-wide-07",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.31.jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-dining-wide-07.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 244032,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "9fc10a4741ed94f1e21994a57d7ca926389397a895d190b9ca240aefbb620a9f",
+      "outputSha256": "b3562a8540cbeee3b84d5e965ccf0608b99003b06dda94a72b87a9646a606345",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-wide-04",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (1).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/venue/venue-bar-wide-04.webp",
+      "outputDimensions": [1200, 1600],
+      "outputBytes": 171350,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "4f8f2e63ede68694121a31d6328ac0524d98ba90730a543ffb776ed511aa3d8b",
+      "outputSha256": "82977b0c7a921848fcd8178d0f366cf7fe41d99832b94b9902472bd21bd23d94",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-wide-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (10).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-kitchen-wide-01-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 109028,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "c73b2f5f56fbf7d1b9ad24f37d4a8ba07386d9abc8c04dee10e8d51dc1ca35b8",
+      "outputSha256": "1d87a5b14aaf8b2c10ab304f771bf4e7c92cf8462057c6323d0e9c95082ae977",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-wide-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (11).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-kitchen-wide-02-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 137726,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "721f4d4d8332b30c202d363f464d6c55d72ceb0a8f60927c77300b8f95ae097e",
+      "outputSha256": "c0e3acc614751eb5fca938f307ab29878369b9c6d7f48266b4d80726add51927",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-bar-wide-05",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (2).jpeg",
+      "sourceDimensions": [5120, 3840],
+      "output": "/media/venue/venue-bar-wide-05.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 228964,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.95,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.42
+      },
+      "sourceSha256": "6a9e1eb98fb0fc2f6c30f749cc050bc1d6beb8a181aff763779dfd13a37bb053",
+      "outputSha256": "ae5c360559838dd28dae4733da5e3dfc364a338b5db9618c8107412cb6a87abc",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-exterior-day-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (3).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-exterior-day-01.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 201392,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "715f1d271198614ffe0fea3e79fa93b72ee33eefd0516b7291dfdf1bb26a7995",
+      "outputSha256": "94596d88da236d361e54c6c355bd59b101bdd52485359071abb99af237eaa5ba",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-exterior-day-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (4).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-exterior-day-02-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 63672,
+      "status": "review",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "125536798969ffd845c32531701065476b88fce92d305481797208346215ba15",
+      "outputSha256": "5fa3becf94a818b9288c33dd561f3812584b6204a16b12d2307449321de03c3d",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-exterior-day-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (5).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-exterior-day-03.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 220956,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "3894be9e8119b4991682772facf588f5ddaa30876e0f6a5862a80aa85b941ae2",
+      "outputSha256": "c833b37c740995a2da818104b4fc2ba98e252b198e1efe6ca1638b7eecad1d59",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-exterior-day-04",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (6).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/venue/venue-exterior-day-04.webp",
+      "outputDimensions": [1600, 1200],
+      "outputBytes": 225142,
+      "status": "approved",
+      "corrections": {
+        "brightness": 0.98,
+        "saturation": 0.94,
+        "contrast": 0.99,
+        "gamma": 1,
+        "sharpenSigma": 0.4
+      },
+      "sourceSha256": "b56b6fc2bde6296437ee5dbdeebcecc4bf1b3b8c98b851f038f84fa946c2406d",
+      "outputSha256": "0d6194f3a5c3ee8c57204a5118f14734dcc6fe592037570842ef402953297052",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-wide-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (7).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-kitchen-wide-03-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 78192,
+      "status": "reject",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "bb461c422b8107f61d1048e93db32cf6865c183b37986cd3d009699bf9cb1507",
+      "outputSha256": "165455f2efb09bbd364ef0bada51af354d311305ce97ab135fe0f44ae7d9797c",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-wide-04",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (8).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-kitchen-wide-04-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 78816,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "5321c55027661dbab302e37d850577649a098d1f5799446c686958f2dfd9602c",
+      "outputSha256": "8e94ae7b5c15a140625b5c255b5759fa1afc4f87192b755bb6292d78a05ab0db",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-wide-05",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32 (9).jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-kitchen-wide-05-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 115628,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "11a2d127a090870c24bea7d58023c62f18198ea5cf059ab2e6be3c70bc9e8232",
+      "outputSha256": "ed4eb153c281147ef7d81bd8eb62d81359c2f879c74cfcadbf836f27049b2c02",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-architecture-03",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.32.jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-architecture-03-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 121010,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "a7eace11759fd040905a249420930b149a90b20941d15ad5c1ae8605a51621f5",
+      "outputSha256": "de858b42bf0102df593e2fb2fae516cec0798ce9a764fe18eb10cd2ec3443008",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-cookline-01",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.33 (1).jpeg",
+      "sourceDimensions": [1600, 1200],
+      "output": "/media/review/venue/venue-kitchen-cookline-01-natural.webp",
+      "outputDimensions": [900, 675],
+      "outputBytes": 64940,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "58256bca19f98a3de16eb48b477d2638dde10fdaee6bae1dff65d38b02568498",
+      "outputSha256": "8fb56c71a07bc5817e25ebdb86c14e1338c37d23b035be3991e605dc4a8dc6c5",
+      "metadataRetained": false,
+      "generativeEdit": false
+    },
+    {
+      "imageId": "venue-kitchen-cookline-02",
+      "sourceFilename": "WhatsApp Image 2026-08-11 at 12.16.33.jpeg",
+      "sourceDimensions": [1200, 1600],
+      "output": "/media/review/venue/venue-kitchen-cookline-02-natural.webp",
+      "outputDimensions": [900, 1200],
+      "outputBytes": 107418,
+      "status": "review",
+      "corrections": {
+        "brightness": 1,
+        "saturation": 0.96,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.38
+      },
+      "sourceSha256": "6371bd44d72801414c4d22d0f431e654c22dff5a654b838d411865467435648c",
+      "outputSha256": "e96337ec097042d5ed7f5d7da2fdf72ad4238804c505f807074108483d6a6b07",
+      "metadataRetained": false,
+      "generativeEdit": false
+    }
+  ]
+}

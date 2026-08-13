@@ -1,0 +1,239 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { CateringCelebrationMotif } from "@/components/catering/CateringCelebrationMotif";
+import { RevealOnScroll } from "@/components/catering/RevealOnScroll";
+import { MediaFrame } from "@/components/media/MediaFrame";
+import { ResponsiveImage } from "@/components/media/ResponsiveImage";
+import {
+  cateringEventCards,
+  cateringMediaIds,
+  cateringMealOptions,
+} from "@/content/catering";
+import { features, site } from "@/config/site";
+import { getImageRecord } from "@/media/manifest";
+
+export const metadata: Metadata = {
+  title: "Indian Catering in Dallas | Namak Indian Restaurant & Bar",
+  description:
+    "Contact Namak Indian Restaurant & Bar about catering for corporate events, birthdays, Sweet 16 celebrations, engagements, weddings, cultural gatherings, religious functions, and family occasions in Dallas.",
+  alternates: { canonical: "https://namakcuisine.com/catering" },
+};
+
+async function FutureCateringInquiry({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  if (!features.cateringInquiryForm) return null;
+
+  const [{ CateringInquiryForm }, { getCateringFormConfiguration }] =
+    await Promise.all([
+      import("@/components/catering/CateringInquiryForm"),
+      import("@/lib/catering/submit"),
+    ]);
+  const query = await searchParams;
+  const preview =
+    process.env.VERCEL_ENV !== "production" &&
+    (query["form-preview"] === "success" || query["form-preview"] === "error")
+      ? query["form-preview"]
+      : undefined;
+  const form = getCateringFormConfiguration();
+
+  return (
+    <section
+      className="catering-form-section section"
+      id="catering-inquiry"
+      aria-labelledby="inquiry-title"
+    >
+      <CateringCelebrationMotif className="motif-form" />
+      <div className="catering-form-heading">
+        <p className="eyebrow">Catering inquiry</p>
+        <h2 id="inquiry-title">Tell us about your event.</h2>
+      </div>
+      <RevealOnScroll className="catering-form-card">
+        <CateringInquiryForm
+          mode={form.mode}
+          externalUrl={form.externalUrl}
+          previewState={preview}
+        />
+      </RevealOnScroll>
+    </section>
+  );
+}
+
+export default function CateringPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Indian catering and event inquiries",
+    provider: {
+      "@type": "Restaurant",
+      name: site.name,
+      url: site.domain,
+    },
+    url: `${site.domain}/catering`,
+  };
+  return (
+    <div className="catering-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <section className="catering-hero">
+        <CateringCelebrationMotif className="motif-hero" />
+        <RevealOnScroll className="catering-hero-copy">
+          <p className="eyebrow">Catering &amp; Events</p>
+          <h1>Bring Namak to your gathering.</h1>
+          <p className="lead">
+            From office lunches and milestone celebrations to weddings, cultural
+            functions, and family gatherings, call our team to share a few
+            details and explore the menu experience you have in mind.
+          </p>
+          <div className="button-row">
+            <a className="button" href={site.phoneHref}>
+              Call Our Team
+            </a>
+            <Link className="button button-quiet" href="/menu">
+              View the Menu
+            </Link>
+          </div>
+          <p className="catering-support-line">
+            Vegetarian, non-vegetarian, and mixed menu preferences welcome.
+          </p>
+        </RevealOnScroll>
+        <RevealOnScroll className="catering-hero-media" delay={70}>
+          <MediaFrame aspectRatio={16 / 10}>
+            <ResponsiveImage
+              media={getImageRecord(cateringMediaIds.hero)}
+              priority
+            />
+          </MediaFrame>
+        </RevealOnScroll>
+      </section>
+
+      <section
+        className="catering-events section"
+        aria-labelledby="event-types-title"
+      >
+        <div className="section-head catering-section-head">
+          <div>
+            <p className="eyebrow">Occasions of every kind</p>
+            <h2 id="event-types-title">Room for every kind of occasion.</h2>
+          </div>
+          <p>
+            Share the shape of your event and we’ll begin the conversation from
+            there.
+          </p>
+        </div>
+        <div className="catering-event-grid">
+          {cateringEventCards.map((card, index) => (
+            <RevealOnScroll key={card.title} delay={index * 65}>
+              <article className="catering-event-card">
+                <MediaFrame aspectRatio={4 / 3}>
+                  <ResponsiveImage media={getImageRecord(card.imageId)} />
+                </MediaFrame>
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                </div>
+              </article>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="catering-preferences"
+        aria-labelledby="preference-title"
+      >
+        <CateringCelebrationMotif />
+        <div className="catering-preference-copy">
+          <p className="eyebrow">Menu preferences</p>
+          <h2 id="preference-title">A menu shaped around your event.</h2>
+          <p>
+            Tell us whether you are interested in a vegetarian, non-vegetarian,
+            or mixed menu, along with any dishes or menu ideas you would like to
+            discuss with our team.
+          </p>
+        </div>
+        <div className="catering-preference-grid">
+          {cateringMealOptions.map((option, index) => (
+            <RevealOnScroll key={option.value} delay={index * 65}>
+              <article>
+                <span aria-hidden="true">
+                  {index === 0 ? "◇" : index === 1 ? "△" : "○"}
+                </span>
+                <h3>{option.label}</h3>
+                <p>Share this preference when you call our team.</p>
+              </article>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="catering-process section"
+        aria-labelledby="process-title"
+      >
+        <div className="catering-process-intro">
+          <p className="eyebrow">Simple from the start</p>
+          <h2 id="process-title">Three steps to begin.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span>
+            <h3>Call and tell us about your event.</h3>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>
+              Share your date, guest count, location, and menu preferences.
+            </h3>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>
+              Our team discusses availability, menu options, service details,
+              and catering pricing with you.
+            </h3>
+          </li>
+        </ol>
+      </section>
+
+      <FutureCateringInquiry searchParams={searchParams} />
+
+      <section className="catering-final-cta" id="plan-your-event">
+        <CateringCelebrationMotif />
+        <div>
+          <p className="eyebrow">Plan Your Event</p>
+          <h2>Let’s talk about your gathering.</h2>
+          <p>
+            Call our team and share your event date, estimated guest count, food
+            preference, and the type of occasion you are planning. We will
+            discuss menu ideas, availability, service details, and catering
+            pricing with you directly.
+          </p>
+          <ul className="catering-call-checklist">
+            <li>Event date</li>
+            <li>Estimated number of guests</li>
+            <li>Vegetarian, non-vegetarian, or mixed preference</li>
+            <li>Dishes or menu ideas you are interested in</li>
+            <li>Event location or ZIP code</li>
+          </ul>
+        </div>
+        <div className="button-row">
+          <a className="button button-light" href={site.phoneHref}>
+            Call {site.phone}
+          </a>
+          <Link className="text-link" href="/menu">
+            Explore the Menu <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}

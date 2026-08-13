@@ -1,0 +1,13 @@
+import Link from "next/link";
+export default function NotFound() {
+  return (
+    <section className="interior-hero not-found">
+      <p className="eyebrow">404 · A brief detour</p>
+      <h1>This isn’t the table you were looking for.</h1>
+      <p>The page may have moved, but your next meal is still within reach.</p>
+      <Link className="button" href="/">
+        Return home
+      </Link>
+    </section>
+  );
+}

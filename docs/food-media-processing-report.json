@@ -1,0 +1,1822 @@
+{
+  "generatedAt": "2026-08-10T00:34:26.387Z",
+  "source": "Owner-supplied files in ignored incoming-media directory",
+  "total": 45,
+  "approved": 42,
+  "review": 0,
+  "hold": 3,
+  "totalOutputBytes": 3512542,
+  "averages": {
+    "beforeLuminance": 159.513,
+    "afterLuminance": 159.99,
+    "beforeSaturation": 0.354,
+    "afterSaturation": 0.354
+  },
+  "exactDuplicates": [],
+  "nearDuplicates": [
+    ["food-bhutte-ke-kebab", "food-tandoori-salmon", 9],
+    ["food-papdi-chaat", "food-samosa-chaat", 9]
+  ],
+  "records": [
+    {
+      "imageId": "food-bharwan-paneer-tikka",
+      "itemId": "embers-veg-bharwan-paneer-tikka",
+      "sourceFilename": "Bharwan Paneer Tikka  - This is Siganture Dish.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-bharwan-paneer-tikka.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 111450,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 168.23,
+        "luminanceStandardDeviation": 53.9,
+        "averageSaturation": 0.3157,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.166
+      },
+      "after": {
+        "meanLuminance": 168.71,
+        "luminanceStandardDeviation": 53.93,
+        "averageSaturation": 0.3171,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.008
+      },
+      "sourceSha256": "f703d44ab6dd066b368ab5d045655f2aa739ed68f386fa9e775abe7dbddc4f30",
+      "outputSha256": "f01ffb04e00deada4645f685e8fdb5081d1c47e28bd9a5cbcf146481b42415e5",
+      "perceptualDHash": "0011000101110000011100000111100001100100111100000111000001110001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-bhutte-ke-kebab",
+      "itemId": "embers-veg-bhutte-ke-kebab",
+      "sourceFilename": "Bhutte ke Kebab.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-bhutte-ke-kebab.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 45146,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 184.82,
+        "luminanceStandardDeviation": 47.77,
+        "averageSaturation": 0.1122,
+        "highlightClippingPercentage": 0.148,
+        "shadowClippingPercentage": 0.116
+      },
+      "after": {
+        "meanLuminance": 185.42,
+        "luminanceStandardDeviation": 47.61,
+        "averageSaturation": 0.1124,
+        "highlightClippingPercentage": 0.397,
+        "shadowClippingPercentage": 0.047
+      },
+      "sourceSha256": "487190477598c8f11c196ada17d879f5e79d3e5217935fd39d33dd952aac30a9",
+      "outputSha256": "21ced7a0d4c41a68a45700f84ac4733dbf1769474e61fa3d27f489f63ef9eb97",
+      "perceptualDHash": "0011001101100001001100010111000100110001111100010101100101100001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-buratta-bomb",
+      "itemId": "amuse-bouche-buratta-bomb",
+      "sourceFilename": "Buratta Bomb.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-buratta-bomb.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 60020,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 180.66,
+        "luminanceStandardDeviation": 64.14,
+        "averageSaturation": 0.2417,
+        "highlightClippingPercentage": 0.96,
+        "shadowClippingPercentage": 0.088
+      },
+      "after": {
+        "meanLuminance": 181.21,
+        "luminanceStandardDeviation": 63.88,
+        "averageSaturation": 0.2411,
+        "highlightClippingPercentage": 0.885,
+        "shadowClippingPercentage": 0.037
+      },
+      "sourceSha256": "68fac9d74c4e123f998e406577dc181acc78e79a52a8e594a2c8a2a3f2618d48",
+      "outputSha256": "fbcade73086633513488c1168ca643c9c3af9881f24ed96efc10de4f75e31176",
+      "perceptualDHash": "0111111101110011101100111011000101110001011100011001101111001110",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-burrata-chaat",
+      "itemId": "embers-veg-burrata-chaat",
+      "sourceFilename": "Burrata Chaat .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-burrata-chaat.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 42018,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 184.94,
+        "luminanceStandardDeviation": 38.18,
+        "averageSaturation": 0.1101,
+        "highlightClippingPercentage": 0.078,
+        "shadowClippingPercentage": 0.08
+      },
+      "after": {
+        "meanLuminance": 185.48,
+        "luminanceStandardDeviation": 37.87,
+        "averageSaturation": 0.1096,
+        "highlightClippingPercentage": 0.008,
+        "shadowClippingPercentage": 0.05
+      },
+      "sourceSha256": "0dd7b8d4c7d10c2a19e317438143a2a44f57bab685212727ba757c7188a581e8",
+      "outputSha256": "be0c41e4c89ae9d6d714ebcf311d65812db11af91ceab369e63675e362e201ab",
+      "perceptualDHash": "1001001010001001100100111011001110110010101100101001011011001100",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chapli-smash-burger",
+      "itemId": "amuse-bouche-chapli-smash-burger",
+      "sourceFilename": "Chapli Smash Burger.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chapli-smash-burger.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 73186,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 141.9,
+        "luminanceStandardDeviation": 64.64,
+        "averageSaturation": 0.2711,
+        "highlightClippingPercentage": 0.073,
+        "shadowClippingPercentage": 0.544
+      },
+      "after": {
+        "meanLuminance": 142.33,
+        "luminanceStandardDeviation": 64.42,
+        "averageSaturation": 0.2704,
+        "highlightClippingPercentage": 0.103,
+        "shadowClippingPercentage": 0.257
+      },
+      "sourceSha256": "ebab341c5796ca84cba22ae1828faac39a2438bac9e7aee53a1502c76f5d7bac",
+      "outputSha256": "c1b6add55067e6326e85609fc496d07217b33b50d23b224b631dce11fb11371d",
+      "perceptualDHash": "0000000000010010011100001110010010000110100001101100010001110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-cheese-naan",
+      "itemId": "indian-breads-cheese-naan",
+      "sourceFilename": "Cheese Naan .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-cheese-naan.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 84760,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 167.48,
+        "luminanceStandardDeviation": 52.52,
+        "averageSaturation": 0.2535,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.228
+      },
+      "after": {
+        "meanLuminance": 167.97,
+        "luminanceStandardDeviation": 51.44,
+        "averageSaturation": 0.2527,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.029
+      },
+      "sourceSha256": "a108d293fd0b52fb7674b266ec5837417b39bf9e7a8b881b2734db122f4f2d28",
+      "outputSha256": "3a6473c083ef376168ab1d191c61fb2ad98c38bda75dc9fc7b0395d2eb81c23f",
+      "perceptualDHash": "0111001101110001011011001101110011100100110011001101100011100000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chicken-boneless-biryani",
+      "itemId": null,
+      "sourceFilename": "Chicken Boneless Biryani .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chicken-boneless-biryani.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 107142,
+      "status": "hold",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "No public enhancement while this source remains on hold."
+      },
+      "before": {
+        "meanLuminance": 153.08,
+        "luminanceStandardDeviation": 53.4,
+        "averageSaturation": 0.3286,
+        "highlightClippingPercentage": 0.182,
+        "shadowClippingPercentage": 0.047
+      },
+      "after": {
+        "meanLuminance": 153.54,
+        "luminanceStandardDeviation": 52.82,
+        "averageSaturation": 0.3298,
+        "highlightClippingPercentage": 0.168,
+        "shadowClippingPercentage": 0.011
+      },
+      "sourceSha256": "ddbfff02431988372a3a7f6af05c89106721af199f30e61fc6e4997988b6d5b5",
+      "outputSha256": "a16d86b454777522d042c7d0c476a9b94b67f8f7ae30ee6b5c2805390caa0b3a",
+      "perceptualDHash": "0000011011100110101100111100011011100110111000101011001011110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chur-chur-naan",
+      "itemId": "indian-breads-chur-chur-naan",
+      "sourceFilename": "Chur Chur Naan .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chur-chur-naan.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 145618,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 126,
+        "luminanceStandardDeviation": 65.91,
+        "averageSaturation": 0.4398,
+        "highlightClippingPercentage": 0.339,
+        "shadowClippingPercentage": 2.085
+      },
+      "after": {
+        "meanLuminance": 126.4,
+        "luminanceStandardDeviation": 64.88,
+        "averageSaturation": 0.4367,
+        "highlightClippingPercentage": 0.186,
+        "shadowClippingPercentage": 1.854
+      },
+      "sourceSha256": "e7e21a450eee365526fca35cd4575ec80d0d6ef197aa2308bfe3d6c8df5125ca",
+      "outputSha256": "15011b9a4d9f24d72772206154676f3035b43350b3e7b3f663cf75e796251697",
+      "perceptualDHash": "1100111011001110101001101100111011001010100101101100110011011000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-coconut-carrot-soup",
+      "itemId": "soups-coconut-carrot-soup",
+      "sourceFilename": "Coconut Carrot Soup.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-coconut-carrot-soup.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 92280,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 157.21,
+        "luminanceStandardDeviation": 69.37,
+        "averageSaturation": 0.4376,
+        "highlightClippingPercentage": 0.625,
+        "shadowClippingPercentage": 0.508
+      },
+      "after": {
+        "meanLuminance": 157.69,
+        "luminanceStandardDeviation": 69.04,
+        "averageSaturation": 0.439,
+        "highlightClippingPercentage": 0.553,
+        "shadowClippingPercentage": 0.301
+      },
+      "sourceSha256": "bb4442587095b9407aa7f33c994d937ff7a047e3e5e088f484ecb943416c0549",
+      "outputSha256": "41ddbae3c146cbdcd52071eb9981fd96b73d614273c4e376c01c84d4faf93c3a",
+      "perceptualDHash": "1000111111100110100110101010111010101100100111001100010011100001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-unidentified-dessert",
+      "itemId": null,
+      "sourceFilename": "Desert.webp",
+      "sourceWidth": 1057,
+      "sourceHeight": 607,
+      "outputFile": "/media/menu/food-unidentified-dessert.webp",
+      "width": 1057,
+      "height": 607,
+      "outputBytes": 47862,
+      "status": "hold",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "No public enhancement while this source remains on hold."
+      },
+      "before": {
+        "meanLuminance": 175.23,
+        "luminanceStandardDeviation": 54.02,
+        "averageSaturation": 0.191,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.002
+      },
+      "after": {
+        "meanLuminance": 175.3,
+        "luminanceStandardDeviation": 54.03,
+        "averageSaturation": 0.1911,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "b87f12eb504616c9e952f37048d3b5109392a2a025bee2b922cb599c6cd03008",
+      "outputSha256": "94704b06fb44631a286df6e9caca053a9467868851b4a0c8c2d549410b3dfe69",
+      "perceptualDHash": "0100000011110000100100101011011010010010110101001111000011110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-bhatti-da-kukarh",
+      "itemId": "embers-non-veg-bhatti-da-kukarh",
+      "sourceFilename": "Embers Non Veg - Bhatti Da Kukarh .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-bhatti-da-kukarh.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 72614,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 170.46,
+        "luminanceStandardDeviation": 58.6,
+        "averageSaturation": 0.1827,
+        "highlightClippingPercentage": 0.011,
+        "shadowClippingPercentage": 0.345
+      },
+      "after": {
+        "meanLuminance": 170.98,
+        "luminanceStandardDeviation": 58.37,
+        "averageSaturation": 0.1831,
+        "highlightClippingPercentage": 0.003,
+        "shadowClippingPercentage": 0.22
+      },
+      "sourceSha256": "f2080aad1fce409337612922a71050bda21e9ef7e765247ffe19105b6345541d",
+      "outputSha256": "af3c30aa450eb7648adcb330a1a0104e1b28f06979226e1a2e430fbcde3f70dc",
+      "perceptualDHash": "1111111111110111111100111111000111110001011110001111000111110001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-classic-chicken-tikka",
+      "itemId": "embers-non-veg-classic-chicken-tikka",
+      "sourceFilename": "Embers Non Veg - Classic Chicken Tikka .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-classic-chicken-tikka.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 48828,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 195.61,
+        "luminanceStandardDeviation": 55.18,
+        "averageSaturation": 0.2309,
+        "highlightClippingPercentage": 0.448,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 196.18,
+        "luminanceStandardDeviation": 54.99,
+        "averageSaturation": 0.231,
+        "highlightClippingPercentage": 0.317,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "9d99a2f14e62136df7ad3a5c4a156da2d415748340c619ce279a731d6c8c8b8f",
+      "outputSha256": "20915615c74065bc5f6d84109f209bb75fc5845c0f8521cff78c8954197ec8fb",
+      "perceptualDHash": "0111011101110001111100001111100011100000011000001111110011111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-lamb-seekh-kebab",
+      "itemId": "embers-non-veg-lamb-seekh-kebab",
+      "sourceFilename": "Embers Non Veg - Lamb Seekh Kebab .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-lamb-seekh-kebab.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 18566,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 213.28,
+        "luminanceStandardDeviation": 52.07,
+        "averageSaturation": 0.0584,
+        "highlightClippingPercentage": 0.094,
+        "shadowClippingPercentage": 0.06
+      },
+      "after": {
+        "meanLuminance": 213.92,
+        "luminanceStandardDeviation": 52,
+        "averageSaturation": 0.0578,
+        "highlightClippingPercentage": 0.109,
+        "shadowClippingPercentage": 0.002
+      },
+      "sourceSha256": "1adefdebe196bd87094ffcc264090303adeb4db5bf8eff4793dfd07b28b80338",
+      "outputSha256": "a8f752a0646d0bcbf86602a11348db9ad049e587adba47b179b59d04059cd4d2",
+      "perceptualDHash": "0111001101101001111100010110000001100000111000011110000111110001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-tandoori-full",
+      "itemId": "embers-non-veg-tandoori-chicken",
+      "sourceFilename": "Embers Non Veg - Tandoori Full.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-tandoori-full.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 56404,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Owner-confirmed mapping; lifted shadows retain detail in the tandoori char."
+      },
+      "before": {
+        "meanLuminance": 130.92,
+        "luminanceStandardDeviation": 53.88,
+        "averageSaturation": 0.2772,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 1.143
+      },
+      "after": {
+        "meanLuminance": 131.35,
+        "luminanceStandardDeviation": 53.78,
+        "averageSaturation": 0.2789,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.832
+      },
+      "sourceSha256": "084f24d412a31540b72eb57f56c33330a93976597db7880fe155e307fe6bd672",
+      "outputSha256": "3747e61f0d54566754d5c19d5c103a5023cd3976a2d664cde1860dff64a8b6a5",
+      "perceptualDHash": "0000101100010011011100010111000101101000011110001111100011111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-tandoori-masaledar-lamb-chops",
+      "itemId": "embers-non-veg-tandoori-masaledar-lamb-chops",
+      "sourceFilename": "Embers Non Veg - Tandoori Masaledaar Lambchops .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-tandoori-masaledar-lamb-chops.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 62210,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 164.1,
+        "luminanceStandardDeviation": 66.21,
+        "averageSaturation": 0.2255,
+        "highlightClippingPercentage": 0.042,
+        "shadowClippingPercentage": 0.378
+      },
+      "after": {
+        "meanLuminance": 164.59,
+        "luminanceStandardDeviation": 66.01,
+        "averageSaturation": 0.2258,
+        "highlightClippingPercentage": 0.016,
+        "shadowClippingPercentage": 0.241
+      },
+      "sourceSha256": "f51e3133bfd35190913a7bca2b7767c6d79ae2a3590eee9c65f8cff412819d0e",
+      "outputSha256": "de6d7684c34fed5781b51d3502b0b1015be7b7f02d2ec4b7b93b718456d9db1c",
+      "perceptualDHash": "0111001101111001111100001111010011111000111100101111001001101000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-tandoori-salmon",
+      "itemId": "embers-non-veg-tandoori-salmon",
+      "sourceFilename": "Embers Non Veg - Tandoori Salmon .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-tandoori-salmon.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 36892,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 177.92,
+        "luminanceStandardDeviation": 53.13,
+        "averageSaturation": 0.1651,
+        "highlightClippingPercentage": 0.002,
+        "shadowClippingPercentage": 0.132
+      },
+      "after": {
+        "meanLuminance": 178.45,
+        "luminanceStandardDeviation": 53.01,
+        "averageSaturation": 0.1647,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.078
+      },
+      "sourceSha256": "4027ed56df200e0261d7014bb497645215d1c7df1782c95b505b4f912178a878",
+      "outputSha256": "8b5973b25cd151dc7ba723a1c9db0534f2f428da82940812fe05d62a08fd027c",
+      "perceptualDHash": "0011001101110001011100010111000101100001011100000101010101101001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-garlic-naan",
+      "itemId": "indian-breads-garlic-naan",
+      "sourceFilename": "Garlic Naan.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-garlic-naan.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 110006,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 170.55,
+        "luminanceStandardDeviation": 51.41,
+        "averageSaturation": 0.4575,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.306
+      },
+      "after": {
+        "meanLuminance": 171.04,
+        "luminanceStandardDeviation": 50.75,
+        "averageSaturation": 0.4572,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.135
+      },
+      "sourceSha256": "197b96a2b267d7a5d7d7c65d1d224ab2c04ddc76df7704791b5dfafbfe9a1e12",
+      "outputSha256": "8b3234f07d3737939226bdc622d245eff076b09590c8d37cfe8b4b3973ae2361",
+      "perceptualDHash": "1101011010110011010100110011101110001011000011111000011111000010",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-hara-bhara-kebab",
+      "itemId": "embers-veg-hara-bhara-kebab",
+      "sourceFilename": "Hara Bhara Kebab .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-hara-bhara-kebab.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 84074,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 134.66,
+        "luminanceStandardDeviation": 55.26,
+        "averageSaturation": 0.3921,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.575
+      },
+      "after": {
+        "meanLuminance": 135.07,
+        "luminanceStandardDeviation": 55.07,
+        "averageSaturation": 0.3933,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.446
+      },
+      "sourceSha256": "cae3fd9fb22d17ced0235eaf6fa3a1ba403c7fa3bb9fd602ab6e433a4d2e243d",
+      "outputSha256": "27a90abf31bf38687ebe6400b3356f64fac8cc6ee87ffd3d9f3b02957e688ad4",
+      "perceptualDHash": "0111100101110001110001001101110011010000111101011110110001111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-hyderabadi-chicken-dum-biryani",
+      "itemId": "biryani-and-pulao-hyderabadi-chicken-dum-biryani",
+      "sourceFilename": "Hyderabadi Chicken Dum Biryani .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-hyderabadi-chicken-dum-biryani.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 107348,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 139.08,
+        "luminanceStandardDeviation": 47.02,
+        "averageSaturation": 0.7733,
+        "highlightClippingPercentage": 0.026,
+        "shadowClippingPercentage": 0.015
+      },
+      "after": {
+        "meanLuminance": 139.52,
+        "luminanceStandardDeviation": 46.48,
+        "averageSaturation": 0.7751,
+        "highlightClippingPercentage": 0.013,
+        "shadowClippingPercentage": 0.007
+      },
+      "sourceSha256": "e50a247817d99ceca0d629a2045f80edcd9249230e83237eb4d0c599480e059a",
+      "outputSha256": "1e98f94c98b02fed6138d878febb1ee96f632e96e3f28683903eca14dee92f93",
+      "perceptualDHash": "1010010100110001111000101100110010000101111101100111110000111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-jhol-momo-non-veg",
+      "itemId": "amuse-bouche-jhol-momo",
+      "sourceFilename": "Jhol Momo Non-Veg.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-jhol-momo-non-veg.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 101102,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Owner-confirmed mapping; crop keeps the full bowl and momo arrangement."
+      },
+      "before": {
+        "meanLuminance": 108.8,
+        "luminanceStandardDeviation": 40.24,
+        "averageSaturation": 0.759,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.099
+      },
+      "after": {
+        "meanLuminance": 109.18,
+        "luminanceStandardDeviation": 39.89,
+        "averageSaturation": 0.7603,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.031
+      },
+      "sourceSha256": "a0352338610adba1778b000d5aa862ec03d7db0fd7677b4d2b5a5bf979d0dcd8",
+      "outputSha256": "8a0624273dc48e5bb41ae2cef3ebe21d9a602f0f28e762a7c3a291cc41a4083a",
+      "perceptualDHash": "1011001101101001011010010100110001001100011011000110010000111001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-lachcha-paratha",
+      "itemId": "indian-breads-lachcha-paratha",
+      "sourceFilename": "Lachcha Paratha .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-lachcha-paratha.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 85594,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 168.84,
+        "luminanceStandardDeviation": 47.15,
+        "averageSaturation": 0.327,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.386
+      },
+      "after": {
+        "meanLuminance": 169.29,
+        "luminanceStandardDeviation": 46.33,
+        "averageSaturation": 0.3275,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.189
+      },
+      "sourceSha256": "8dcae913df7d6577d9ce836314be69609aad51e86eda032616010b01cee88630",
+      "outputSha256": "e81d5f5c00f8001d10ba5349198ccd520b35a80e3f18a259da84d3a7546780da",
+      "perceptualDHash": "0011001001101000011010010110110101011100110011000100110001110001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "venue-main-outdoor",
+      "itemId": null,
+      "sourceFilename": "Main Outdoor.webp",
+      "sourceWidth": 1360,
+      "sourceHeight": 1020,
+      "outputFile": "/media/menu/venue-main-outdoor.webp",
+      "width": 1200,
+      "height": 900,
+      "outputBytes": 116266,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 99.04,
+        "luminanceStandardDeviation": 46.07,
+        "averageSaturation": 0.3023,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 1.404
+      },
+      "after": {
+        "meanLuminance": 99.15,
+        "luminanceStandardDeviation": 45.9,
+        "averageSaturation": 0.3043,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 1.337
+      },
+      "sourceSha256": "5ff79b1fd2318287ce6e61a330ba0225ecdb7303d6ee025b64d04f52f672d153",
+      "outputSha256": "9f974b3f65425cecc99652613ad96e4d0e396f8957aa097e4fe867fa7d39461e",
+      "perceptualDHash": "1100111100001001111111101010001100001100100100101001001010000110",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-malai-tandoori-broccoli",
+      "itemId": "embers-veg-malai-tandoori-broccoli",
+      "sourceFilename": "Malai Tandoori Broccoli .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-malai-tandoori-broccoli.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 62922,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 161.34,
+        "luminanceStandardDeviation": 69.69,
+        "averageSaturation": 0.2279,
+        "highlightClippingPercentage": 0.01,
+        "shadowClippingPercentage": 0.553
+      },
+      "after": {
+        "meanLuminance": 161.84,
+        "luminanceStandardDeviation": 69.48,
+        "averageSaturation": 0.2287,
+        "highlightClippingPercentage": 0.003,
+        "shadowClippingPercentage": 0.356
+      },
+      "sourceSha256": "7f29e615e11c517627fbacf7be2a8bf901aa5fd3f7fc17437577112ffe150da5",
+      "outputSha256": "15eb83b5d33c4d32deb37287a16cb91a9fc2fbd5cd62ee573c537ada6987c4b5",
+      "perceptualDHash": "0111001111100001111101001101010011111100110011001110010001101000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-masala-roti",
+      "itemId": "indian-breads-masala-roti",
+      "sourceFilename": "Masala Roti.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-masala-roti.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 89442,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 152.43,
+        "luminanceStandardDeviation": 40.07,
+        "averageSaturation": 0.5915,
+        "highlightClippingPercentage": 0.007,
+        "shadowClippingPercentage": 0.005
+      },
+      "after": {
+        "meanLuminance": 152.91,
+        "luminanceStandardDeviation": 39.41,
+        "averageSaturation": 0.5927,
+        "highlightClippingPercentage": 0.016,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "d5f1eac9920fd8ed296c36199f6082e75b217f0efc2ff713e065f92ee8a2e64e",
+      "outputSha256": "63e2a3b6c513b5024b5ea62b3bb41a85d9cae6840994c7060129162345bb37e6",
+      "perceptualDHash": "1111011011110010111000000111010001100100011001000110110010110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-murgh-badam-shorba",
+      "itemId": "soups-murgh-badam-shorba",
+      "sourceFilename": "Murgh Badami Shorba.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-murgh-badam-shorba.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 67466,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 163.3,
+        "luminanceStandardDeviation": 39.05,
+        "averageSaturation": 0.584,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 163.82,
+        "luminanceStandardDeviation": 38.83,
+        "averageSaturation": 0.5839,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "7515e81e531bddeba65a5beece7c4e99777f0d33bf99a79f808396a920fac90e",
+      "outputSha256": "eea180eb369f47b86e03829d7435d97668a106c1bc3e094a87542526872a2b91",
+      "perceptualDHash": "1001111000001110100101101011011010110010100101101000110010011000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-fish-moilee",
+      "itemId": "non-veg-entrees-fish-moilee",
+      "sourceFilename": "NON-VEG ENTREES -  Fish Moilee Fish Moilee.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-fish-moilee.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 95102,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 116.65,
+        "luminanceStandardDeviation": 64.06,
+        "averageSaturation": 0.2985,
+        "highlightClippingPercentage": 0.023,
+        "shadowClippingPercentage": 0.417
+      },
+      "after": {
+        "meanLuminance": 117.03,
+        "luminanceStandardDeviation": 63.74,
+        "averageSaturation": 0.298,
+        "highlightClippingPercentage": 0.008,
+        "shadowClippingPercentage": 0.246
+      },
+      "sourceSha256": "8933529b35e83fb6f5f0f80d5e8e6ba7bf4dcccea1e549df4569b2fa561c3c8f",
+      "outputSha256": "62568a2b3b2afedc8f335df2d1fc98e698da24bd390591c7823760a7f47022ae",
+      "perceptualDHash": "0111001111000000101101100001001010110011101100101000111011001000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-prawn-mango-curry",
+      "itemId": "non-veg-entrees-prawn-mango-curry",
+      "sourceFilename": "NON-VEG ENTREES -  Prawn Mango Curry.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-prawn-mango-curry.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 67474,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 191.96,
+        "luminanceStandardDeviation": 52.94,
+        "averageSaturation": 0.2174,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 192.51,
+        "luminanceStandardDeviation": 52.84,
+        "averageSaturation": 0.218,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "3bf293961c9ee579ee09dd0220c229b247d6033afe51d6789ab8165ec747db36",
+      "outputSha256": "36b499d2f1ff9a812d487694d2361d1b52a88434c48d4fd68df733197c19cf5a",
+      "perceptualDHash": "0011100100111000101110001101100011011000110010001101011000111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-butter-chicken",
+      "itemId": "non-veg-entrees-butter-chicken",
+      "sourceFilename": "NON-VEG ENTREES - Butter Chicken.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-butter-chicken.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 65680,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 134.69,
+        "luminanceStandardDeviation": 47.05,
+        "averageSaturation": 0.6863,
+        "highlightClippingPercentage": 0.005,
+        "shadowClippingPercentage": 0.008
+      },
+      "after": {
+        "meanLuminance": 135.15,
+        "luminanceStandardDeviation": 46.86,
+        "averageSaturation": 0.6865,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.002
+      },
+      "sourceSha256": "e50eef3baefee5689da479627163e22227815be3675ffe134a748abc40635b26",
+      "outputSha256": "598f11956e82890b1a3df8029027c5854fd6e33bcdc2922f1feff6fa7222da88",
+      "perceptualDHash": "0111011001110010011000100101001001011010011001100011110000111100",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chicken-korma",
+      "itemId": "non-veg-entrees-chicken-korma",
+      "sourceFilename": "NON-VEG ENTREES - Chicken Korma .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chicken-korma.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 59110,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 142.25,
+        "luminanceStandardDeviation": 44.58,
+        "averageSaturation": 0.6536,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.013
+      },
+      "after": {
+        "meanLuminance": 142.7,
+        "luminanceStandardDeviation": 44.26,
+        "averageSaturation": 0.6533,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "c80b54958f2c65715d8085e6598e3690c40945ecef71d2cab82748f474422abd",
+      "outputSha256": "c29d16a238c8fd53154990a68715fee5f3c9de9ab8446da9bfbe6f9a3cdd4520",
+      "perceptualDHash": "1111101101100001010010111100101010110010110100101101010010111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chicken-tikka-masala",
+      "itemId": "non-veg-entrees-chicken-tikka-masala",
+      "sourceFilename": "NON-VEG ENTREES - Chicken Tikka Masala.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chicken-tikka-masala.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 31816,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 215.43,
+        "luminanceStandardDeviation": 49.48,
+        "averageSaturation": 0.1552,
+        "highlightClippingPercentage": 0.008,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 216.1,
+        "luminanceStandardDeviation": 49.4,
+        "averageSaturation": 0.1545,
+        "highlightClippingPercentage": 0.003,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "f3743d3dc812ffeb924b9612eaf51a8f3f51b8d52cface3909971421d5d03206",
+      "outputSha256": "f972ccf1a96ad1cfb10c0d9b882da3d75bd4540b5b70b11c89465c6c2cc47f6e",
+      "perceptualDHash": "0100000110110011011010010111100101110001011100011111000001110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-chicken-vindaloo",
+      "itemId": "non-veg-entrees-chicken-vindaloo",
+      "sourceFilename": "NON-VEG ENTREES - Chicken Vindaloo .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-chicken-vindaloo.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 80266,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 144.82,
+        "luminanceStandardDeviation": 68.71,
+        "averageSaturation": 0.5566,
+        "highlightClippingPercentage": 0.01,
+        "shadowClippingPercentage": 0.015
+      },
+      "after": {
+        "meanLuminance": 145.32,
+        "luminanceStandardDeviation": 68.4,
+        "averageSaturation": 0.5571,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "d788c974727eb62b7c42967398f14d5329546439891657e0fb0ca41df17477cb",
+      "outputSha256": "02432762241949624198ca080bd0bdcbffb15653369e0b4ca12b06f0d2268999",
+      "perceptualDHash": "1101100011011000100011001100110011001000111110001111000011100000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-coriander-prawns",
+      "itemId": "non-veg-entrees-coriander-prawns",
+      "sourceFilename": "NON-VEG ENTREES - Coriander Prawns .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-coriander-prawns.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 109740,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 142.71,
+        "luminanceStandardDeviation": 61.36,
+        "averageSaturation": 0.6012,
+        "highlightClippingPercentage": 0.002,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 143.1,
+        "luminanceStandardDeviation": 60.78,
+        "averageSaturation": 0.6022,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "0422ad8a5fc9602f2fa8284f5b60e7781e0829f79ee25f503b1017040d5e5840",
+      "outputSha256": "fb83a1db965b0fa4dfacf8c8a16d4ca0d39f3474adb5ba47303668fcd86763e6",
+      "perceptualDHash": "1110100011010100110110001101110011011000110100001101000011100000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-kadai-chicken",
+      "itemId": null,
+      "sourceFilename": "NON-VEG ENTREES - Kadai Chicken .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-kadai-chicken.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 90668,
+      "status": "hold",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "No public enhancement while this source remains on hold."
+      },
+      "before": {
+        "meanLuminance": 131.62,
+        "luminanceStandardDeviation": 57.28,
+        "averageSaturation": 0.4188,
+        "highlightClippingPercentage": 0.011,
+        "shadowClippingPercentage": 0.072
+      },
+      "after": {
+        "meanLuminance": 132.04,
+        "luminanceStandardDeviation": 56.69,
+        "averageSaturation": 0.4201,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.021
+      },
+      "sourceSha256": "8e37ff687538ca98b44f99d18d98732f8cce69b30b5a821152351748eeb2a5ad",
+      "outputSha256": "45866ef9dbcac1759c4c4250d811067c8083344e91d2244d03220e6de5119400",
+      "perceptualDHash": "1100110011000100110011001101101011011001110001101100110011110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-papdi-chaat",
+      "itemId": "amuse-bouche-papdi-chaat",
+      "sourceFilename": "Papdi Chat.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-papdi-chaat.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 123290,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 157.05,
+        "luminanceStandardDeviation": 32.97,
+        "averageSaturation": 0.6213,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 157.58,
+        "luminanceStandardDeviation": 32.42,
+        "averageSaturation": 0.6217,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "4627d610e5010871082d1294727fd16b64e4ccf76cfdb5280b7f8730003a6e83",
+      "outputSha256": "7df7d08323e23ff5c2a7873147a962ea1a275d3f2f11d49cdf65349d86af1d36",
+      "perceptualDHash": "1010011110101000101100001010010000101100101101001101110010111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-punjabi-samosa",
+      "itemId": "embers-veg-punjabi-samosa",
+      "sourceFilename": "Punjabi Samosa.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-punjabi-samosa.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 80030,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 176.18,
+        "luminanceStandardDeviation": 46.28,
+        "averageSaturation": 0.2033,
+        "highlightClippingPercentage": 0.015,
+        "shadowClippingPercentage": 0.068
+      },
+      "after": {
+        "meanLuminance": 176.7,
+        "luminanceStandardDeviation": 46.06,
+        "averageSaturation": 0.203,
+        "highlightClippingPercentage": 0.002,
+        "shadowClippingPercentage": 0.02
+      },
+      "sourceSha256": "e0b09ba881b58b55f276a0b538b4dac024b55c0c6022f4075f1c3ade03b1eba5",
+      "outputSha256": "a9329bffbc39d5519b607934104482839be4874ef59e7ba28d7dd566f57d9e08",
+      "perceptualDHash": "0011000100110001011100010110000111100001111010001110010001100001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-raw-mango-salad",
+      "itemId": "amuse-bouche-raw-mango-salad",
+      "sourceFilename": "Raw Mango Salad.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-raw-mango-salad.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 44822,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 188.55,
+        "luminanceStandardDeviation": 46.83,
+        "averageSaturation": 0.1151,
+        "highlightClippingPercentage": 0.812,
+        "shadowClippingPercentage": 0.028
+      },
+      "after": {
+        "meanLuminance": 189.14,
+        "luminanceStandardDeviation": 46.57,
+        "averageSaturation": 0.1146,
+        "highlightClippingPercentage": 0.692,
+        "shadowClippingPercentage": 0.011
+      },
+      "sourceSha256": "1158bbcf63846fb94dbd49b4f6db7627e60e5d4ee8fa9d36630af23c72aefc23",
+      "outputSha256": "fcd976ddadb90893636832c90b339f6a27245f5c3d7ea40e21c072e54a7e75c6",
+      "perceptualDHash": "0001111100001111000100110111001101110011011000110011001100011110",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-samosa-chaat",
+      "itemId": "amuse-bouche-samosa-chaat",
+      "sourceFilename": "Samosa Chat.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-samosa-chaat.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 129366,
+      "status": "approved",
+      "styleFamily": "ivory-coupe",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 162.46,
+        "luminanceStandardDeviation": 33.31,
+        "averageSaturation": 0.6128,
+        "highlightClippingPercentage": 0.008,
+        "shadowClippingPercentage": 0.003
+      },
+      "after": {
+        "meanLuminance": 163.02,
+        "luminanceStandardDeviation": 32.7,
+        "averageSaturation": 0.6124,
+        "highlightClippingPercentage": 0.002,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "4b41da3d8023506ea749eb12dedd7e3d20f24b5ea37143a269832317ce51836b",
+      "outputSha256": "cc711e7f7fabddd19c926be8c7a8354a5dab92f14647fa1a66b601719608473b",
+      "perceptualDHash": "1010011111101011001100001010010010101010101101001001110010111001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-tandoori-roti",
+      "itemId": "indian-breads-tandoori-roti",
+      "sourceFilename": "Tandoori Roti .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-tandoori-roti.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 38902,
+      "status": "approved",
+      "styleFamily": "bread-basket",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 212.52,
+        "luminanceStandardDeviation": 42.48,
+        "averageSaturation": 0.0916,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 213.27,
+        "luminanceStandardDeviation": 42.3,
+        "averageSaturation": 0.0906,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "a0cdf27461fe2a205df2df89d21edfdc49abc005ff140df667b428f2534dd803",
+      "outputSha256": "d1c04c1ec5d8224825487d3de2895d2027199a4f0bc1767bcf04f4d4b3fd29e4",
+      "perceptualDHash": "1011000100110001011100010110100001100001011000010111000111110001",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-dal-makhani",
+      "itemId": "veg-entrees-dal-makhani",
+      "sourceFilename": "VEG ENTREES - Dal Makhani.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-dal-makhani.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 68820,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 123.32,
+        "luminanceStandardDeviation": 57.85,
+        "averageSaturation": 0.4959,
+        "highlightClippingPercentage": 0.024,
+        "shadowClippingPercentage": 0.381
+      },
+      "after": {
+        "meanLuminance": 123.73,
+        "luminanceStandardDeviation": 57.52,
+        "averageSaturation": 0.4953,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0.26
+      },
+      "sourceSha256": "c8311aff7eeff890e6e60f21a9a318b573e65f045ea324abcef9fba4a6cbaa6a",
+      "outputSha256": "9ee3ba4404605816fb57442e1ea349cdb1c530e03170a7ae4b2d6e02a58ee210",
+      "perceptualDHash": "1000110110010011011010010100010011010100111000001100100011110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-malai-kofta",
+      "itemId": "veg-entrees-malai-kofta",
+      "sourceFilename": "VEG ENTREES - Malai Kofta.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-malai-kofta.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 120292,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 172.41,
+        "luminanceStandardDeviation": 45.36,
+        "averageSaturation": 0.1939,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 172.9,
+        "luminanceStandardDeviation": 45.12,
+        "averageSaturation": 0.1944,
+        "highlightClippingPercentage": 0,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "b912c88d5ade3925321504f2a0d3e41e7bc0eb270e2dc35e86a3c3121712f05b",
+      "outputSha256": "002b5398206f98c42bc188c804be29f3194f8f9fea5add3600dd46abc2547f90",
+      "perceptualDHash": "1011011111100001011001010111010001100100011011000111110000111000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-paneer-tikka-masala",
+      "itemId": "veg-entrees-paneer-tikka-masala",
+      "sourceFilename": "VEG ENTREES - Paneer Tikka Masala.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-paneer-tikka-masala.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 53774,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 167.81,
+        "luminanceStandardDeviation": 60.67,
+        "averageSaturation": 0.2151,
+        "highlightClippingPercentage": 0.015,
+        "shadowClippingPercentage": 0
+      },
+      "after": {
+        "meanLuminance": 168.35,
+        "luminanceStandardDeviation": 60.59,
+        "averageSaturation": 0.2141,
+        "highlightClippingPercentage": 0.007,
+        "shadowClippingPercentage": 0
+      },
+      "sourceSha256": "77a1486da91f1a6b723ddebaebbd12f345cccc4afe6dbaac32c5228be2e88027",
+      "outputSha256": "dd4c5dc7d82a8e712aa0bb2572ff01b9a8a0a6f02c683af8024a584c7010fbbc",
+      "perceptualDHash": "0011001101110001010010011110000011110100111111001111100001110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-pindi-chole",
+      "itemId": "veg-entrees-pindi-chole",
+      "sourceFilename": "VEG ENTREES - Pindi Chole.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-pindi-chole.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 79056,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 159.41,
+        "luminanceStandardDeviation": 66.75,
+        "averageSaturation": 0.2699,
+        "highlightClippingPercentage": 0.031,
+        "shadowClippingPercentage": 1.092
+      },
+      "after": {
+        "meanLuminance": 159.86,
+        "luminanceStandardDeviation": 66.5,
+        "averageSaturation": 0.2698,
+        "highlightClippingPercentage": 0.002,
+        "shadowClippingPercentage": 0.84
+      },
+      "sourceSha256": "d4fe5418452094f311239d9d2ca642685273e25c5bacca2c558370c7023b9a00",
+      "outputSha256": "31799f9ee6937e63f83306043cc43500da255431b8a53de7227c59d9f2bb0760",
+      "perceptualDHash": "0011001101101001011010010110110101001001011010010110100101110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-saag-burrata",
+      "itemId": "veg-entrees-saag-burrata",
+      "sourceFilename": "VEG ENTREES - Saag Buratta.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-saag-burrata.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 140772,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 132.19,
+        "luminanceStandardDeviation": 69.84,
+        "averageSaturation": 0.5113,
+        "highlightClippingPercentage": 1.1,
+        "shadowClippingPercentage": 0.501
+      },
+      "after": {
+        "meanLuminance": 132.59,
+        "luminanceStandardDeviation": 69.06,
+        "averageSaturation": 0.5142,
+        "highlightClippingPercentage": 0.775,
+        "shadowClippingPercentage": 0.168
+      },
+      "sourceSha256": "027731b9f01d4028952a35a567ae7926a5024db7981016593388a664ed66113d",
+      "outputSha256": "2f50f453ef598644d3811bf5c287ff43b247682932a76991f6470ba25b6f3f3e",
+      "perceptualDHash": "0011000101000100110101101011010010001101100111101101110011011000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-tandoori-paneer-makhani",
+      "itemId": "veg-entrees-tandoori-paneer-makhani",
+      "sourceFilename": "VEG ENTREES - Tandoori Paneer Makhani.avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-tandoori-paneer-makhani.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 58632,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 175.78,
+        "luminanceStandardDeviation": 62.94,
+        "averageSaturation": 0.223,
+        "highlightClippingPercentage": 0.016,
+        "shadowClippingPercentage": 0.016
+      },
+      "after": {
+        "meanLuminance": 176.33,
+        "luminanceStandardDeviation": 62.84,
+        "averageSaturation": 0.2229,
+        "highlightClippingPercentage": 0.003,
+        "shadowClippingPercentage": 0.005
+      },
+      "sourceSha256": "b63a7cbf06740212cdb47bef33fa5555ade733a20b0677d3a0046205907d05e9",
+      "outputSha256": "30ca3fc5647a7f08ab387835e955da589599f7ad3b2e97f2572069326979d66d",
+      "perceptualDHash": "0000000000110000011110000111010011011000110011001110000011110000",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    },
+    {
+      "imageId": "food-veg-dum-biryani",
+      "itemId": "biryani-and-pulao-veg-dum-biryani",
+      "sourceFilename": "Veg Dum Biryani .avif",
+      "sourceWidth": 1000,
+      "sourceHeight": 600,
+      "outputFile": "/media/menu/food-veg-dum-biryani.webp",
+      "width": 1000,
+      "height": 600,
+      "outputBytes": 45714,
+      "status": "approved",
+      "styleFamily": "charcoal-kadhai",
+      "enhancement": {
+        "brightness": 1,
+        "saturation": 1,
+        "contrast": 1,
+        "gamma": 1,
+        "sharpenSigma": 0.4,
+        "notes": "Gentle luminance, contrast, saturation, and texture correction reviewed for this source."
+      },
+      "before": {
+        "meanLuminance": 140.38,
+        "luminanceStandardDeviation": 53.44,
+        "averageSaturation": 0.5154,
+        "highlightClippingPercentage": 0.597,
+        "shadowClippingPercentage": 0.122
+      },
+      "after": {
+        "meanLuminance": 140.81,
+        "luminanceStandardDeviation": 52.96,
+        "averageSaturation": 0.5144,
+        "highlightClippingPercentage": 0.615,
+        "shadowClippingPercentage": 0.083
+      },
+      "sourceSha256": "58382c1806c522038a65a65c21670724444a0a6ec7bb697d4a4cbf056aca36e6",
+      "outputSha256": "529b44e427b4a26c0a54118cd067f395c419639e67d347885ddd0eee1c262e8c",
+      "perceptualDHash": "1001100101101001011010110110010001001110000111110000101100110011",
+      "generativeAlteration": false,
+      "metadataRetained": false
+    }
+  ]
+}

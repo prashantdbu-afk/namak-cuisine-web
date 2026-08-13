@@ -1,0 +1,14 @@
+node_modules
+.next
+.env*
+!.env.example
+playwright-report
+test-results
+coverage
+.lighthouseci
+visual-review
+artifacts/
+.pnpm-store
+*.tsbuildinfo
+.DS_Store
+incoming-media/
