@@ -91,9 +91,14 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        {analytics.enabled || analytics.firstPartyEnabled ? (
+          <AnalyticsEvents
+            googleEnabled={analytics.enabled}
+            firstPartyEnabled={analytics.firstPartyEnabled}
+          />
+        ) : null}
         {analytics.enabled && analytics.measurementId ? (
           <>
-            <AnalyticsEvents />
             <GoogleAnalytics gaId={analytics.measurementId} />
           </>
         ) : null}

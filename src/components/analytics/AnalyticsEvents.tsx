@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { site } from "@/config/site";
 import {
   trackCtaClick,
   trackPageView,
   trackSocialClick,
+  sendFirstPartyEvent,
   type AnalyticsEventName,
 } from "@/lib/analytics/events";
 
@@ -39,16 +40,54 @@ function isSameDestination(href: string, destination: string) {
   }
 }
 
-export function AnalyticsEvents() {
+export function AnalyticsEvents({
+  googleEnabled = true,
+  firstPartyEnabled = false,
+}: {
+  googleEnabled?: boolean;
+  firstPartyEnabled?: boolean;
+}) {
   const pathname = usePathname();
   const lastTrackedView = useRef<string | null>(null);
+  const lastTrackedFirstPartyPage = useRef<string | null>(null);
+
+  const firstParty = useCallback(
+    (eventName: AnalyticsEventName, ctaLocation?: string) => {
+      if (!firstPartyEnabled) return;
+      const visitorKey = "namak_analytics_visitor_id";
+      const sessionKey = "namak_analytics_session_id";
+      let visitorId = localStorage.getItem(visitorKey);
+      let sessionId = sessionStorage.getItem(sessionKey);
+      if (!visitorId) {
+        visitorId = crypto.randomUUID();
+        localStorage.setItem(visitorKey, visitorId);
+      }
+      if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        sessionStorage.setItem(sessionKey, sessionId);
+      }
+      void sendFirstPartyEvent({
+        eventName,
+        visitorId,
+        sessionId,
+        sourcePage: pathname,
+        ...(ctaLocation ? { ctaLocation } : {}),
+      });
+    },
+    [firstPartyEnabled, pathname],
+  );
 
   useEffect(() => {
+    if (firstPartyEnabled && lastTrackedFirstPartyPage.current !== pathname) {
+      lastTrackedFirstPartyPage.current = pathname;
+      firstParty("page_view");
+    }
     const eventName = routeViewEvents[pathname as keyof typeof routeViewEvents];
     if (!eventName || lastTrackedView.current === pathname) return;
     lastTrackedView.current = pathname;
-    trackPageView(eventName);
-  }, [pathname]);
+    if (googleEnabled) trackPageView(eventName);
+    firstParty(eventName);
+  }, [pathname, googleEnabled, firstPartyEnabled, firstParty]);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -58,28 +97,35 @@ export function AnalyticsEvents() {
 
       const href = link.getAttribute("href") ?? "";
       if (href.toLowerCase().startsWith("tel:")) {
-        trackCtaClick("click_call", pathname, getCtaLocation(link));
+        const location = getCtaLocation(link);
+        if (googleEnabled) trackCtaClick("click_call", pathname, location);
+        firstParty("click_call", location);
         return;
       }
 
       if (isSameDestination(href, site.directionsUrl)) {
-        trackCtaClick("click_directions", pathname, getCtaLocation(link));
+        const location = getCtaLocation(link);
+        if (googleEnabled)
+          trackCtaClick("click_directions", pathname, location);
+        firstParty("click_directions", location);
         return;
       }
 
       if (isSameDestination(href, site.social.instagram)) {
-        trackSocialClick("click_instagram", pathname);
+        if (googleEnabled) trackSocialClick("click_instagram", pathname);
+        firstParty("click_instagram");
         return;
       }
 
       if (isSameDestination(href, site.social.facebook)) {
-        trackSocialClick("click_facebook", pathname);
+        if (googleEnabled) trackSocialClick("click_facebook", pathname);
+        firstParty("click_facebook");
       }
     }
 
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-  }, [pathname]);
+  }, [pathname, googleEnabled, firstPartyEnabled, firstParty]);
 
   return null;
 }

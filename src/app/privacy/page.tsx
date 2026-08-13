@@ -43,6 +43,14 @@ export default function Privacy() {
           privacy terms. Namak does not send catering form entries, names, email
           addresses, phone numbers, or notes to Google Analytics.
         </p>
+        <p>
+          When Namak&apos;s first-party analytics is enabled, the site uses a
+          random visitor identifier and a random session identifier to count
+          visits and understand actions such as Menu views, calls, and direction
+          requests. It does not use fingerprinting or collect form contents for
+          analytics, and the analytics database does not retain full IP
+          addresses.
+        </p>
       </section>
     </InteriorPage>
   );

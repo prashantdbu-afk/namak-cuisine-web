@@ -21,15 +21,37 @@ Daily and monthly artifacts are named `namak-daily-growth-report` and
 
 ## Data connection required
 
-The public GA4 Measurement ID sends website events but cannot read reports.
-Reporting requires a separate GA4 Property ID and read-only access to the GA4
-Data API. Until that owner-controlled access is configured, the workflow
-deliberately reports **Not enough data yet** instead of inventing numbers.
+Reports are designed to use Namak's owner-controlled PostgreSQL event store,
+not to depend exclusively on GA4. Until the database, schema, and read-only
+report export are configured, the workflow deliberately reports **Not enough
+data yet** instead of inventing numbers. GA4 can remain enabled in parallel for
+comparison and is independently controlled.
 
 The reporting model supports measured inputs for visitors, sessions, page
 views, returning visitors, Menu/Bar/Catering interest, Calls, Directions,
 device share, traffic sources, day of week, and Dallas-local time windows.
 Query strings and form/PII fields must be removed before input is supplied.
+
+## First-party production setup
+
+1. Provision an owner-controlled PostgreSQL database.
+2. Run `data/analytics-schema.sql` against it.
+3. Add `DATABASE_URL` to Vercel **Production** only. Treat it as a secret.
+4. Add `NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED=true` to Vercel Production.
+5. Keep it unset or `false` in Preview and Development.
+6. Configure a read-only report export to supply `ANALYTICS_REPORT_INPUT`. The
+   current workflow safely emits a no-data report until that query/export
+   connection is installed.
+
+The browser creates a random UUID stored in first-party local storage and a
+random per-tab session UUID in session storage. The endpoint accepts only the
+approved event name, pathname, and general CTA location. It does not accept
+names, emails, customer phone numbers, form content, fingerprints, or query
+strings. The schema does not store IP addresses.
+
+`page_view` is sent only to Namak's first-party endpoint so all public content
+routes can be measured. It is not manually sent to GA4; GA4 pageviews remain
+the responsibility of Enhanced Measurement.
 
 ## Reporting rules
 

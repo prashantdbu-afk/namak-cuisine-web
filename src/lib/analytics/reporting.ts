@@ -259,7 +259,7 @@ ${recommendationMarkdown}
 
 ## Namak Online Presence
 
-The report uses available first-party website data. Google Business Profile impressions, Search Console rankings, reviews, and physical restaurant visits are **unavailable unless separately connected**.
+The report uses available first-party website data when the owner-controlled database export is connected. Google Business Profile impressions, Search Console rankings, reviews, and physical restaurant visits are **unavailable unless separately connected**.
 
 ## What I Would Do This Week
 

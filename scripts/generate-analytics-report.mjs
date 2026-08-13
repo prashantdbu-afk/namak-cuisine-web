@@ -10,7 +10,7 @@ const empty = {
   status: "not_enough_data",
   generatedAt: new Date().toISOString(),
   cadence,
-  note: "Not enough data yet. Configure the GA4 reporting export described in docs/analytics-reports-guide.md.",
+  note: "Not enough data yet. Configure the first-party database report export described in docs/analytics-reports-guide.md.",
   metrics: {},
 };
 

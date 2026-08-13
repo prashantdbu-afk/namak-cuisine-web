@@ -4,12 +4,14 @@ export type AnalyticsEnvironment = {
   VERCEL_ENV?: string;
   NEXT_PUBLIC_ANALYTICS_PROVIDER?: string;
   NEXT_PUBLIC_ANALYTICS_ID?: string;
+  NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED?: string;
 };
 
 export type AnalyticsConfig = {
   enabled: boolean;
   provider: AnalyticsProvider;
   measurementId: string | null;
+  firstPartyEnabled: boolean;
 };
 
 export function getAnalyticsConfig(
@@ -17,6 +19,8 @@ export function getAnalyticsConfig(
     VERCEL_ENV: process.env.VERCEL_ENV,
     NEXT_PUBLIC_ANALYTICS_PROVIDER: process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER,
     NEXT_PUBLIC_ANALYTICS_ID: process.env.NEXT_PUBLIC_ANALYTICS_ID,
+    NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED:
+      process.env.NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED,
   },
 ): AnalyticsConfig {
   const provider = env.NEXT_PUBLIC_ANALYTICS_PROVIDER?.trim().toLowerCase();
@@ -28,5 +32,8 @@ export function getAnalyticsConfig(
       env.VERCEL_ENV === "production" && isGoogle && measurementId !== null,
     provider: isGoogle ? "google" : "disabled",
     measurementId,
+    firstPartyEnabled:
+      env.VERCEL_ENV === "production" &&
+      env.NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED === "true",
   };
 }

@@ -13,7 +13,28 @@ describe("analytics configuration", () => {
       enabled: true,
       provider: "google",
       measurementId: "G-YYFJJQGY6T",
+      firstPartyEnabled: false,
     });
+  });
+
+  it("enables first-party collection independently only in production", () => {
+    expect(
+      getAnalyticsConfig({
+        VERCEL_ENV: "production",
+        NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED: "true",
+      }),
+    ).toEqual({
+      enabled: false,
+      provider: "disabled",
+      measurementId: null,
+      firstPartyEnabled: true,
+    });
+    expect(
+      getAnalyticsConfig({
+        VERCEL_ENV: "preview",
+        NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED: "true",
+      }).firstPartyEnabled,
+    ).toBe(false);
   });
 
   it.each(["preview", "development", "test", undefined])(
