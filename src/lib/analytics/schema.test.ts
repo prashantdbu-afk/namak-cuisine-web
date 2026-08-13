@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseFirstPartyEvent } from "./schema";
+import { isObviousAutomation, parseFirstPartyEvent } from "./schema";
 
 const valid = {
   eventName: "click_call",
@@ -24,5 +24,12 @@ describe("first-party analytics event schema", () => {
     expect(
       parseFirstPartyEvent({ ...valid, sourcePage: "/catering?email=x" }),
     ).toBeNull();
+  });
+
+  it("filters only obvious automation agents", () => {
+    expect(isObviousAutomation("Mozilla/5.0 Playwright/1.58")).toBe(true);
+    expect(isObviousAutomation("Mozilla/5.0 Chrome/140 Safari/537.36")).toBe(
+      false,
+    );
   });
 });

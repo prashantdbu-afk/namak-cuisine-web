@@ -39,8 +39,14 @@ Query strings and form/PII fields must be removed before input is supplied.
 3. Add `DATABASE_URL` to Vercel **Production** only. Treat it as a secret.
 4. Add `NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED=true` to Vercel Production.
 5. Keep it unset or `false` in Preview and Development.
-6. Configure a read-only report export to supply `ANALYTICS_REPORT_INPUT`. The
-   current workflow safely emits a no-data report until that query/export
+6. In Neon, create a separate PostgreSQL role with `SELECT` permission only on
+   `analytics_events`. It must not have `INSERT`, `UPDATE`, `DELETE`, schema
+   creation, or ownership privileges.
+7. Add that role's pooled connection string to GitHub Actions as repository
+   secret `ANALYTICS_REPORT_DATABASE_URL`. Do not copy the website's
+   write-capable `DATABASE_URL` into GitHub.
+8. Connect the report query/export step to produce `ANALYTICS_REPORT_INPUT`.
+   The workflow safely emits a no-data report until that read-only query/export
    connection is installed.
 
 The browser creates a random UUID stored in first-party local storage and a
@@ -52,6 +58,22 @@ strings. The schema does not store IP addresses.
 `page_view` is sent only to Namak's first-party endpoint so all public content
 routes can be measured. It is not manually sent to GA4; GA4 pageviews remain
 the responsibility of Enhanced Measurement.
+
+Obvious Playwright, Lighthouse, headless-browser, and search-crawler user agents
+are discarded by the endpoint. Preview and development deployments cannot
+persist events because collection is production-gated. This is intentionally a
+small exclusion list and is not a fingerprinting system.
+
+## Expected event behavior
+
+- Each meaningful route navigation sends one first-party `page_view`.
+- Menu, Bar, and Catering also send one corresponding `view_*` event. This is
+  intentional: one event counts the route view and the other categorizes
+  restaurant interest.
+- React hydration does not create duplicate events because the tracker retains
+  the most recently recorded route.
+- Each actual Call, Directions, Instagram, or Facebook click sends one event.
+- GA4 receives no manual `page_view`; Enhanced Measurement owns GA4 pageviews.
 
 ## Reporting rules
 

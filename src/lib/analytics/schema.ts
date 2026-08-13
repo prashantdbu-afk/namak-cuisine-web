@@ -49,3 +49,9 @@ export function parseFirstPartyEvent(value: unknown): FirstPartyEvent | null {
     ...(input.ctaLocation ? { ctaLocation: input.ctaLocation as string } : {}),
   };
 }
+
+export function isObviousAutomation(userAgent: string) {
+  return /playwright|lighthouse|headlesschrome|pagespeed|googlebot|bingbot/i.test(
+    userAgent,
+  );
+}

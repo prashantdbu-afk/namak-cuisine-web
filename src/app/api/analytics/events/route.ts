@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import postgres from "postgres";
-import { parseFirstPartyEvent } from "@/lib/analytics/schema";
+import {
+  isObviousAutomation,
+  parseFirstPartyEvent,
+} from "@/lib/analytics/schema";
 
 export async function POST(request: Request) {
   if (
@@ -8,6 +11,9 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_NAMAK_ANALYTICS_ENABLED !== "true"
   )
     return new NextResponse(null, { status: 404 });
+  if (isObviousAutomation(request.headers.get("user-agent") ?? "")) {
+    return new NextResponse(null, { status: 204 });
+  }
   const event = parseFirstPartyEvent(await request.json().catch(() => null));
   if (!event)
     return NextResponse.json({ error: "Invalid event" }, { status: 400 });

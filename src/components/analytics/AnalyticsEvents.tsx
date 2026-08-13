@@ -72,6 +72,8 @@ export function AnalyticsEvents({
         sessionId,
         sourcePage: pathname,
         ...(ctaLocation ? { ctaLocation } : {}),
+      }).catch(() => {
+        // Analytics must never interrupt navigation or primary restaurant CTAs.
       });
     },
     [firstPartyEnabled, pathname],
