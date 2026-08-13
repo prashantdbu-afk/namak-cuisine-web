@@ -9,5 +9,16 @@ export default defineConfig({
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
   },
-  use: { ...devices["Desktop Chrome"], baseURL: "http://127.0.0.1:3000" },
+  use: { baseURL: "http://127.0.0.1:3000" },
+  projects: [
+    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
+    {
+      name: "tablet",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 768, height: 1024 },
+      },
+    },
+    { name: "mobile", use: { ...devices["Pixel 7"] } },
+  ],
 });

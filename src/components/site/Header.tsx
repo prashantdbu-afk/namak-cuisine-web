@@ -1,11 +1,23 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/config/site";
 import { getReservationAction } from "@/lib/reservations";
 export function Header() {
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const reserve = getReservationAction();
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
   return (
     <header className="site-header">
       <div className="nav-shell">
@@ -13,6 +25,7 @@ export function Header() {
           <span>N</span> NAMAK<span className="sr-only"> home</span>
         </Link>
         <button
+          ref={toggleRef}
           className="menu-toggle"
           aria-expanded={open}
           aria-controls="site-nav"

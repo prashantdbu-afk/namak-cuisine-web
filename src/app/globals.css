@@ -4,7 +4,7 @@
   --canvas: #f8f4ec;
   --surface: #fffdf9;
   --text: #1e2522;
-  --text-muted: #69736e;
+  --text-muted: #626d67;
   --primary: #1f5a4a;
   --primary-dark: #152c27;
   --pomegranate: #b8484f;
@@ -27,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
   background: var(--canvas);
 }
 
@@ -112,6 +113,17 @@ em {
 :focus-visible {
   outline: 3px solid var(--pomegranate);
   outline-offset: 4px;
+}
+
+main :target {
+  scroll-margin-top: 96px;
+}
+
+.site-footer :focus-visible,
+.bar :focus-visible,
+.story-section-dark :focus-visible,
+.catering-preferences :focus-visible {
+  outline-color: #f4c86b;
 }
 
 .announcement {
@@ -1097,6 +1109,7 @@ em {
 
 .footer a {
   display: inline-flex;
+  min-width: 24px;
   min-height: 44px;
   align-items: center;
   color: var(--footer-body);
