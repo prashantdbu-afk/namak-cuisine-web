@@ -144,8 +144,8 @@ test("captures restored bar category imagery", async ({ page }) => {
   for (const [viewportName, viewport] of [
     ["desktop-1920", { width: 1920, height: 1080 }],
     ["desktop-1440", { width: 1440, height: 1000 }],
+    ["tablet-820", { width: 820, height: 1180 }],
     ["mobile-390", { width: 390, height: 844 }],
-    ["mobile-430", { width: 430, height: 932 }],
   ] as const) {
     await page.setViewportSize(viewport);
     await page.goto("/bar");
@@ -154,8 +154,10 @@ test("captures restored bar category imagery", async ({ page }) => {
       "bar-draft-beer",
       "bar-whiskey",
       "bar-gin",
+      "bar-vodka",
       "bar-tequila",
       "bar-rum",
+      "bar-bubbles",
       "bar-white",
       "bar-red",
     ]) {
@@ -169,6 +171,14 @@ test("captures restored bar category imagery", async ({ page }) => {
         animations: "disabled",
       });
     }
+    await page.screenshot({
+      path: path.join(
+        outputDirectory,
+        `bar-layout--complete--${viewportName}.png`,
+      ),
+      fullPage: true,
+      animations: "disabled",
+    });
   }
 });
 

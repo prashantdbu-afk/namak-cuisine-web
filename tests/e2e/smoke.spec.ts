@@ -397,6 +397,43 @@ test("bar menu search and beer variants work", async ({ page }) => {
   for (const id of ["bar-bubbles", "bar-white", "bar-red"]) {
     await expect(page.locator(`#${id} .eyebrow`)).toHaveText("WINE LIST");
   }
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  const photographedSection = page.locator("#bar-whiskey");
+  const photographedLayout = await photographedSection.evaluate((section) => {
+    const image = section.querySelector(".bar-category-feature");
+    const content = section.querySelector(".bar-category-content");
+    if (!(image instanceof HTMLElement) || !(content instanceof HTMLElement)) {
+      return null;
+    }
+    return {
+      columns: getComputedStyle(section).gridTemplateColumns,
+      imageWidth: image.getBoundingClientRect().width,
+      contentLeft: content.getBoundingClientRect().left,
+      imageRight: image.getBoundingClientRect().right,
+    };
+  });
+  expect(photographedLayout).not.toBeNull();
+  expect(photographedLayout?.columns.split(" ")).toHaveLength(2);
+  expect(photographedLayout?.imageWidth).toBeGreaterThanOrEqual(320);
+  expect(photographedLayout?.imageWidth).toBeLessThanOrEqual(420);
+  expect(photographedLayout?.contentLeft).toBeGreaterThan(
+    photographedLayout?.imageRight ?? 0,
+  );
+
+  for (const id of ["bar-liquor", "bar-wines-by-the-glass", "bar-rose"]) {
+    await expect(page.locator(`#${id}`)).toHaveClass(/is-text-only/);
+    await expect(page.locator(`#${id} .bar-category-feature`)).toHaveCount(0);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(photographedSection).toHaveCSS("grid-template-columns", "350px");
+  const mobileOverflow = await page.evaluate(
+    () =>
+      document.documentElement.scrollWidth -
+      document.documentElement.clientWidth,
+  );
+  expect(mobileOverflow).toBeLessThanOrEqual(0);
 });
 
 test("internal review routes and assets return 404", async ({ page }) => {

@@ -110,89 +110,98 @@ export function MenuExperience({
         </nav>
       </div>
       <div className="menu-sections section" aria-live="polite">
-        {visibleCategories.map((category) => (
-          <section
-            id={category.id}
-            key={category.id}
-            aria-labelledby={`${category.id}-heading`}
-          >
-            {categoryMedia
-              .filter((feature) => feature.categoryId === category.id)
-              .map((feature) => (
+        {visibleCategories.map((category) => {
+          const feature = categoryMedia.find(
+            (candidate) => candidate.categoryId === category.id,
+          );
+          return (
+            <section
+              className={
+                activeMenu === "bar"
+                  ? `bar-category-section${feature ? " has-category-media" : " is-text-only"}`
+                  : undefined
+              }
+              id={category.id}
+              key={category.id}
+              aria-labelledby={`${category.id}-heading`}
+            >
+              {feature && (
                 <figure
                   className="bar-category-feature"
                   data-category-image-id={feature.imageId}
-                  key={feature.imageId}
                 >
-                  <MediaFrame aspectRatio={5 / 3}>
+                  <MediaFrame aspectRatio={3 / 2}>
                     <ResponsiveImage
                       media={getImageRecord(feature.imageId)}
                       priority={false}
-                      sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1200px) 62vw, 760px"
+                      sizes="(max-width: 980px) calc(100vw - 40px), (max-width: 1440px) 34vw, 420px"
                     />
                   </MediaFrame>
                   <figcaption className="visually-hidden">
                     {feature.label} editorial category image
                   </figcaption>
                 </figure>
-              ))}
-            <p className="eyebrow dark">
-              {getMenuSectionEyebrow(activeMenu, category)}
-            </p>
-            <h2 id={`${category.id}-heading`}>{category.name}</h2>
-            <ul>
-              {matchingItems
-                .filter((entry) => entry.categoryId === category.id)
-                .map((entry) => {
-                  const placement = placements.find(
-                    (candidate) => candidate.itemId === entry.id,
-                  );
-                  return (
-                    <li key={entry.id}>
-                      <article
-                        className={`priced-menu-item${placement ? " has-menu-image" : ""}`}
-                        data-menu-item-id={entry.id}
-                        data-image-id={placement?.imageId}
-                        data-background-family={placement?.backgroundFamily}
-                        data-presentation-tier={placement?.presentationTier}
-                      >
-                        {placement && (
-                          <MenuImageStage
-                            media={getImageRecord(placement.imageId)}
-                            surface={getMenuImageStageSurface(category)}
-                          />
-                        )}
-                        <div className="menu-item-copy">
-                          <h3>{entry.name}</h3>
-                          {entry.description && <p>{entry.description}</p>}
-                        </div>
-                        {entry.priceCents !== null && (
-                          <span className="menu-price">
-                            {formatPrice(entry.priceCents)}
-                          </span>
-                        )}
-                        {entry.variants && (
-                          <ul
-                            className="menu-variants"
-                            aria-label={`${entry.name} sizes`}
+              )}
+              <div className={feature ? "bar-category-content" : undefined}>
+                <p className="eyebrow dark">
+                  {getMenuSectionEyebrow(activeMenu, category)}
+                </p>
+                <h2 id={`${category.id}-heading`}>{category.name}</h2>
+                <ul>
+                  {matchingItems
+                    .filter((entry) => entry.categoryId === category.id)
+                    .map((entry) => {
+                      const placement = placements.find(
+                        (candidate) => candidate.itemId === entry.id,
+                      );
+                      return (
+                        <li key={entry.id}>
+                          <article
+                            className={`priced-menu-item${placement ? " has-menu-image" : ""}`}
+                            data-menu-item-id={entry.id}
+                            data-image-id={placement?.imageId}
+                            data-background-family={placement?.backgroundFamily}
+                            data-presentation-tier={placement?.presentationTier}
                           >
-                            {entry.variants.map((choice) => (
-                              <li key={choice.label}>
-                                <span>{choice.label}</span>
-                                <span className="menu-price">
-                                  {formatPrice(choice.priceCents)}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </article>
-                    </li>
-                  );
-                })}
-            </ul>
-          </section>
-        ))}
+                            {placement && (
+                              <MenuImageStage
+                                media={getImageRecord(placement.imageId)}
+                                surface={getMenuImageStageSurface(category)}
+                              />
+                            )}
+                            <div className="menu-item-copy">
+                              <h3>{entry.name}</h3>
+                              {entry.description && <p>{entry.description}</p>}
+                            </div>
+                            {entry.priceCents !== null && (
+                              <span className="menu-price">
+                                {formatPrice(entry.priceCents)}
+                              </span>
+                            )}
+                            {entry.variants && (
+                              <ul
+                                className="menu-variants"
+                                aria-label={`${entry.name} sizes`}
+                              >
+                                {entry.variants.map((choice) => (
+                                  <li key={choice.label}>
+                                    <span>{choice.label}</span>
+                                    <span className="menu-price">
+                                      {formatPrice(choice.priceCents)}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </article>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            </section>
+          );
+        })}
         {matchingItems.length === 0 && (
           <div className="menu-empty">
             <h2>No menu items match “{query}”.</h2>
