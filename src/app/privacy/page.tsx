@@ -34,6 +34,15 @@ export default function Privacy() {
           information such as your IP address, browser details, and referring
           page. The website does not automatically request your location.
         </p>
+        <h2>Website analytics</h2>
+        <p>
+          On the production website, Namak uses Google Analytics to understand
+          how visitors use the site and which restaurant actions, such as calls
+          or direction requests, are most helpful. Google may process technical
+          information about your device, browser, and interactions under its own
+          privacy terms. Namak does not send catering form entries, names, email
+          addresses, phone numbers, or notes to Google Analytics.
+        </p>
       </section>
     </InteriorPage>
   );

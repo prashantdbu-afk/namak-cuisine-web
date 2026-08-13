@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { AnalyticsEvents } from "@/components/analytics/AnalyticsEvents";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileActions } from "@/components/site/MobileActions";
 import { site } from "@/config/site";
 import { isProductionDeployment } from "@/config/publication";
 import { getOpeningHoursSpecification } from "@/content/hours";
+import { getAnalyticsConfig } from "@/config/analytics";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
@@ -50,6 +53,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const analytics = getAnalyticsConfig();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
@@ -87,6 +91,12 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        {analytics.enabled && analytics.measurementId ? (
+          <>
+            <AnalyticsEvents />
+            <GoogleAnalytics gaId={analytics.measurementId} />
+          </>
+        ) : null}
       </body>
     </html>
   );

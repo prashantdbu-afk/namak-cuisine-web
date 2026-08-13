@@ -1,0 +1,55 @@
+name: Analytics Growth Reports
+
+on:
+  workflow_dispatch:
+    inputs:
+      cadence:
+        description: Report cadence
+        required: true
+        default: weekly
+        type: choice
+        options: [daily, weekly, monthly]
+  schedule:
+    - cron: "15 12 * * *"
+    - cron: "30 12 * * 1"
+    - cron: "45 12 1 * *"
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    name: Generate owner growth report
+    runs-on: ubuntu-latest
+    env:
+      REPORT_CADENCE: ${{ inputs.cadence || (github.event.schedule == '30 12 * * 1' && 'weekly') || (github.event.schedule == '45 12 1 * *' && 'monthly') || 'daily' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.16.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Generate report outputs
+        run: node scripts/generate-analytics-report.mjs "$REPORT_CADENCE"
+      - name: Upload daily report
+        if: env.REPORT_CADENCE == 'daily'
+        uses: actions/upload-artifact@v4
+        with:
+          name: namak-daily-growth-report
+          path: artifacts/daily-growth-report/
+      - name: Upload weekly report
+        if: env.REPORT_CADENCE == 'weekly'
+        uses: actions/upload-artifact@v4
+        with:
+          name: namak-weekly-growth-report
+          path: artifacts/weekly-growth-report/
+      - name: Upload monthly report
+        if: env.REPORT_CADENCE == 'monthly'
+        uses: actions/upload-artifact@v4
+        with:
+          name: namak-monthly-growth-report
+          path: artifacts/monthly-growth-report/
