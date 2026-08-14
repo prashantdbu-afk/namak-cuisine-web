@@ -18,7 +18,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run && node --test scripts/lib/analytics-growth-report.test.mjs",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test --config=playwright.a11y.config.ts",
     "test:visual": "playwright test --config=playwright.visual.config.ts",
